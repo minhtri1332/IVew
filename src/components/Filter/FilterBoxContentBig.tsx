@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle} from 'react-native';
 import {IC_ARROW_DOWN} from '@/assets';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {Colors} from "@/themes/Colors";
 
 const SContainer = styled.View<{ hideDivider?: boolean }>`

@@ -1,4 +1,6 @@
 export * from '@react-navigation/native';
+// @ts-ignore
+export {default as styled, useTheme} from 'styled-components/native';
 import {useNavigation as _useNavigation} from '@react-navigation/native';
 export const useNavigation = _useNavigation;
 

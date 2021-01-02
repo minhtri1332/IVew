@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useState} from 'react';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {ActivityIndicator, Dimensions, KeyboardAvoidingView, Platform,} from 'react-native';
 import {InputBorder} from '@/components/InputBorder';
@@ -140,7 +140,7 @@ export const LoginScreen = memo(function LoginScreen() {
             <Top>
                 <Logo/>
                 <TopTitle>
-                    Ứng dụng chat
+                    Ứng dụng
                 </TopTitle>
                 <TopSubTitle>
                     {`Đây là ứng dụng\ngiups con người something`}

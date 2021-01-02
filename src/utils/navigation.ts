@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/native';
 
 import {TransitionPresets} from "@react-navigation/stack";
-import {DetailScreenProps} from "@/screens/Detail/DetailScreen";
 
 export const defaultScreenOptions = TransitionPresets.SlideFromRightIOS;
 
@@ -37,11 +36,7 @@ export const goBack = () => navigation().goBack();
 
 
 export const replaceWithMainScreen = createReplace(
-  'Main'
-);
-
-export const navigateToDetailScreen = createNavigate<DetailScreenProps>(
-  'DetailScreen'
+  'HomeScreen'
 );
 
 export const navigateToLoginScreen = createNavigate(
@@ -51,36 +46,3 @@ export const navigateToLoginScreen = createNavigate(
 export const navigateToForgotPasswordScreen = createNavigate(
   'ForgotPasswordScreen'
 );
-
-export const navigateToRegisterScreen = createNavigate(
-  'RegisterScreen'
-);
-
-export const openAddCameraScreen = createNavigate(
-  'AddCameraScreen'
-);
-
-export const openNotifyScreen = createNavigate(
-  'NotifyScreen'
-);
-
-
-/**
- * USAGE EXAMPLE:
- *
- * type-safe NAVIGATE to EditUser screen with required userId props
- * const navigateToEditUser = createNavigate<{userId: string}>('EditUser');
- * -> use: navigateToEditUser({userId: '123'});
- *
- *
- * type-safe NAVIGATION to multiple screens
- * const profileNavigation = createNavigation<{EditUser: {userId: string}, Profile: undefined}>();
- *
- * -> use
- * - navigate to EditUser screen
- * profileNavigation().navigate('EditUser', {userId: '123'});
- * - navigate to Profile screen
- * profileNavigation().navigate('Profile');
- *
- * It's all auto completed. Enjoy!
- */

@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import React, {memo, useCallback} from 'react';
 import {Colors} from "@/themes/Colors";
 

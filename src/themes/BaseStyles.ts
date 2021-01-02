@@ -1,4 +1,6 @@
 import {StyleSheet} from "react-native";
+import {styled} from '@/global';
+import {Colors} from '@/themes/Colors';
 
 export const BaseStyles = StyleSheet.create({
     flex1: {
@@ -60,3 +62,11 @@ export const BaseStyles = StyleSheet.create({
         elevation: 5,
     }
 });
+
+
+export const ScreenWrapper = styled.View`
+  flex: 1;
+  background-color: ${Colors.white};
+`;
+
+export default ScreenWrapper;

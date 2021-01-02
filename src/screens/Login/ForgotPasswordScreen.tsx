@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useState} from 'react';
-import styled from "styled-components/native";
+import {styled} from '@/global';
 import {Colors} from "@/themes/Colors";
 import {InputBorder} from '@/components/InputBorder';
 import {HeaderBack} from "@/components/HeaderBack";

@@ -17,7 +17,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import useBoolean from '@/hooks/useBoolean';
 

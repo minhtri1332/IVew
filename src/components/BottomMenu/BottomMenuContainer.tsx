@@ -1,5 +1,5 @@
 import React, {memo, PropsWithChildren} from 'react';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {Animated, StyleSheet, ViewStyle} from 'react-native';
 import {screenLongDimension, screenShortDimension} from '@/utils/scale';
 import {getStatusBarHeight, getBottomSpace} from 'react-native-iphone-x-helper';

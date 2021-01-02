@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {IC_CLOSE, IC_NAV_SEARCH} from '@/assets';
 import debounce from 'lodash/debounce';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 
 const GrayPlaceholder = styled(TextInput).attrs((props) => ({

@@ -1,11 +1,10 @@
 import React, {memo, useCallback} from 'react';
-import {Animated, ImageSourcePropType, ScrollView, StyleSheet, Text, TouchableOpacityProps, View,} from 'react-native';
+import {Animated, ImageSourcePropType, ScrollView, StyleSheet, Text, TouchableOpacityProps, View} from 'react-native';
 
 import {Colors} from '@/themes/Colors';
-import styled from 'styled-components/native';
-import {IC_TAB_APPS, IC_TAB_COMPANY, IC_TAB_HOME, IC_USER,} from '@/assets';
-import FastImage from 'react-native-fast-image';
-import {getStatusBarHeight} from "react-native-status-bar-height";
+import {styled} from '@/global';
+import {IC_TAB_APPS, IC_TAB_COMPANY, IC_TAB_HOME, IC_USER} from '@/assets';
+import {getStatusBarHeight} from 'react-native-status-bar-height';
 
 interface Props {}
 

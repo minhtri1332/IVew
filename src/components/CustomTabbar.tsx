@@ -2,7 +2,7 @@ import React, {memo, useCallback} from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import {ImageSourcePropType, StyleSheet, TouchableOpacity, View,} from 'react-native';
 import {getBottomSpace} from 'react-native-iphone-x-helper';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {Colors} from "@/themes/Colors";
 
 export interface TabBarIconProps {

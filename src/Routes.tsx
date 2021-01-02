@@ -4,15 +4,12 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {defaultScreenOptions, navigationRef} from '@/utils/navigation';
-import {DetailScreen} from '@/screens/Detail/DetailScreen';
 import {LoginScreen} from '@/screens/Login/LoginScreen';
 import {ForgotPasswordScreen} from '@/screens/Login/ForgotPasswordScreen';
 import {RegisterScreen} from '@/screens/Login/RegisterScreen';
-import {CameraScreen} from "@/screens/Camera/CameraScreen";
 import {DrawerContent} from "@/screens/DrawerContent";
-import {AddCameraScreen} from "@/screens/Camera/AddCameraScreen";
-import {NotifyScreen} from "@/screens/Notify/NotifyScreen";
 import {HomeScreen} from "@/screens/Home/HomeScreen";
+import {PreloadScreen} from '@/screens/Login/Preload';
 
 const RootStack = createStackNavigator();
 const ModalStack = createStackNavigator();
@@ -23,15 +20,13 @@ const MainStack = createStackNavigator();
 const MainStackComponent = memo(function MainStackComponent() {
     return (
         <MainStack.Navigator
-            initialRouteName={'CameraScreen'}
+            initialRouteName={'PreloadScreen'}
             headerMode={'none'}
             screenOptions={defaultScreenOptions}>
-            <DrawerStack.Screen name={'CameraScreen'} component={CameraScreen}/>
-            <DrawerStack.Screen name={'DetailScreen'} component={DetailScreen}/>
-            <DrawerStack.Screen name={'NotifyScreen'} component={NotifyScreen}/>
+            <DrawerStack.Screen name={'PreloadScreen'} component={PreloadScreen}/>
             <DrawerStack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen}/>
             <DrawerStack.Screen name={'RegisterScreen'} component={RegisterScreen}/>
-            <DrawerStack.Screen name={'AddCameraScreen'} component={AddCameraScreen}/>
+
         </MainStack.Navigator>
     );
 });
@@ -53,12 +48,12 @@ const DrawerStackComponent = memo(function DrawerStackComponent() {
 export const ModalStackComponent = memo(function ModalStackComponent() {
     return (
         <ModalStack.Navigator
-            initialRouteName={'HomeScreen'}
+            initialRouteName={'PreloadScreen'}
             headerMode={'none'}
             mode={'modal'}>
             <ModalStack.Screen name={'Main'} component={DrawerStackComponent}/>
-            <RootStack.Screen name={'LoginScreen'} component={LoginScreen}/>
             <RootStack.Screen name={'HomeScreen'} component={HomeScreen}/>
+            <RootStack.Screen name={'LoginScreen'} component={LoginScreen}/>
         </ModalStack.Navigator>
     );
 });

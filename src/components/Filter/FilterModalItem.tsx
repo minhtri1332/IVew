@@ -1,7 +1,7 @@
 import React, {memo, useCallback} from 'react';
 import {Image, ImageSourcePropType, StyleSheet, TouchableOpacity} from 'react-native';
 import {IC_CHECK_ROUND} from '@/assets';
-import styled from 'styled-components/native';
+import {styled} from '@/global';
 import {FilterBoxOption} from './types';
 import {Colors} from "@/themes/Colors";
 
