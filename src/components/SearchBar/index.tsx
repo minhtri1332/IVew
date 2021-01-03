@@ -47,14 +47,13 @@ const Icon = styled.Image`
 `;
 
 const SSectionHeaderView = styled.View`
-  flex: 1;
   height: 36px;
-  margin: 0 16px 8px 16px;
+  margin: 16px 16px 8px 16px;
   padding: 0 4px 0 10px;
   flex-direction: row;
   align-items: center;
   border-radius: 22px;
-  background-color: ${Colors.gray6};
+  background-color: ${Colors.gray5};
 `;
 
 const ViewIcon = styled.View`
@@ -146,7 +145,6 @@ export const Divider = styled.View<{height?: number}>`
   height: ${(p) => p.height || 1}px;
   background-color: ${Colors.black10};
 `;
-
 
 const styles = StyleSheet.create({
   searchIcon: {

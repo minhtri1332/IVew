@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native';
 
 import {TransitionPresets} from "@react-navigation/stack";
+import {HistoryDetailProps} from "@/screens/checkin/Screens/HistoryDetail";
 
 export const defaultScreenOptions = TransitionPresets.SlideFromRightIOS;
 
@@ -35,14 +36,33 @@ export const createReplace = <T extends object>(screenName: string) => (
 export const goBack = () => navigation().goBack();
 
 
-export const replaceWithMainScreen = createReplace(
+export const replaceWithMainScreen = createNavigate(
   'HomeScreen'
 );
 
-export const navigateToLoginScreen = createNavigate(
+export const navigateToLoginScreen = createPush(
   'LoginScreen'
 );
 
 export const navigateToForgotPasswordScreen = createNavigate(
   'ForgotPasswordScreen'
+);
+
+export const navigateToHistoryScreen = createNavigate(
+  'HistoryScreen'
+);
+export const navigateToHistoryDetail = createNavigate<HistoryDetailProps>(
+  'HistoryDetail'
+);
+export const navigateToMServiceScreen = createNavigate(
+  'MServiceScreen'
+);
+export const navigateToHeadMapScreen = createNavigate(
+  'HeadMapScreen'
+);
+export const navigateToMScanScreen = createNavigate(
+  'MScanScreen'
+);
+export const openModalCreateCustomer = createNavigate(
+  'ModalCreateCustomer'
 );

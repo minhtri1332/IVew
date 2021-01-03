@@ -12,32 +12,13 @@ export interface RawCamera {
     ip: string;
 }
 
-export interface RawProductType {
-    '$id': string;
-    id: string;
+export type FileType = {
     name: string;
-    isDeleted: boolean;
-}
-
-
-
-export interface RawOrderProduct {
-    '$id': string;
-    idOrder: number;
-    idProduct: number;
-    name: string;
-    description: string;
-    unit: string;
-    price: number;
-    quantity: number;
-    inStock: boolean;
-    listImage: string;
+    size: number;
     type: string;
-    manufacture: string;
-    isStock: boolean;
-    ngayCapNhat?: any;
-    gioCapNhat?: any;
-}
+    uri: string;
+};
+
 export interface RawCustomNotify {
     '$id': string;
     contentHTML: string;

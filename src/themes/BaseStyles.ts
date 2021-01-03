@@ -63,6 +63,24 @@ export const BaseStyles = StyleSheet.create({
     }
 });
 
+export const SAvatar = styled.Image<{size?: number}>`
+  width: ${(props: any) => props.size || 40 } ;
+  height: ${(props: any) => props.size || 40 } ;
+  border-radius:  ${(props: any) => props.size || 40 } ;
+`;
+
+export const SIcon = styled.Image<{size?: number, tintColor?: string}>`
+  width: ${(props: any) => props.size || 24 } ;
+  height: ${(props: any) => props.size || 24 } ;
+  tint-color:${(props: any) => props.tintColor || Colors.grey5 } ;
+`;
+
+export const STextLabel = styled.Text<{size?: number}>`
+font-family: Roboto-Medium;
+  font-size: ${(props: any) => props.size || 24 } ;
+  tint-color:${ Colors.grey1 } ;
+  margin: 16px 16px 8px 16px;
+`;
 
 export const ScreenWrapper = styled.View`
   flex: 1;

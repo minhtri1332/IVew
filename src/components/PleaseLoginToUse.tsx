@@ -1,7 +1,7 @@
 import React, {memo, useCallback} from 'react';
-import styled from "styled-components/native";
-import {Colors} from "@/themes/Colors";
-import {navigateToLoginScreen} from "@/utils/navigation";
+import {styled} from '@/global';
+import {Colors} from '@/themes/Colors';
+import {navigateToLoginScreen} from '@/utils/navigation';
 
 const Container = styled.View`
   flex: 1;
@@ -25,16 +25,14 @@ const Title = styled.Text`
 `;
 
 export const PleaseLoginToUse = memo(function HomeHeader() {
-    const login = useCallback(() => {
-        navigateToLoginScreen()
-    }, []);
-    return (
-        <Container>
-            <BtnLogin onPress={login}>
-                <Title>
-                    Vui lòng đăng nhập để sử dụng
-                </Title>
-            </BtnLogin>
-        </Container>
-    )
+  const login = useCallback(() => {
+    navigateToLoginScreen();
+  }, []);
+  return (
+    <Container>
+      <BtnLogin onPress={login}>
+        <Title>Vui lòng đăng nhập để sử dụng</Title>
+      </BtnLogin>
+    </Container>
+  );
 });

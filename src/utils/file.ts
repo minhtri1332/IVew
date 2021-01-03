@@ -1,5 +1,4 @@
-import {FileType} from '@base/core/services/File';
-import {UploadFileContent} from '@/types';
+import {FileType, UploadFileContent} from '@/types';
 
 export const getFileContents = async (files: FileType[]) => {
   const fileContents: UploadFileContent[] = [];

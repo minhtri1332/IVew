@@ -26,7 +26,7 @@ const Container = styled.View<{disabled?: boolean}>`
   border-width: 1px;
   border-color: ${Colors.gray5};
   border-radius: 8px;
-  background-color: ${(p) => (p.disabled ? Colors.gray6 : Colors.white)};
+  background-color: ${(p: any) => (p.disabled ? Colors.gray6 : Colors.white)};
   flex-direction: row;
   overflow: hidden;
 `;
@@ -115,7 +115,7 @@ export const InputBorder = memo(function InputBorder(props: Props) {
   }, [toggle, isFocus]);
 
   const setRequired = useMemo(() => {
-    return required ? '*' : '';
+    return required ? ' *' : '';
   }, [required]);
 
   return (

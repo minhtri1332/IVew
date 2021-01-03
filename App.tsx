@@ -1,6 +1,6 @@
 // @ts-ignore
 import React, {memo} from 'react';
-import {StatusBar, YellowBox} from 'react-native';
+import {StatusBar, YellowBox, Text} from 'react-native';
 //@ts-ignore
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
