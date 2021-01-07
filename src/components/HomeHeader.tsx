@@ -2,7 +2,7 @@ import React, {memo, ReactElement, useCallback} from 'react';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {Colors} from '@/themes/Colors';
 import {styled, useNavigation} from '@/global';
-import {IC_BACKGROUND_HOME, IC_LOGO} from '@/assets';
+import {IC_BACKGROUND_HOME, IC_LOGO, IC_LOGO_APP} from '@/assets';
 
 interface Props {
   title?: string;
@@ -12,9 +12,9 @@ export const HomeHeader = memo(function HomeHeader(props: Props) {
   return (
     <Container>
       <Left>
-        <SLogo source={IC_LOGO} />
-        <SText>App Name</SText>
-        <STextTitle>Nền tẳng app</STextTitle>
+        <SLogo source={IC_LOGO_APP} />
+        <SText>IView</SText>
+        <STextTitle>Nền tảng Camera AI</STextTitle>
       </Left>
       <Right>
         <SImageBackground source={IC_BACKGROUND_HOME} />
@@ -42,8 +42,6 @@ const STextTitle = styled.Text`
 `;
 
 const Left = styled.TouchableOpacity`
-  flex: 1;
-  height: 100%;
   padding: 32px 32px;
 `;
 
@@ -52,13 +50,12 @@ const Right = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 16px;
 `;
 
 const SLogo = styled.Image`
   width: 50px;
   height: 50px;
-  tint-color: ${Colors.white};
+  border-radius: 40px;
 `;
 
 const SImageBackground = styled.Image`

@@ -7,6 +7,10 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {openModalCreateCustomer} from '@/utils/navigation';
 
+const keyExtractor = (item: any): string => {
+  return item;
+};
+
 export const MServiceScreen = memo(function MServiceScreen() {
   const rightHeader = useMemo(() => {
     return (
@@ -20,7 +24,9 @@ export const MServiceScreen = memo(function MServiceScreen() {
     return (
       <View>
         <FastImage
-          style={{height: 120, width: 120, borderRadius: 4}}
+   style={{justifyContent: 'flex-end',
+     borderRadius: 5,
+     height: 100}}
           source={{
             uri: 'https://unsplash.it/400/400?image=1',
             headers: {Authorization: 'someAuthToken'},
@@ -38,7 +44,9 @@ export const MServiceScreen = memo(function MServiceScreen() {
       <STextLabel>My Customer</STextLabel>
       <FlatGrid
         fixed={true}
+        itemDimension={100}
         data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+        keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
     </ScreenWrapper>

@@ -18,4 +18,5 @@ export const IC_Multi_IMAGE = require('./icons/ic_multi_image.png');
 export const IC_UN_CHECK = require("./icons/ic_un_check.png");
 export const IC_CHECK = require("./icons/ic_checked.png");
 
+export const IC_LOGO_APP = require("./icons/ic_logo_app.png");
 export const IMG_LOGO_SMALL = require('./images/logo-small.png');

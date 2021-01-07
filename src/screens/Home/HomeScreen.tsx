@@ -57,7 +57,7 @@ const Container = styled.View`
 `;
 
 const SViewFunction = styled.View`
-  margin: 16px;
+
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;

@@ -44,7 +44,6 @@ const TopSubTitle = styled.Text`
 const Bottom = styled.View`
   flex: 2;
   align-items: center;
-  justify-content: flex-end;
   background-color: white;
 `;
 
