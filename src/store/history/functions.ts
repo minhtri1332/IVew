@@ -1,6 +1,3 @@
-import {Fetch} from "@/utils/fetch";
-import {RawCamera} from "@/types";
-
 
 export interface GetCameraListParams {
     keyword: string;

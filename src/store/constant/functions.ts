@@ -1,5 +1,5 @@
 import {Fetch} from "@/utils/fetch";
-import {RawUser, RawCustomNotify} from "@/types";
+import { RawCustomNotify} from "@/types";
 import {setUserAction} from "@/store/constant/index";
 import Global from "@/utils/Global";
 import SimpleToast from "react-native-simple-toast";
@@ -13,17 +13,7 @@ export interface LoginPrams {
 }
 
 export const requestLogin = async (params: LoginPrams) => {
-    const {data} = await Fetch.post<{
-        data: RawUser;
-    }>('api/Account/login', {
-        ...params
-    });
-    if (!data) {
-        return null
-    }
-    setUserAction(data.data);
-    Global.accessToken = data.data.accessToken;
-    return data.data;
+
 };
 
 interface ConfigProps {

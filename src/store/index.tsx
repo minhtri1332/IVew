@@ -3,7 +3,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {cameraReducer, setCameraStore} from './camera';
 import {setStore} from '@/store/getStore';
 import {constantReducer, constantSetStore} from '@/store/constant';
 
@@ -18,7 +17,6 @@ const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
 
 const appReducer = combineReducers({
   constant: constantReducer,
-  cameras: cameraReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -33,10 +31,7 @@ const rootReducer = (state: any, action: any) => {
 const persistedReducer = persistReducer(
   {
     key: 'root',
-    whitelist: [
-      'global',
-      'constant',
-    ], // if you want to persist something, put it here
+    whitelist: ['global', 'constant'], // if you want to persist something, put it here
     storage: AsyncStorage,
   },
   rootReducer,
@@ -50,5 +45,4 @@ export default store;
 
 // set store
 setStore(store);
-setCameraStore(store);
 constantSetStore(store);
