@@ -24,8 +24,14 @@ export const HistoryDetail = memo(function HistoryDetail() {
     <ScreenWrapper>
       <HeaderBack title={'Chi tiết khách hàng'} right={rightHeader} />
       <SViewAvatar>
-        <SAvatar source={IC_LOGO} size={100} />
-        <STextName>Nguyen Minh Tri</STextName>
+        <SAvatar
+          source={{
+            uri:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1_YImJiJsDBeVjqy19Tq6M7MchZafcD32mg&usqp=CAU',
+          }}
+          size={100}
+        />
+        <STextName>Nguyễn Minh Trí</STextName>
       </SViewAvatar>
 
       <Item label={'Độ tuổi'} divider={true}>

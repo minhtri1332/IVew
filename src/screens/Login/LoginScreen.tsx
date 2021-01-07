@@ -1,16 +1,24 @@
 import React, {memo, useCallback, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
-import {ActivityIndicator, Dimensions, KeyboardAvoidingView, Platform,} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {InputBorder} from '@/components/InputBorder';
-import {IMG_LOGO_SMALL} from '@/assets';
-import {navigateToForgotPasswordScreen, replaceWithMainScreen,} from '@/utils/navigation';
+import {IC_LOGO_APP, IMG_LOGO_SMALL} from '@/assets';
+import {
+  navigateToForgotPasswordScreen,
+  replaceWithMainScreen,
+} from '@/utils/navigation';
 
 const {width: DWidth} = Dimensions.get('window');
 
 const Container = styled(KeyboardAvoidingView)`
   flex: 1;
-  background-color: ${Colors.white};
+  background-color: ${Colors.grey6};
 `;
 
 const Top = styled.View`
@@ -20,11 +28,9 @@ const Top = styled.View`
   flex: 1;
 `;
 
-const Logo = styled.View`
+const Logo = styled.Image`
   width: 120px;
   height: 120px;
-  background-color: darkred;
-  border-radius: 60px;
 `;
 
 const TopTitle = styled.Text`
@@ -44,7 +50,6 @@ const TopSubTitle = styled.Text`
 const Bottom = styled.View`
   flex: 2;
   align-items: center;
-  background-color: white;
 `;
 
 const Title = styled.Text`
@@ -98,7 +103,7 @@ const ViewSpaceFlexEnd = styled.View`
 const TextForgot = styled.Text`
   color: ${Colors.blue1};
   font-size: 14px;
-  padding: 10px 0 6px 6px
+  padding: 10px 0 6px 6px;
 `;
 
 const BtnRow = styled.TouchableOpacity`
@@ -108,79 +113,74 @@ const BtnRow = styled.TouchableOpacity`
 `;
 
 const SInputBorder = styled(InputBorder).attrs({
-    containerStyle: {
-        marginTop: 12,
-    },
+  containerStyle: {
+    marginTop: 12,
+  },
 })``;
 
 interface ParamsInterface {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
 export const LoginScreen = memo(function LoginScreen() {
-    const [params, setParams] = useState<ParamsInterface>({
-        username: '', //0979294748
-        password: '', //12345678
-    });
-    const loading = false;
-    const onTextChange = useCallback(
-        (keyname: string, value: string) => {
-            setParams({
-                ...params,
-                [keyname]: value,
-            });
-        },
-        [params],
-    );
+  const [params, setParams] = useState<ParamsInterface>({
+    username: '', //0979294748
+    password: '', //12345678
+  });
+  const loading = false;
+  const onTextChange = useCallback(
+    (keyname: string, value: string) => {
+      setParams({
+        ...params,
+        [keyname]: value,
+      });
+    },
+    [params],
+  );
 
-    return (
-        <Container behavior={Platform.OS == "ios" ? "padding" : "height"}>
-            <Top>
-                <Logo/>
-                <TopTitle>
-                    Ứng dụng
-                </TopTitle>
-                <TopSubTitle>
-                    {`Đây là ứng dụng\ngiups con người something`}
-                </TopSubTitle>
-            </Top>
-            <Bottom>
-                <ContainerInput>
-                    <SInputBorder
-                        value={params.username}
-                        keyName={'username'}
-                        onTextChange={onTextChange}
-                        keyboardType={"email-address"}
-                        placeHolder={'Nhập vào email'}
-                    />
-                    <SInputBorder
-                        value={params.password}
-                        keyName={'password'}
-                        onTextChange={onTextChange}
-                        placeHolder={'Nhập mật khẩu của bạn'}
-                        secureTextEntry={true}
-                    />
-                    <ViewSpaceFlexEnd>
-                        <BtnRow onPress={navigateToForgotPasswordScreen}>
-                            <TextForgot>
-                                Quên mật khẩu?
-                            </TextForgot>
-                        </BtnRow>
-                    </ViewSpaceFlexEnd>
-                    <BtnLogin onPress={!loading ? replaceWithMainScreen : () => {
-                    }}>
-                        {loading ? (
-                            <ActivityIndicator color={'#fff'}/>
-                        ) : (
-                            <LoginText>Đăng nhập</LoginText>
-                        )}
-                    </BtnLogin>
-                </ContainerInput>
-            </Bottom>
-            <Footer>
-                <FooterText>Copyright 2020 Tên app. All Rights Reserved</FooterText>
-            </Footer>
-        </Container>
-    );
+  return (
+    <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+      <Top>
+        <Logo source={IC_LOGO_APP} />
+        <TopTitle>Ứng dụng</TopTitle>
+        <TopSubTitle>
+          {`Đây là ứng dụng\ngiups con người something`}
+        </TopSubTitle>
+      </Top>
+      <Bottom>
+        <ContainerInput>
+          <SInputBorder
+            value={params.username}
+            keyName={'username'}
+            onTextChange={onTextChange}
+            keyboardType={'email-address'}
+            placeHolder={'Nhập vào email'}
+          />
+          <SInputBorder
+            value={params.password}
+            keyName={'password'}
+            onTextChange={onTextChange}
+            placeHolder={'Nhập mật khẩu của bạn'}
+            secureTextEntry={true}
+          />
+          <ViewSpaceFlexEnd>
+            <BtnRow onPress={navigateToForgotPasswordScreen}>
+              <TextForgot>Quên mật khẩu?</TextForgot>
+            </BtnRow>
+          </ViewSpaceFlexEnd>
+          <BtnLogin onPress={!loading ? replaceWithMainScreen : () => {}}>
+            {loading ? (
+              <ActivityIndicator color={'#fff'} />
+            ) : (
+              <LoginText>Đăng nhập</LoginText>
+            )}
+          </BtnLogin>
+        </ContainerInput>
+      </Bottom>
+      <Footer>
+        <FooterText>Copyright 2020 Tên app. All Rights Reserved</FooterText>
+      </Footer>
+    </Container>
+  );
 });
