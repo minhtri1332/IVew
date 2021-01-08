@@ -16,7 +16,7 @@ export const MScanScreen = memo(function MScanScreen() {
       <SViewBody>
         <View style={[BaseStyles.viewShadow, styles.viewCard]}>
           <SText>Smart scan</SText>
-          <SImage size={200} tintColor={Colors.grey1} source={IC_SCAN} />
+          <SImage resizeMode={'contain'} size={100} source={IC_SCAN} />
           <SButton title={'Chọn ảnh'} onPress={openSelectImage} />
         </View>
       </SViewBody>
@@ -38,11 +38,12 @@ const SViewBody = styled.View`
 const SImage = styled.Image<{size?: number}>`
   width: ${(props: any) => props.size || 24};
   height: ${(props: any) => props.size || 24};
-  tint-color: ${(props: any) => props.tintColor || Colors.grey5};
+  tint-color:${Colors.grey4}
   align-self: center;
 `;
 
 const SButton = styled(SubmitButtonColor)`
+  margin-top: 24px;
   padding: 0px 16px;
 `;
 

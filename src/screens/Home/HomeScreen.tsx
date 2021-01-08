@@ -4,7 +4,13 @@ import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
 import {ItemHome} from '@/screens/Home/components/ItemHome';
-import {IC_LOGO} from '@/assets';
+import {
+  IC_HOME_CHECKIN,
+  IC_HOME_HEAD_MAP,
+  IC_HOME_SCAN,
+  IC_HOME_SERVICE,
+  IC_LOGO,
+} from '@/assets';
 import {
   navigateToHeadMapScreen,
   navigateToHistoryScreen,
@@ -19,22 +25,22 @@ export const HomeScreen = memo(function HomeScreen() {
       <Container>
         <SViewFunction>
           <ItemHome
-            icon={IC_LOGO}
+            icon={IC_HOME_CHECKIN}
             label={'Checkin'}
             onPress={navigateToHistoryScreen}
           />
           <ItemHome
-            icon={IC_LOGO}
+            icon={IC_HOME_SERVICE}
             label={'MService'}
             onPress={navigateToMServiceScreen}
           />
           <ItemHome
-            icon={IC_LOGO}
+            icon={IC_HOME_HEAD_MAP}
             label={'Headmap'}
             onPress={navigateToHeadMapScreen}
           />
           <ItemHome
-            icon={IC_LOGO}
+            icon={IC_HOME_SCAN}
             label={'MScan'}
             onPress={navigateToMScanScreen}
           />
@@ -57,7 +63,7 @@ const Container = styled.View`
 `;
 
 const SViewFunction = styled.View`
-
+  margin-top: 16px;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;

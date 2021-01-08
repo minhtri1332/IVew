@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import {InputBorder} from '@/components/InputBorder';
-import {IC_LOGO_APP, IMG_LOGO_SMALL} from '@/assets';
+import {BG_LOGIN, IC_LOGO_APP, IMG_LOGO_SMALL} from '@/assets';
 import {
   navigateToForgotPasswordScreen,
   replaceWithMainScreen,
@@ -35,14 +35,15 @@ const Logo = styled.Image`
 
 const TopTitle = styled.Text`
   font-size: 25px;
+  margin-top: 8px;
   font-weight: bold;
-  color: ${Colors.gray1};
+  color: ${Colors.blue1};
 `;
 
 const TopSubTitle = styled.Text`
-  padding-top: 20px;
+  padding-top: 16px;
   font-size: 18px;
-  color: ${Colors.gray1};
+  color: ${Colors.white};
   line-height: 23px;
   text-align: center;
 `;
@@ -141,6 +142,7 @@ export const LoginScreen = memo(function LoginScreen() {
 
   return (
     <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+      <SImageBackground source={BG_LOGIN} />
       <Top>
         <Logo source={IC_LOGO_APP} />
         <TopTitle>Ứng dụng</TopTitle>
@@ -184,3 +186,11 @@ export const LoginScreen = memo(function LoginScreen() {
     </Container>
   );
 });
+
+const SImageBackground = styled.Image`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+`;
