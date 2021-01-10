@@ -3,12 +3,20 @@ import {BaseStyles, ScreenWrapper, SIcon} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import {IC_SCAN} from '@/assets';
 import {Colors} from '@/themes/Colors';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Image, View} from 'react-native';
 import {styled} from '@/global';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export const MScanScreen = memo(function MScanScreen() {
-  const openSelectImage = useCallback(() => {}, []);
+  const [url, setUrl] = useState(null);
+  const openSelectImage = useCallback(() => {
+    launchImageLibrary({mediaType: 'photo', quality: 1}, (event: any) => {
+      console.log('event', event);
+      setUrl(event);
+    });
+  }, [setUrl]);
+  console.log('sdf', url.uri);
 
   return (
     <ScreenWrapper>
@@ -16,7 +24,10 @@ export const MScanScreen = memo(function MScanScreen() {
       <SViewBody>
         <View style={[BaseStyles.viewShadow, styles.viewCard]}>
           <SText>Smart scan</SText>
-          <SImage resizeMode={'contain'} size={100} source={IC_SCAN} />
+          <Image
+            resizeMode={'contain'}
+            source={url ? {uri: url.uri} : IC_SCAN}
+          />
           <SButton title={'Chọn ảnh'} onPress={openSelectImage} />
         </View>
       </SViewBody>
@@ -36,9 +47,6 @@ const SViewBody = styled.View`
 `;
 
 const SImage = styled.Image<{size?: number}>`
-  width: ${(props: any) => props.size || 24};
-  height: ${(props: any) => props.size || 24};
-  tint-color:${Colors.grey4}
   align-self: center;
 `;
 

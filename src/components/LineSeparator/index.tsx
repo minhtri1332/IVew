@@ -22,7 +22,7 @@ const SViewLine = styled.View`
 
 const SViewRoot = styled.View<LineSeparatorProps>`
   height: 1px;
-  background: ${Colors.grey4};
+  background: ${Colors.grey6};
   width: 100%;
 `;
 

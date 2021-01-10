@@ -52,8 +52,8 @@ const SViewContent = styled.View`
 const STextName = styled.Text`
   font-size: 18px;
   line-height: 22px;
-  font-family: Roboto-Medium;
-  color: darkblue;
+  font-family: Roboto;
+  color: ${Colors.blue};
 `;
 const STextTitle = styled.Text`
   font-size: 15px;
