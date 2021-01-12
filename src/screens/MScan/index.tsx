@@ -16,7 +16,6 @@ export const MScanScreen = memo(function MScanScreen() {
       setUrl(event);
     });
   }, [setUrl]);
-  console.log('sdf', url.uri);
 
   return (
     <ScreenWrapper>
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     borderRadius: 16,
     margin: 16,
+    alignItems: 'center',
   },
 });
 

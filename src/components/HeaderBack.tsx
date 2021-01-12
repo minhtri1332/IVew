@@ -7,7 +7,7 @@ import {goBack} from '@/utils/navigation';
 
 const Container = styled.View`
   height: ${getStatusBarHeight() + 56}px;
-  background-color: ${Colors.backgroundColor};
+  background-color: ${Colors.backgroundHeader};
   padding-top: ${getStatusBarHeight()}px;
   flex-direction: row;
 `;

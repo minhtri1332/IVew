@@ -52,7 +52,7 @@ export const HomeScreen = memo(function HomeScreen() {
 
 const SViewContainerHome = styled.View`
   flex: 1;
-  background-color: ${Colors.blue1};
+  background-color: ${Colors.backgroundHeader};
 `;
 
 const Container = styled.View`
