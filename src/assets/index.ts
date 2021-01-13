@@ -17,7 +17,7 @@ export const IC_SINGLE_IMAGE = require('./icons/ic_single_image.png');
 export const IC_Multi_IMAGE = require('./icons/ic_multi_image.png');
 export const IC_UN_CHECK = require("./icons/ic_un_check.png");
 export const IC_CHECK = require("./icons/ic_checked.png");
-export const IC_SCAN = require("./icons/ic_flower.png");
+export const IC_SCAN = require("./icons/ic_library.png");
 
 export const IC_HOME_SCAN = require("./icons/ic_scanning.png");
 export const IC_HOME_HEAD_MAP = require("./icons/ic_headmap.png");

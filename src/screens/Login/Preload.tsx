@@ -3,7 +3,6 @@ import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {ActivityIndicator} from 'react-native';
 import {navigateToLoginScreen} from '@/utils/navigation';
-import {useUser} from '@/store/constant';
 import SplashScreen from 'react-native-splash-screen';
 import {IC_LOGO_APP} from '@/assets';
 
@@ -28,11 +27,9 @@ export const PreloadScreen = memo(function PreloadScreen() {
     }, 500);
   }, []);
 
-  const user = useUser();
-
   useEffect(() => {
     SplashScreen.hide();
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     getData()

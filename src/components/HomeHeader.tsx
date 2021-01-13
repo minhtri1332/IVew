@@ -13,7 +13,7 @@ export const HomeHeader = memo(function HomeHeader(props: Props) {
     <Container>
       <Left>
         <SLogo source={IC_LOGO_APP} />
-        <SText>IView</SText>
+        <SText>iVIEW</SText>
         <STextTitle>Nền tảng Camera AI</STextTitle>
       </Left>
       <Right>
@@ -41,7 +41,7 @@ const STextTitle = styled.Text`
   color: ${Colors.white};
 `;
 
-const Left = styled.TouchableOpacity`
+const Left = styled.View`
   padding: 32px 32px;
 `;
 
