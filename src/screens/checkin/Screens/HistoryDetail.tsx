@@ -8,6 +8,7 @@ import {IC_ARROW, IC_EDIT, IC_LOGO} from '@/assets';
 import {SAvatar} from '@/themes/BaseStyles';
 import {Item, ItemContent} from '@/components/ViewItem';
 import moment from 'moment';
+import {useHistory} from '@/store/history';
 
 export interface HistoryDetailProps {
   id: string;
@@ -15,7 +16,7 @@ export interface HistoryDetailProps {
 
 export const HistoryDetail = memo(function HistoryDetail() {
   const {id} = useNavigationParams<HistoryDetailProps>();
-
+  const history = useHistory(id);
   const rightHeader = useMemo(() => {
     return <SIcon source={IC_EDIT} size={24} />;
   }, []);
@@ -31,7 +32,7 @@ export const HistoryDetail = memo(function HistoryDetail() {
           }}
           size={100}
         />
-        <STextName>Nguyễn Minh Trí</STextName>
+        <STextName>{history?.value}</STextName>
       </SViewAvatar>
 
       <Item label={'Độ tuổi'} divider={true}>

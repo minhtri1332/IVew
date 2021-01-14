@@ -18,3 +18,8 @@ export interface RawAttendence {
     totalLateMinute: number,
     totalOnTime: number,
 }
+
+export interface RawTest {
+   id:string|number;
+   value:string;
+}

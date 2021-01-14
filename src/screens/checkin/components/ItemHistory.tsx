@@ -5,17 +5,19 @@ import {IC_ARROW, IC_ARROW_DOWN, IC_LOGO} from '@/assets';
 import {Colors} from '@/themes/Colors';
 import {LineSeparator} from '@/components/LineSeparator';
 import {navigateToHistoryDetail} from '@/utils/navigation';
+import {useHistory} from '@/store/history';
 
 interface ItemHistoryProps {
-  idItem: string;
+  historyId: string;
 }
 
 export const ItemHistory = memo(function ItemHistory({
-  idItem,
+  historyId,
 }: ItemHistoryProps) {
+  const history = useHistory(historyId);
   const onPress = useCallback(() => {
-    navigateToHistoryDetail({id: idItem});
-  }, []);
+    navigateToHistoryDetail({id: historyId});
+  }, [historyId]);
 
   return (
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
@@ -27,7 +29,7 @@ export const ItemHistory = memo(function ItemHistory({
         size={40}
       />
       <SViewContent>
-        <STextName>Nguyễn Minh Trí</STextName>
+        <STextName>{history?.value}</STextName>
         <STextTitle>Khách đã ghé thăm 2 lần</STextTitle>
         <STextTime>Lần cuối ghé thăm vào 10:00 3/1/2021</STextTime>
         <LineSeparator />

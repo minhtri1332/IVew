@@ -75,17 +75,16 @@ export const LoginScreen = memo(function LoginScreen() {
                 <TextForgot>Quên mật khẩu?</TextForgot>
               </BtnRow>
             </ViewSpaceFlexEnd>
-
-            <SViewButton>
-              <BtnLogin onPress={!loading ? replaceWithMainScreen : () => {}}>
-                {loading ? (
-                  <ActivityIndicator color={'#fff'} />
-                ) : (
-                  <LoginText>Đăng nhập</LoginText>
-                )}
-              </BtnLogin>
-            </SViewButton>
           </ContainerInput>
+          <SViewButton style={BaseStyles.viewShadow}>
+            <BtnLogin onPress={!loading ? replaceWithMainScreen : () => {}}>
+              {loading ? (
+                <ActivityIndicator color={'#fff'} />
+              ) : (
+                <LoginText>Đăng nhập</LoginText>
+              )}
+            </BtnLogin>
+          </SViewButton>
         </Bottom>
       </SViewBox>
 
@@ -114,8 +113,9 @@ const SViewButton = styled.View`
   position: absolute;
   width: 100%;
   padding: 0px 16px;
-  bottom: -20px;
+  bottom: 0px;
   align-self: center;
+  z-index: 100;
 `;
 const Top = styled.View`
   align-items: center;
@@ -140,6 +140,7 @@ const TopSubTitle = styled.Text`
 `;
 const Bottom = styled.View`
   margin: 0px 32px;
+  padding-bottom: 24px;
 `;
 const ContainerInput = styled.View`
   width: 100%;
