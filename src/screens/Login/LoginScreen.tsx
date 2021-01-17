@@ -14,6 +14,8 @@ import {
   replaceWithMainScreen,
 } from '@/utils/navigation';
 import {BaseStyles} from '@/themes/BaseStyles';
+import {useAsyncFn} from '@/hooks/useAsyncFn';
+import {requestLogin} from '@/store/auth/function';
 
 const {width: DWidth} = Dimensions.get('window');
 
@@ -33,7 +35,7 @@ export const LoginScreen = memo(function LoginScreen() {
     username: '', //0979294748
     password: '', //12345678
   });
-  const loading = false;
+
   const onTextChange = useCallback(
     (keyname: string, value: string) => {
       setParams({
@@ -43,6 +45,11 @@ export const LoginScreen = memo(function LoginScreen() {
     },
     [params],
   );
+
+  const [{loading}, startLogin] = useAsyncFn(async () => {
+    await requestLogin(params.username, params.password);
+    // replaceWithMainScreen();
+  }, [params]);
 
   return (
     <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
@@ -77,7 +84,7 @@ export const LoginScreen = memo(function LoginScreen() {
             </ViewSpaceFlexEnd>
           </ContainerInput>
           <SViewButton style={BaseStyles.viewShadow}>
-            <BtnLogin onPress={!loading ? replaceWithMainScreen : () => {}}>
+            <BtnLogin onPress={startLogin}>
               {loading ? (
                 <ActivityIndicator color={'#fff'} />
               ) : (

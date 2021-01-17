@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import {setStore} from '@/store/getStore';
 import {setHistoryStore, historyReducer} from '@/store/history';
+import {authReducer, setAuthStore} from '@/store/auth';
 
 const middlewares: any[] = [];
 
@@ -17,6 +18,7 @@ const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
 
 const appReducer = combineReducers({
   history: historyReducer,
+  auth: authReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -46,3 +48,4 @@ export default store;
 // set store
 setStore(store);
 setHistoryStore(store);
+setAuthStore(store);

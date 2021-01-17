@@ -23,6 +23,7 @@
     "axios": "^0.21.0",
     "he": "^1.2.0",
     "moment": "^2.29.1",
+    "querystring": "^0.2.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-device-info": "^7.0.2",
