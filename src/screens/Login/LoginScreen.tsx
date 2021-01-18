@@ -1,21 +1,14 @@
-import React, {memo, useCallback, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
-import {
-  ActivityIndicator,
-  Dimensions,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {ActivityIndicator, Dimensions, KeyboardAvoidingView, Platform} from 'react-native';
 import {InputBorder} from '@/components/InputBorder';
-import {BG_LOGIN, IC_LOGO_APP, IMG_LOGO_SMALL} from '@/assets';
-import {
-  navigateToForgotPasswordScreen,
-  replaceWithMainScreen,
-} from '@/utils/navigation';
+import {BG_LOGIN, IC_LOGO_APP} from '@/assets';
+import {navigateToForgotPasswordScreen, replaceWithMainScreen} from '@/utils/navigation';
 import {BaseStyles} from '@/themes/BaseStyles';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestLogin} from '@/store/auth/function';
+import LocalStorageHelper from '@/services/LocalServiceHelper';
 
 const {width: DWidth} = Dimensions.get('window');
 
@@ -31,25 +24,43 @@ interface ParamsInterface {
 }
 
 export const LoginScreen = memo(function LoginScreen() {
-  const [params, setParams] = useState<ParamsInterface>({
-    username: '', //0979294748
-    password: '', //12345678
-  });
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const onTextChange = useCallback(
     (keyname: string, value: string) => {
-      setParams({
-        ...params,
-        [keyname]: value,
-      });
+if (keyname == "username"){
+  setUsername(value)
+}else {setPassword(value)}
     },
-    [params],
+    [],
   );
 
+  const fillUser = useCallback(async () => {
+    const email = await LocalStorageHelper.get("username");
+    const pass = await LocalStorageHelper.get("password");
+
+    if (email) {
+      onTextChange("username",String(email));
+    }
+
+    if (pass) {
+      onTextChange("password",String(pass));
+    }
+  }, []);
+
+
+  useEffect(() => {
+    fillUser().then();
+  }, []);
+
   const [{loading}, startLogin] = useAsyncFn(async () => {
-    await requestLogin(params.username, params.password);
-    // replaceWithMainScreen();
-  }, [params]);
+     await requestLogin(username, password);
+     await LocalStorageHelper.set("username", username);
+     await LocalStorageHelper.set("password", password);
+     replaceWithMainScreen();
+  }, [username, password]);
 
   return (
     <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
@@ -64,14 +75,14 @@ export const LoginScreen = memo(function LoginScreen() {
         <Bottom>
           <ContainerInput style={BaseStyles.viewShadow}>
             <SInputBorder
-              value={params.username}
+              value={username}
               keyName={'username'}
               onTextChange={onTextChange}
               keyboardType={'email-address'}
               placeHolder={'Nhập vào email'}
             />
             <SInputBorder
-              value={params.password}
+              value={password}
               keyName={'password'}
               onTextChange={onTextChange}
               placeHolder={'Nhập mật khẩu của bạn'}

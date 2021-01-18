@@ -10,12 +10,13 @@ export const TabletLeftWidth = 375;
 
 export const isLandscape = () => dims.width > dims.height;
 
-let screenWidth = dims.width;
-let screenHeight = dims.height;
+export const screenWidth = dims.width;
+export const screenHeight = dims.height;
 const [shortDimension, longDimension] =
   screenWidth < screenHeight
     ? [screenWidth, screenHeight]
     : [screenHeight, screenWidth];
+
 
 export const screenShortDimension = shortDimension;
 export const screenLongDimension = longDimension;

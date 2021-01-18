@@ -34,6 +34,8 @@ export const HomeScreen = memo(function HomeScreen() {
             label={'MService'}
             onPress={navigateToMServiceScreen}
           />
+        </SViewFunction>
+        <SViewFunction>
           <ItemHome
             icon={IC_HOME_HEAD_MAP}
             label={'Headmap'}
@@ -45,6 +47,8 @@ export const HomeScreen = memo(function HomeScreen() {
             onPress={navigateToMScanScreen}
           />
         </SViewFunction>
+
+
       </Container>
     </SViewContainerHome>
   );
@@ -66,5 +70,5 @@ const SViewFunction = styled.View`
   margin-top: 16px;
   justify-content: center;
   flex-direction: row;
-  flex-wrap: wrap;
+
 `;

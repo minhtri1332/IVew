@@ -25,5 +25,4 @@ export const IC_HOME_CHECKIN = require("./icons/ic_checkin.png");
 export const IC_HOME_SERVICE = require("./icons/ic_service.png");
 
 export const IC_LOGO_APP = require("./icons/ic_logo_app.png");
-export const IMG_LOGO_SMALL = require('./images/logo-small.png');
 export const BG_LOGIN = require('./images/bg_login.png');

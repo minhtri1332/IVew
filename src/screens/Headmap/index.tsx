@@ -8,7 +8,7 @@ export const HeadMapScreen = memo(function HeadMapScreen() {
   return (
     <ScreenWrapper>
       <HeaderBack title={'HeadMap'} />
-      <WebviewComponent url={'https://www.google.com'} />
+      <WebviewComponent url={'https://go.iview.vn/#/login'} />
     </ScreenWrapper>
   );
 });
