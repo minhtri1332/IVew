@@ -42,7 +42,7 @@ const STextTitle = styled.Text`
 `;
 
 const Left = styled.View`
-  padding: 32px 32px;
+  padding: 16px 32px;
 `;
 
 const Right = styled.View`
