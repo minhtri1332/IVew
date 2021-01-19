@@ -150,7 +150,7 @@ export const RegisterScreen = memo(function RegisterScreen() {
         <Logo source={IC_LOGO_APP} />
       </Top>
       <Bottom>
-        <Title>Đăng ký tài khoản Motorshop.vn</Title>
+        <Title>Đăng ký tài khoản iView</Title>
         <ContainerInput>
           <SInputBorder
             value={params.username}
