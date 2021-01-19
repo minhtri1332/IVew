@@ -25,5 +25,6 @@ export interface FilterModalBottomProps {
   labelStyle?: TextStyle;
   textStyle?: TextStyle;
   dropDownStyle?: ImageStyle;
-  hideDivider?: boolean
+  hideDivider?: boolean;
+  isButtonClearValue?:boolean;
 }

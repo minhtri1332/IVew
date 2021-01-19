@@ -20,12 +20,13 @@ import {
 import {BottomMenuModal} from './BottomMenuModal';
 import {BottomMenuContainer} from './BottomMenuContainer';
 import {BottomMenuHeader} from './BottomMenuHeader';
-import {Colors} from "@/themes/Colors";
-import styled from "styled-components/native";
+import {Colors} from '@/themes/Colors';
+import {styled} from '@/global';
+import {IC_ARROW, IC_ARROW_DOWN} from '@/assets';
 
 const SText = styled(Content)<{hasValue: boolean}>`
   flex: 1;
-  color: ${p => (p.hasValue ? Colors.gray1 : Colors.gray4)};
+  color: ${(p: any) => (p.hasValue ? Colors.gray1 : Colors.gray4)};
 `;
 
 interface Props {
@@ -108,7 +109,7 @@ export const BottomMenuSelector = memo(
                 </SText>
               </ContentWrapper>
             </TextWrapper>
-            <Icon source={require('@/assets/icons/selector-arrow.png')} />
+            <Icon source={IC_ARROW_DOWN} />
           </>
         </Button>
         <BottomMenuModal

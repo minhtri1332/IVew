@@ -1,10 +1,18 @@
 import React, {memo, useCallback, useEffect, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
-import {ActivityIndicator, Dimensions, KeyboardAvoidingView, Platform} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {InputBorder} from '@/components/InputBorder';
 import {BG_LOGIN, IC_LOGO_APP} from '@/assets';
-import {navigateToForgotPasswordScreen, replaceWithMainScreen} from '@/utils/navigation';
+import {
+  navigateToForgotPasswordScreen,
+  replaceWithMainScreen,
+} from '@/utils/navigation';
 import {BaseStyles} from '@/themes/BaseStyles';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestLogin} from '@/store/auth/function';
@@ -18,50 +26,40 @@ const SInputBorder = styled(InputBorder).attrs({
   },
 })``;
 
-interface ParamsInterface {
-  username: string;
-  password: string;
-}
-
 export const LoginScreen = memo(function LoginScreen() {
+  const [username, setUsername] = useState('thanh191997@gmail.com');
+  const [password, setPassword] = useState('meditech1234');
 
-  const [username, setUsername] = useState("thanh191997@gmail.com");
-  const [password, setPassword] = useState("meditech1234");
-
-  const onTextChange = useCallback(
-    (keyname: string, value: string) => {
-if (keyname == "username"){
-  setUsername(value)
-}else {setPassword(value)}
-    },
-    [],
-  );
-
-  const fillUser = useCallback(async () => {
-    const email = await LocalStorageHelper.get("username");
-    const pass = await LocalStorageHelper.get("password");
-
-    if (email) {
-      onTextChange("username",String(email));
-    }
-
-    if (pass) {
-      onTextChange("password",String(pass));
+  const onTextChange = useCallback((keyname: string, value: string) => {
+    if (keyname == 'username') {
+      setUsername(value);
+    } else {
+      setPassword(value);
     }
   }, []);
 
+  const fillUser = useCallback(async () => {
+    const email = await LocalStorageHelper.get('username');
+    const pass = await LocalStorageHelper.get('password');
+
+    if (email) {
+      onTextChange('username', String(email));
+    }
+
+    if (pass) {
+      onTextChange('password', String(pass));
+    }
+  }, []);
 
   useEffect(() => {
     fillUser().then();
   }, []);
 
   const [{loading}, startLogin] = useAsyncFn(async () => {
-
-     await requestLogin(username, password);
-    console.log("ds");
-     await LocalStorageHelper.set("username", username);
-     await LocalStorageHelper.set("password", password);
-     replaceWithMainScreen();
+    await requestLogin(username, password);
+    await LocalStorageHelper.set('username', username);
+    await LocalStorageHelper.set('password', password);
+    replaceWithMainScreen();
   }, [username, password]);
 
   return (

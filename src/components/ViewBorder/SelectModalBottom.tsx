@@ -9,7 +9,8 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Text, Image
+  Text,
+  Image,
 } from 'react-native';
 import {
   BottomMenuContainer,
@@ -19,8 +20,8 @@ import {
 
 import {FilterModalItem} from '@/components/Filter/FilterModalItem';
 import {IC_CLOSE, IC_DROPDOWN} from '@/assets';
-import styled from "styled-components/native";
-import {Colors} from "@/themes/Colors";
+import {Colors} from '@/themes/Colors';
+import {styled} from '@/global';
 
 type Props = FilterModalBottomProps;
 
@@ -39,7 +40,6 @@ const Icon = styled.Image`
   width: 24px;
   height: 24px;
 `;
-
 
 export const SelectModalBottom = memo(function SelectModalBottom({
   inputName,
@@ -70,9 +70,7 @@ export const SelectModalBottom = memo(function SelectModalBottom({
     [selectedOption, placeholder],
   );
 
-  const text = !!selectedOption
-    ? selectedOptionLabel
-    : '';
+  const text = !!selectedOption ? selectedOptionLabel : '';
 
   const onSelectOptionCb = useCallback(
     (value: string | number) => {
@@ -172,13 +170,13 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     fontSize: 11,
     lineHeight: 13,
-    color: Colors.gray1
+    color: Colors.gray1,
   },
   contentText: {
     fontSize: 15,
     lineHeight: 18,
     paddingTop: 2,
-    color: Colors.gray3
+    color: Colors.gray3,
   },
   btnViewTitle: {
     flex: 1,
@@ -201,7 +199,7 @@ const styles = StyleSheet.create({
   iconClear: {
     width: 10,
     height: 10,
-    tintColor: Colors.gray3
+    tintColor: Colors.gray3,
   },
   viewIcon: {
     width: 14,

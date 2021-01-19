@@ -23,7 +23,7 @@ export const HomeScreen = memo(function HomeScreen() {
   return (
     <SViewContainerHome>
       <HomeHeader />
-      <Container      refreshControl={
+      <Container refreshControl={
         <RefreshControl refreshing={loading} onRefresh={call} />
       }>
         <SViewFunction>

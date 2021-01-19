@@ -1,5 +1,5 @@
 import {createDynamicReducer} from '@/utils/createDynamicReducer';
-import {RawHistory, RawTest} from "@/store/history/types";
+import {RawAttendence, RawHistory, RawTest} from "@/store/history/types";
 
 const {
   setStore,
@@ -8,7 +8,7 @@ const {
   useByKey,
   setQueries,
   useKeysByQuery,
-} = createDynamicReducer<RawTest>('history', 'id');
+} = createDynamicReducer<RawHistory>('history', 'employeeID');
 
 export const setHistoryStore = setStore;
 export const historyReducer = reducer;

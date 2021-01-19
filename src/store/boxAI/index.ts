@@ -5,6 +5,7 @@ const {
     setStore,
     reducer,
     sync,
+    getByKey,
     useByKey,
     setQueries,
     useKeysByQuery,
@@ -16,3 +17,4 @@ export const syncBoxAi = sync;
 export const useBoxAi = useByKey;
 export const setBoxAiQueries = setQueries;
 export const useBoxAiByQuery = useKeysByQuery;
+export const getBoxAi = getByKey;
