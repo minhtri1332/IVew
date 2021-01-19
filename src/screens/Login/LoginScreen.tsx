@@ -25,8 +25,8 @@ interface ParamsInterface {
 
 export const LoginScreen = memo(function LoginScreen() {
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("thanh191997@gmail.com");
+  const [password, setPassword] = useState("meditech1234");
 
   const onTextChange = useCallback(
     (keyname: string, value: string) => {
@@ -56,7 +56,9 @@ if (keyname == "username"){
   }, []);
 
   const [{loading}, startLogin] = useAsyncFn(async () => {
+
      await requestLogin(username, password);
+    console.log("ds");
      await LocalStorageHelper.set("username", username);
      await LocalStorageHelper.set("password", password);
      replaceWithMainScreen();

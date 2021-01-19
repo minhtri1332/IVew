@@ -1,28 +1,31 @@
-import React, {memo, useCallback} from 'react';
-import {Text} from 'react-native';
+import React, {memo} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
 import {ItemHome} from '@/screens/Home/components/ItemHome';
-import {
-  IC_HOME_CHECKIN,
-  IC_HOME_HEAD_MAP,
-  IC_HOME_SCAN,
-  IC_HOME_SERVICE,
-  IC_LOGO,
-} from '@/assets';
+import {IC_HOME_CHECKIN, IC_HOME_HEAD_MAP, IC_HOME_SCAN, IC_HOME_SERVICE} from '@/assets';
 import {
   navigateToHeadMapScreen,
   navigateToHistoryScreen,
   navigateToMScanScreen,
   navigateToMServiceScreen,
 } from '@/utils/navigation';
+import {useAsyncEffect} from '@/hooks/useAsyncEffect';
+import {requestGetBoxAi} from '@/store/boxAI/functions';
+import {RefreshControl} from 'react-native';
 
 export const HomeScreen = memo(function HomeScreen() {
+
+  const {call, loading} = useAsyncEffect(async () => {
+    await requestGetBoxAi();
+  }, []);
+
   return (
     <SViewContainerHome>
       <HomeHeader />
-      <Container>
+      <Container      refreshControl={
+        <RefreshControl refreshing={loading} onRefresh={call} />
+      }>
         <SViewFunction>
           <ItemHome
             icon={IC_HOME_CHECKIN}
@@ -59,7 +62,7 @@ const SViewContainerHome = styled.View`
   background-color: ${Colors.backgroundHeader};
 `;
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   background-color: ${Colors.white};
   border-top-left-radius: 30px;
