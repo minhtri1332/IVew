@@ -7,20 +7,13 @@ import {StyleSheet, Image, View} from 'react-native';
 import {styled} from '@/global';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import File from '@/utils/file';
-import ImagePicker from "react-native-image-crop-picker";
 import {screenHeight} from '@/utils/scale';
 
 export const MScanScreen = memo(function MScanScreen() {
-  const [fileSelect, setFile] = useState("");
+  const [fileSelect, setFile] = useState('');
   const openSelectImage = useCallback(async () => {
-    // launchImageLibrary({mediaType: 'photo', quality: 1}, (event: any) => {
-    //   console.log('event', event);
-    //   setUrl(event);
-    // });
-
     const file = await File.pickImage({multiple: false} || {});
-    // const file = await ImagePicker.openPicker({multiple: false});
-    setFile(file[0].uri)
+    setFile(file[0].uri);
   }, []);
 
   return (
@@ -30,9 +23,9 @@ export const MScanScreen = memo(function MScanScreen() {
         <View style={[BaseStyles.viewShadow, styles.viewCard]}>
           <SText>Smart scan</SText>
           <SImage
-            small={fileSelect == "" ? false : true}
-            resizeMode={"contain"}
-            source={fileSelect != "" ? {uri: fileSelect} : IC_SCAN}
+            small={fileSelect == '' ? false : true}
+            resizeMode={'contain'}
+            source={fileSelect != '' ? {uri: fileSelect} : IC_SCAN}
           />
           <SButton title={'Chọn ảnh'} onPress={openSelectImage} />
         </View>
@@ -55,9 +48,10 @@ const SViewBody = styled.View`
 const SImage = styled.Image<{small?: boolean}>`
   width: 100%;
   min-height: 100px;
-  height: ${(props:any) => props.small?screenHeight - 320 : 100};
+  height: ${(props: any) => (props.small ? screenHeight - 320 : 100)};
   padding: 16px;
   border-radius: 6px;
+  margin-bottom: -16px;
 `;
 
 const SButton = styled(SubmitButtonColor)`
