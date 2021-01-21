@@ -13,14 +13,14 @@ const data = [
     {id:"6", value:"Nguyễn Văn Đê"}];
 
 export const requestGetHistoryList = async (params?: HistoryProps) => {
-    console.log(params)
+
     const {data} = await Fetch.get<{data: any}>('https://go.iview.vn/api/v1/attendence/list-record-month', {
         params: {
             boxID: params?.boxID,
             month: params?.month
         }
     });
-    console.log('data', data.data.listRecord)
+
     batch(() => {
         syncHistory(data.data.listRecord)
         setHistoryQueries({ all: data.data.listRecord.map((item:RawHistory) => item.boxID) });

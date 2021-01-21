@@ -1,20 +1,29 @@
 import React, {memo, useCallback, useState} from 'react';
-import {BaseStyles, ScreenWrapper, SIcon} from '@/themes/BaseStyles';
+import {BaseStyles, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import {IC_SCAN} from '@/assets';
 import {Colors} from '@/themes/Colors';
-import {StyleSheet, Image, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {styled} from '@/global';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import File from '@/utils/file';
 import {screenHeight} from '@/utils/scale';
+import {useAsyncFn} from '@/hooks/useAsyncFn';
+import {requestTransformFile} from '@/store/MScan/functions';
+import {RawFile} from '@/store/types';
 
 export const MScanScreen = memo(function MScanScreen() {
-  const [fileSelect, setFile] = useState('');
+  const [fileSelect, setFile] = useState({uri: ''} as RawFile);
+
   const openSelectImage = useCallback(async () => {
     const file = await File.pickImage({multiple: false} || {});
-    setFile(file[0].uri);
+    // @ts-ignore
+    setFile(file[0]);
   }, []);
+
+  const [{loading}, startTransform] = useAsyncFn(async () => {
+    const scan = await requestTransformFile(fileSelect);
+  }, [fileSelect]);
 
   return (
     <ScreenWrapper>
@@ -23,16 +32,29 @@ export const MScanScreen = memo(function MScanScreen() {
         <View style={[BaseStyles.viewShadow, styles.viewCard]}>
           <SText>Smart scan</SText>
           <SImage
-            small={fileSelect == '' ? false : true}
+            small={fileSelect.uri == '' ? false : true}
             resizeMode={'contain'}
-            source={fileSelect != '' ? {uri: fileSelect} : IC_SCAN}
+            source={fileSelect.uri == '' ? IC_SCAN : {uri: fileSelect.uri}}
           />
-          <SButton title={'Chọn ảnh'} onPress={openSelectImage} />
+          <SViewButton>
+            {fileSelect.uri != '' && (
+              <SButton title={'Biến đổi'} onPress={startTransform} />
+            )}
+            <SButton
+              title={fileSelect ? 'Đổi ảnh' : 'Chọn ảnh'}
+              onPress={openSelectImage}
+            />
+          </SViewButton>
         </View>
       </SViewBody>
     </ScreenWrapper>
   );
 });
+
+const SViewButton = styled.View`
+  flex-direction: row;
+  margin-top: 16px;
+`;
 
 const SText = styled.Text`
   padding: 16px 0px;
