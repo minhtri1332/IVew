@@ -2,7 +2,7 @@ import React, {memo, useCallback, useEffect} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {ActivityIndicator} from 'react-native';
-import {navigateToLoginScreen} from '@/utils/navigation';
+import {navigateToFaceDetectScreen, navigateToLoginScreen} from '@/utils/navigation';
 import SplashScreen from 'react-native-splash-screen';
 import {IC_LOGO_APP} from '@/assets';
 
@@ -23,7 +23,8 @@ export const PreloadScreen = memo(function PreloadScreen() {
   const getData = useCallback( () => {
     setTimeout(() => {
 
-      navigateToLoginScreen();
+      // navigateToLoginScreen();
+      navigateToFaceDetectScreen();
     }, 500);
   }, []);
 

@@ -6,6 +6,7 @@ import {
 
 import {TransitionPresets} from "@react-navigation/stack";
 import {HistoryDetailProps} from "@/screens/checkin/Screens/HistoryDetail";
+import {FaceDetectScreenProps} from '@/screens/FaceDetect/FaceDetect';
 
 export const defaultScreenOptions = TransitionPresets.SlideFromRightIOS;
 
@@ -63,6 +64,12 @@ export const navigateToHeadMapScreen = createNavigate(
 export const navigateToMScanScreen = createNavigate(
   'MScanScreen'
 );
+export const navigateToFaceDetectScreen = createNavigate(
+  'CameraScreen'
+);
 export const openModalCreateCustomer = createNavigate(
   'ModalCreateCustomer'
+);
+export const openFaceDetectScreen = createPush<FaceDetectScreenProps>(
+  'FaceDetectScreen'
 );

@@ -25,6 +25,7 @@ export const IC_HOME_CHECKIN = require("./icons/ic_checkin.png");
 export const IC_HOME_SERVICE = require("./icons/ic_service.png");
 export const IC_CLOCK = require("./icons/ic_clock.png");
 export const IC_CALENDAR = require("./icons/calendar.png");
+export const IC_CAMERA = require("./icons/ic_camera.png");
 
 export const IC_LOGO_APP = require("./icons/ic_logo_app.png");
 export const BG_LOGIN = require('./images/bg_login.png');

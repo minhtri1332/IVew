@@ -16,6 +16,8 @@ import MServiceScreen from "@/screens/MService";
 import MScanScreen from "@/screens/MScan";
 import HeadMapScreen from "@/screens/Headmap";
 import ModalCreateCustomer from "@/screens/MService/Modal/ModalCreateCustomer";
+import CameraScreen from '@/screens/FaceDetect';
+import {FaceDetectScreen} from '@/screens/FaceDetect/FaceDetect';
 
 const RootStack = createStackNavigator();
 const ModalStack = createStackNavigator();
@@ -41,6 +43,8 @@ const MainStackComponent = memo(function MainStackComponent() {
       <MainStack.Screen name={'MServiceScreen'} component={MServiceScreen} />
       <MainStack.Screen name={'HeadMapScreen'} component={HeadMapScreen} />
       <MainStack.Screen name={'MScanScreen'} component={MScanScreen} />
+      <MainStack.Screen name={'CameraScreen'} component={CameraScreen} />
+      <MainStack.Screen name={'FaceDetectScreen'} component={FaceDetectScreen} />
     </MainStack.Navigator>
   );
 });
