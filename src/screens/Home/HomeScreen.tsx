@@ -3,12 +3,13 @@ import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
 import {ItemHome} from '@/screens/Home/components/ItemHome';
-import {IC_HOME_CHECKIN, IC_HOME_HEAD_MAP, IC_HOME_SCAN, IC_HOME_SERVICE} from '@/assets';
+import {IC_DETECT_FACE, IC_HOME_CHECKIN, IC_HOME_HEAD_MAP, IC_HOME_SCAN, IC_HOME_SERVICE} from '@/assets';
 import {
+  navigateToFaceDetectScreen,
   navigateToHeadMapScreen,
   navigateToHistoryScreen,
   navigateToMScanScreen,
-  navigateToMServiceScreen,
+  navigateToMServiceScreen, openFaceDetectScreen,
 } from '@/utils/navigation';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {requestGetBoxAi} from '@/store/boxAI/functions';
@@ -48,6 +49,14 @@ export const HomeScreen = memo(function HomeScreen() {
             icon={IC_HOME_SCAN}
             label={'MScan'}
             onPress={navigateToMScanScreen}
+          />
+        </SViewFunction>
+
+        <SViewFunction>
+          <ItemHome
+            icon={IC_DETECT_FACE}
+            label={'Face detect'}
+            onPress={openFaceDetectScreen}
           />
         </SViewFunction>
 

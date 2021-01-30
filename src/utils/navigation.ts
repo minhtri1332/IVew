@@ -70,6 +70,6 @@ export const navigateToFaceDetectScreen = createNavigate(
 export const openModalCreateCustomer = createNavigate(
   'ModalCreateCustomer'
 );
-export const openFaceDetectScreen = createPush<FaceDetectScreenProps>(
+export const openFaceDetectScreen = createNavigate<FaceDetectScreenProps>(
   'FaceDetectScreen'
 );

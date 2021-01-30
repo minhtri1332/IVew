@@ -23,8 +23,8 @@ export const PreloadScreen = memo(function PreloadScreen() {
   const getData = useCallback( () => {
     setTimeout(() => {
 
-      // navigateToLoginScreen();
-      navigateToFaceDetectScreen();
+      navigateToLoginScreen();
+      // navigateToFaceDetectScreen();
     }, 500);
   }, []);
 

@@ -6,8 +6,16 @@ platform :ios, '10.0'
 target 'iview' do
   # Pods for IView
   config = use_native_modules!
-
+  
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+    'FaceDetectorMLKit'
+  ]
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Core'
+  
   use_react_native!(:path => config["reactNativePath"])
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
   target 'iviewTests' do
     inherit! :complete

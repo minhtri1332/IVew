@@ -105,9 +105,7 @@ export default class CameraScreen extends React.Component {
   };
 
   onCapture() {
-
     this.state.uriImage && this.state.faces.length > 0 && this.state.faces.map(item => {
-
       const ratioWidth = item.bounds.size.width / DWidth;
       const ratioHeight = item.bounds.size.height / DHeight;
       const offsetX = item.bounds.origin.x / DWidth;
