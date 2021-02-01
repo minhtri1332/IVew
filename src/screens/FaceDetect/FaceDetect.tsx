@@ -8,8 +8,7 @@ import {IC_EMPTY_IMAGE_DETECT} from '@/assets';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {navigateToFaceDetectScreen} from '@/utils/navigation';
 import {Colors} from '@/themes/Colors';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {FaceDetector} from 'react-native-camera';
+import {RNCamera,FaceDetector} from 'react-native-camera';
 import File from '@/utils/file';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
@@ -31,33 +30,18 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   const [userPending, setUserPending] = useState<Set<string>>(() => {
     return new Set([]);
   });
-
-  const [paramFaceDetect, setParamFaceDetect] = useState<
-    FaceDetectScreenProps
-    >(() => ({
-    faces: [],
-    imageUri:'',
-    width:0,
-    height:0
-  }));
-
-  const setParamCustom = (name: string, value: any) => {
-    console.log(value);
-    setParamFaceDetect((state) => ({...state, [name]: value}));
-  };
+  const [imageShow, setImageShow] = useState(imageUri);
 
   useEffect(() => {
-    setParamCustom("faces", faces);
-    setParamCustom("imageUri", imageUri);
-    setParamCustom("width", width);
-    setParamCustom("height", height);
-    cropImageFace();
+    setImageShow(imageUri)
+    cropImageFace(faces, imageUri, width, height);
   }, [faces, imageUri, height, width]);
 
   const cropImageFace = useCallback(
-    () => {
+    (faces, imageUri, width, height) => {
+      console.log("start crop",faces );
+     imageUri && faces.map((item: any, index: number) => {
 
-      imageUri && faces.map((item, index) => {
         const ratioWidth = item.bounds.size.width / DWidth;
         const ratioHeight = item.bounds.size.height / DHeight;
         const offsetX = item.bounds.origin.x / DWidth;
@@ -68,7 +52,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           size: {width: ratioWidth * width, height: ratioHeight * height},
           resizeMode: 'contain',
         };
-
+       console.log("as", cropData);
         // @ts-ignore
         ImageEditor.cropImage(imageUri, cropData).then(url => {
           setUserPending((set) => {
@@ -76,12 +60,12 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
             newSet.has(url) ? newSet.delete(url) : newSet.add(url);
             return newSet;
           });
-
+          console.log("cropImage", url);
           setListFaceDetect(url)
         });
       });
     },
-    [paramFaceDetect.imageUri, paramFaceDetect.faces, paramFaceDetect.width, paramFaceDetect.height,faces],
+    [],
   );
 
 
@@ -94,13 +78,13 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
 
     const takePictureLibrary = useCallback(
     async () => {
+      const options = { mode: FaceDetector.Constants.Mode.fast, runClassifications: RNCamera.Constants.FaceDetection.Classifications.all };
       const file = await File.pickImage({multiple: false} || {});
-      const faces = await FaceDetector.detectFacesAsync(file[0].uri)
-      setParamCustom("faces", faces);
-      setParamCustom("imageUri", file[0].uri);
-      setParamCustom("width", file[0].width);
-      setParamCustom("height", file[0].height);
-
+      setImageShow(file[0].uri)
+      console.log("1", file);
+      const facesCrop = await FaceDetector.detectFacesAsync(file[0].uri, options);
+      console.log("2", facesCrop.faces);
+      cropImageFace(facesCrop.faces, file[0].uri, file[0].width, file[0].height);
     },
     [],
   );
@@ -110,7 +94,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     <View style={styles.container}>
       <HeaderBack title={'Detect'}/>
       <SViewImage>
-        <SImage source={imageUri ?{uri:paramFaceDetect.imageUri}:IC_EMPTY_IMAGE_DETECT} resizeMode={'contain'}/>
+        <SImage source={imageShow ?{uri:imageShow}:IC_EMPTY_IMAGE_DETECT} resizeMode={'contain'}/>
       </SViewImage>
 
       <SViewButton>
@@ -121,7 +105,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       <SText>Face detected</SText>
 
       <SScrollView>
-        {listFaceDetect !=""&& <SImageFace source={{uri: listFaceDetect}} resizeMode={'contain'}/>}
+        {listFaceDetect !="" && <SImageFace source={{uri: listFaceDetect}} resizeMode={'contain'}/>}
       </SScrollView>
 
     </View>

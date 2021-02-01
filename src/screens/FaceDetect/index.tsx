@@ -36,7 +36,7 @@ export default class CameraScreen extends React.Component {
     zoom: 0,
     autoFocus: 'on',
     depth: 0,
-    type: 'front',
+    type: 'back',
     whiteBalance: 'auto',
     ratio: '16:9',
     recordOptions: {
