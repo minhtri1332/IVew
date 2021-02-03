@@ -11,11 +11,13 @@ let headers = {
 
 export const Fetch = axios.create({baseURL: Core.baseUrl, headers}); // baseURL: Core.baseUrl
 
-
 Fetch.interceptors.response.use((response) => {
     return response;
 }, (error) => {
-
+    if (error.response.status === 500) {
+        Alert.alert('Lỗi', 'Request failed with status code 500');
+        return Promise.resolve({error});
+    }
     if (error.response.status === 401) {
         // setTokenAction('');
         // replaceLoginScreen();
