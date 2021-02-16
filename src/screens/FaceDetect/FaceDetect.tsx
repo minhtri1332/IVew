@@ -1,20 +1,36 @@
-import React, {memo, useCallback, useEffect, useState} from 'react';
-import {ActivityIndicator, Dimensions, StyleSheet, View} from 'react-native';
+import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {HeaderBack} from '@/components/HeaderBack';
 import {styled} from '@/global';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
 import ImageEditor from '@react-native-community/image-editor';
-import {IC_EMPTY_IMAGE_DETECT} from '@/assets';
+import {IC_ADD_USER, IC_DETECT_FACE, IC_EMPTY_IMAGE_DETECT} from '@/assets';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
-import {navigateToFaceDetectScreen} from '@/utils/navigation';
+import {
+  goBack,
+  navigateToFaceDetectScreen,
+  openModalCreateCustomer,
+} from '@/utils/navigation';
 import {Colors} from '@/themes/Colors';
-import {RNCamera, FaceDetector} from 'react-native-camera';
+import {FaceDetector} from 'react-native-camera';
 import File from '@/utils/file';
 import useBoolean from '@/hooks/useBoolean';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
-import {requestTransformFile} from '@/store/MScan/functions';
+import ImageResizer from 'react-native-image-resizer';
 import RNFetchBlob from 'rn-fetch-blob';
 import {requestAddEmployee} from '@/store/faceDetect/function';
+import ToastService from '@/services/ToastService';
+import {ItemFace} from '@/screens/FaceDetect/ItemFace';
+import {InputBorder} from '@/components/InputBorder';
+import {SIcon} from '@/themes/BaseStyles';
+import ButtonText from '@/components/button/ButtonText';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 export interface FaceDetectScreenProps {
@@ -40,9 +56,12 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     height,
     width,
   } = useNavigationParams<FaceDetectScreenProps>();
-  const [listFaceDetect, setListFaceDetect] = useState('');
   const [imageShow, setImageShow] = useState(imageUri);
+  const [myFace, setMyFace] = useState('');
   const [isLoading, loadingTrue, loadingFalse] = useBoolean();
+  const [listFaceDetect, setListFaceDetect] = useState<Set<string>>(() => {
+    return new Set([]);
+  });
   const [paramEmployee, setParamEmployee] = useState<ParamEmployee>(() => ({
     name: 'tri',
     position: 'dev',
@@ -57,8 +76,10 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   };
 
   useEffect(() => {
-    setListFaceDetect('');
     setImageShow(imageUri);
+    setListFaceDetect(() => {
+      return new Set([]);
+    });
     RNFetchBlob.fs.readFile(imageUri, 'base64').then((data) => {
       setParamCustom('avatar', data);
     });
@@ -73,36 +94,55 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
         const offsetX = item.bounds.origin.x / DWidth;
         const offsetY = item.bounds.origin.y / DHeight;
 
+        const OX = offsetX * width > 0 ? offsetX * width : 0;
+        const OY = offsetY * height > 0 ? offsetY * height : 0;
+        const SW = ratioWidth * width > 0 ? ratioWidth * width : 0;
+        const SY = ratioHeight * height > 0 ? ratioHeight * height : 0;
+
         const cropData = {
-          offset: {x: offsetX * width, y: offsetY * height},
-          size: {width: ratioWidth * width, height: ratioHeight * height},
+          offset: {x: OX, y: OY},
+          size: {width: SW, height: SY},
           resizeMode: 'contain',
         };
 
         // @ts-ignore
         ImageEditor.cropImage(imageUri, cropData).then((url) => {
-          setListFaceDetect(url);
+          setListFaceDetect((set) => {
+            const newSet = new Set(set);
+            newSet.has(url) ? newSet.delete(url) : newSet.add(url);
+            return newSet;
+          });
           RNFetchBlob.fs.readFile(url, 'base64').then((data) => {
             setParamCustom('image', data);
+            setMyFace(url);
           });
         });
       });
   }, []);
 
   const cropImagePickerFace = useCallback((faces, imageUri, width, height) => {
+    setListFaceDetect(() => {
+      return new Set([]);
+    });
     RNFetchBlob.fs.readFile(imageUri, 'base64').then((data) => {
       setParamCustom('avatar', data);
     });
     imageUri &&
       faces.map((item: any, index: number) => {
-        const ratioWidth = item.bounds.size.width / 8 / DWidth;
-        const ratioHeight = item.bounds.size.height / 8 / DHeight;
-        const offsetX = item.bounds.origin.x / 8 / DWidth;
-        const offsetY = item.bounds.origin.y / 8 / DHeight;
+        const size = item.bounds.size.width > DWidth ? 8 : 1;
+        const ratioWidth = item.bounds.size.width / size / DWidth;
+        const ratioHeight = item.bounds.size.height / size / DHeight;
+        const offsetX = item.bounds.origin.x / size / DWidth;
+        const offsetY = item.bounds.origin.y / size / DHeight;
+
+        const OX = offsetX * width > 0 ? offsetX * width : 0;
+        const OY = offsetY * height > 0 ? offsetY * height : 0;
+        const SW = ratioWidth * width > 0 ? ratioWidth * width : 0;
+        const SY = ratioHeight * height > 0 ? ratioHeight * height : 0;
 
         const cropData = {
-          offset: {x: offsetX * width, y: offsetY * height},
-          size: {width: ratioWidth * width, height: ratioHeight * height},
+          offset: {x: OX, y: OY},
+          size: {width: SW, height: SY},
           resizeMode: 'contain',
         };
         console.log('cropData', cropData);
@@ -112,8 +152,13 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
         ImageEditor.cropImage(imageUri, cropData).then((url) => {
           RNFetchBlob.fs.readFile(url, 'base64').then((data) => {
             setParamCustom('image', data);
+            setMyFace(url);
           });
-          setListFaceDetect(url);
+          setListFaceDetect((set) => {
+            const newSet = new Set(set);
+            newSet.has(url) ? newSet.delete(url) : newSet.add(url);
+            return newSet;
+          });
           loadingFalse();
         });
       });
@@ -129,58 +174,121 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     };
     const file = await File.pickImage({multiple: false} || {});
     setImageShow(file[0].uri);
-    setListFaceDetect('');
+
     loadingTrue();
     RNFetchBlob.fs.readFile(file[0].uri, 'base64').then((data) => {
       setParamCustom('image', data);
+      setMyFace(url);
     });
-    const cropData = {
-      offset: {x: file[0].width, y: file[0].height},
-      size: {width: file[0].width, height: file[0].height},
-      resizeMode: 'contain',
-    };
-    // @ts-ignore
-    ImageEditor.cropImage(file[0].uri, cropData).then((url) => {
-      console.log('1', file);
-      await FaceDetector.detectFacesAsync(url, options).then((res) => {
-        if (res.faces.length > 0) {
-          cropImagePickerFace(res.faces, url, file[0].width, file[0].height);
-        } else {
-          console.log('No faces: ');
-        }
-        loadingFalse();
+
+    ImageResizer.createResizedImage(
+      file[0].uri,
+      file[0].width - 10,
+      file[0].height - 10,
+      'JPEG',
+      0.01,
+      0,
+      undefined,
+      false,
+      {onlyScaleDown: true},
+    )
+      .then((response) => {
+        console.log('response1', response);
+        FaceDetector.detectFacesAsync(response.uri, options).then((res) => {
+          if (res.faces.length > 0) {
+            console.log('dêtct', res);
+            cropImagePickerFace(
+              res.faces,
+              file[0].uri,
+              file[0].width,
+              file[0].height,
+            );
+          } else {
+            console.log('No faces: ');
+          }
+          loadingFalse();
+        });
+      })
+      .catch((err) => {
+        // Oops, something went wrong. Check that the filename is correct and
+        // inspect err to get more details.
       });
-    });
   }, []);
 
   const [{loading}, requestData] = useAsyncFn(async () => {
     await requestAddEmployee(paramEmployee);
+    ToastService.show('Success!');
+    goBack();
   }, [paramEmployee]);
+
+  const onPressImage = useCallback(
+    (value: string) => {
+      setMyFace(value);
+      RNFetchBlob.fs.readFile(value, 'base64').then((data) => {
+        setParamCustom('image', data);
+      });
+    },
+    [setParamCustom],
+  );
+
+  const rightHeader = useMemo(() => {
+    return (
+      <ButtonText
+        color={Colors.white}
+        title={'Lưu'}
+        onPress={requestData}
+        loading={loading}
+      />
+    );
+  }, [loading]);
+
+  // @ts-ignore
+  const renderFace = ({bounds, faceID, rollAngle, yawAngle}) => (
+    <View
+      key={faceID}
+      transform={[
+        {perspective: 600},
+        {rotateZ: `${rollAngle.toFixed(0)}deg`},
+        {rotateY: `${yawAngle.toFixed(0)}deg`},
+      ]}
+      style={[
+        styles.face,
+        {
+          ...bounds.size,
+          left: bounds.origin.x,
+          top: bounds.origin.y,
+        },
+      ]}>
+      {/*<Text style={styles.faceText}>ID: {faceID}</Text>*/}
+      {/*<Text style={styles.faceText}>rollAngle: {rollAngle.toFixed(0)}</Text>*/}
+      {/*<Text style={styles.faceText}>yawAngle: {yawAngle.toFixed(0)}</Text>*/}
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      <HeaderBack title={'Detect'} />
-      <SViewImage>
-        <SImage
-          source={imageShow ? {uri: imageShow} : IC_EMPTY_IMAGE_DETECT}
-          resizeMode={'contain'}
-        />
-      </SViewImage>
+      <HeaderBack title={'Detect'} right={rightHeader} />
+      <ScrollView>
+        <SViewImage>
+          <SImage
+            source={imageShow ? {uri: imageShow} : IC_DETECT_FACE}
+            resizeMode={'cover'}
+          />
+        </SViewImage>
 
-      <SViewBottom>
-        <SViewButton>
-          <SButton title={'Chụp ảnh'} onPress={takePicture} />
-          <SButton title={'Chọn ảnh'} onPress={takePictureLibrary} />
-          <SButton title={'Gửi'} onPress={requestData} />
-        </SViewButton>
-
-        <SText>Face detected</SText>
-
-        <SScrollView>
-          {listFaceDetect != '' && (
-            <SImageFace source={{uri: listFaceDetect}} resizeMode={'contain'} />
-          )}
-        </SScrollView>
+        {!isLoading && (
+          <SScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {[...listFaceDetect].map((item) => {
+              return (
+                <ItemFace
+                  uri={item}
+                  onPress={onPressImage}
+                  isCheck={myFace == item}
+                />
+              );
+            })}
+          </SScrollView>
+        )}
 
         {isLoading && (
           <ActivityIndicator
@@ -194,16 +302,54 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
             size={'large'}
           />
         )}
-      </SViewBottom>
+
+        <SViewButton>
+          {!loading && (
+            <View style={{flexDirection: 'row'}}>
+              <SButton title={'Chụp ảnh'} onPress={takePicture} />
+              <SButton title={'Chọn ảnh'} onPress={takePictureLibrary} />
+            </View>
+          )}
+        </SViewButton>
+
+        <SInputBorder
+          value={paramEmployee.name}
+          keyName={'name'}
+          onTextChange={setParamCustom}
+          placeHolder={'Họ tên'}
+          required={true}
+        />
+
+        <SInputBorder
+          value={paramEmployee.position}
+          keyName={'position'}
+          onTextChange={setParamCustom}
+          placeHolder={'Vị trí'}
+          required={false}
+        />
+
+        <SInputBorder
+          value={paramEmployee.department}
+          keyName={'department'}
+          onTextChange={setParamCustom}
+          placeHolder={'Phòng ban'}
+          required={true}
+        />
+      </ScrollView>
     </View>
   );
 });
 
+const SInputBorder = styled(InputBorder).attrs({
+  containerStyle: {
+    marginTop: 16,
+    marginRight: 16,
+    marginLeft: 16,
+  },
+})``;
+
 const SViewBottom = styled.View`
-  flex: 4;
   width: 100%;
-  padding-bottom: 16px;
-  background-color: ${Colors.grey7};
   justify-content: center;
 `;
 
@@ -212,12 +358,7 @@ const SButton = styled(SubmitButtonColor)`
   padding: 0px 16px;
 `;
 
-const SText = styled.Text`
-  margin-left: 16px;
-`;
-
 const SViewImage = styled.View`
-  flex: 7;
   padding-bottom: 16px;
   padding-top: 16px;
   align-self: center;
@@ -229,23 +370,30 @@ const SViewButton = styled.View`
   flex-direction: row;
 `;
 
-const SImageFace = styled.Image`
-  width: 100px;
-  height: 100px;
+const SImage = styled.Image`
+  height: 120px;
+  width: 120px;
   border-radius: 4px;
-  align-self: center;
+`;
+const SScrollView = styled.ScrollView`
+  width: 100%;
+  padding: 0px 16px;
 `;
 
-const SImage = styled.Image`
-  height: 350px;
-  width: 350px;
-  border-radius: 4px;
-`;
-const SScrollView = styled.ScrollView``;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: '100%',
     width: '100%',
+    backgroundColor: Colors.white,
+  },
+  face: {
+    padding: 10,
+    borderWidth: 2,
+    borderRadius: 2,
+    position: 'absolute',
+    borderColor: Colors.red1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
 });

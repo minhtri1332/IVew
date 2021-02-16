@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
-import {useAsyncFn, useLatest} from '@/global';
+
 import ToastService from '@/services/ToastService';
 import LoadingModal from '@/components/LoadingModal';
 import {RootSiblingPortal} from 'react-native-root-siblings';
+import {useLatest} from 'react-use';
+import {useAsyncFn} from '@/hooks/useAsyncFn';
 
 interface ToastType {
   message?: string; // for success is required, for error is optional

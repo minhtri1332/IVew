@@ -10,16 +10,14 @@ const Wrapper = styled(TouchableOpacity)<{
   flex-direction: row;
   align-items: center;
   height: 44px;
-  background-color: ${(p) =>
-    p.disabled ? Colors.grey5 : p.colorButton + '15'};
   justify-content: center;
   border-radius: 8px;
-  margin: ${(p) => (p.withMargin ? '16px 16px 16px' : 0)};
+  margin: ${(p: any) => (p.withMargin ? '16px 16px 16px' : 0)};
 `;
 
 const Title = styled.Text<{colorButton: string}>`
   font-size: 18px;
-  color: ${(props) => props.colorButton};
+  color: ${(props: any) => props.colorButton};
   text-align: center;
   font-family: Roboto-Medium;
 `;
@@ -32,18 +30,16 @@ interface SubmitButtonProps {
   title: string;
   color?: string;
   value?: string;
-  withMargin?: boolean;
   loading?: boolean;
   textStyle?: TextStyle;
   style?: ViewStyle;
   onPress: (value: string) => void;
 }
-export const SubmitButtonColor = memo(function SubmitButtonColor({
+export const ButtonText = memo(function ButtonText({
   title,
   value,
   color,
   loading = false,
-  withMargin = true,
   textStyle,
   style,
   onPress,
@@ -55,19 +51,18 @@ export const SubmitButtonColor = memo(function SubmitButtonColor({
   return (
     <Wrapper
       onPress={onPressListener}
-      colorButton={color || Colors.blue1}
       disabled={loading}
       activeOpacity={0.6}
-      style={style}
-      withMargin={withMargin}>
+      style={style}>
       {loading ? (
         <SLoadingIndicator color={color || Colors.blue1} size={24} />
-      ) : null}
-      <Title style={textStyle} colorButton={color || '#007AFF'}>
-        {title}
-      </Title>
+      ) : (
+        <Title style={textStyle} colorButton={color || '#007AFF'}>
+          {title}
+        </Title>
+      )}
     </Wrapper>
   );
 });
 
-export default SubmitButtonColor;
+export default ButtonText;

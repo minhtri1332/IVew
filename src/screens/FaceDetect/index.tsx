@@ -228,26 +228,6 @@ export default class CameraScreen extends React.Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <View
-            style={{
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}>
-            <TouchableOpacity
-              onPress={this.toggle('canDetectFaces')}
-              style={styles.flipButton}>
-              <Text style={styles.flipText}>
-                {!canDetectFaces ? 'Detect Faces' : 'Detecting Faces'}
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={this.onCapture.bind(this)}
-              style={styles.flipButton}>
-              <Text style={styles.flipText}>detect snap</Text>
-            </TouchableOpacity>
-          </View>
         </View>
 
         {this.state.zoom !== 0 && (

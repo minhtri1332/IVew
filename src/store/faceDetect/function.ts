@@ -4,5 +4,5 @@ import {ParamEmployee} from "@/screens/FaceDetect/FaceDetect";
 export const requestAddEmployee = async (params?: ParamEmployee) => {
     console.log("param", params)
     const {data} = await Fetch.post<{data: any}>('https://ai.iview.vn/api/v1/employee/add-employee', params);
-    console.log('data', data.data.message)
+    console.log('data', data)
 };

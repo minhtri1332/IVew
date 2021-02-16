@@ -6,4 +6,3 @@ export const requestTransformFile = async (fileSelect: any) => {
     console.log("data", data)
     return data;
 };
-
