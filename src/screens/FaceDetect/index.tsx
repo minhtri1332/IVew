@@ -7,24 +7,25 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 // eslint-disable-next-line import/no-unresolved
 import {RNCamera, RNCameraProps} from 'react-native-camera';
 import ImageEditor from '@react-native-community/image-editor';
 import {Colors} from '@/themes/Colors';
-import {IC_CAMERA, IC_LOGO} from '@/assets';
-import {openFaceDetectScreen} from '@/utils/navigation';
+import {IC_BACK, IC_CAMERA, IC_LOGO} from '@/assets';
+import {goBack, openFaceDetectScreen} from '@/utils/navigation';
 import {styled} from '@/global';
+import {HeaderBack} from '@/components/HeaderBack';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
-
 const CameraWidth = DWidth;
-const CameraHeight = 4 / 3 * DWidth;
+const CameraHeight = (4 / 3) * DWidth;
 
 const ContentCamera = styled.View`
-    width: ${CameraWidth};
-    height: ${CameraHeight};
+  width: ${CameraWidth};
+  height: ${CameraHeight};
 `;
 
 const Header = styled.View`
@@ -62,13 +63,12 @@ export default class CameraScreen extends React.Component {
     zoom: 0,
     autoFocus: 'on',
     depth: 0,
-    type: 'front',
+    type: 'back',
     whiteBalance: 'auto',
     ratio: '4:3',
     canDetectFaces: true,
     faces: [],
-    uriImage: '',
-    imageData: {},
+    loadingTakePicture: false,
   };
 
   toggleFacing() {
@@ -103,19 +103,19 @@ export default class CameraScreen extends React.Component {
     });
   }
 
-  takePicture = async function() {
+  takePicture = async function () {
+    this.setState({
+      loadingTakePicture: true,
+    });
     if (this.camera) {
       const data = await this.camera.takePictureAsync({
         fixOrientation: this.state.type === 'front' ? true : false,
         mirrorImage: this.state.type === 'front' ? true : false,
       });
 
-
       this.setState({
-        uriImage: data.uri,
-        imageData: data,
+        loadingTakePicture: false,
       });
-      console.log('takePicture ', data, data.width / data.height);
       openFaceDetectScreen({
         faces: this.state.faces,
         imageUri: data.uri,
@@ -125,10 +125,10 @@ export default class CameraScreen extends React.Component {
     }
   };
 
-  toggle = (value) => () =>
+  toggle = (value: any) => () =>
     this.setState((prevState) => ({[value]: !prevState[value]}));
 
-  facesDetected = ({faces}) => {
+  facesDetected = ({faces}: any) => {
     this.setState({faces});
   };
 
@@ -148,7 +148,9 @@ export default class CameraScreen extends React.Component {
           top: bounds.origin.y,
         },
       ]}>
-      {/*<Text style={styles.faceText}>ID: {faceID}</Text>*/}
+      {this.state.loadingTakePicture && (
+        <Text style={styles.faceText}>Đang định dạng...</Text>
+      )}
       {/*<Text style={styles.faceText}>rollAngle: {rollAngle.toFixed(0)}</Text>*/}
       {/*<Text style={styles.faceText}>yawAngle: {yawAngle.toFixed(0)}</Text>*/}
     </View>
@@ -203,80 +205,66 @@ export default class CameraScreen extends React.Component {
   }
 
   render() {
-    return <View style={styles.container}>
-      <Header>
-        <View
-          style={{
-            flex: 0.9,
-            marginTop: 16,
-          }}>
+    return (
+      <View style={styles.container}>
+        <Header>
+          <TouchableOpacity onPress={goBack}>
+            <Image style={{margin: 16}} source={IC_BACK} />
+          </TouchableOpacity>
+        </Header>
+        {this.renderCamera()}
+        <Bottom>
+          {this.state.zoom !== 0 && (
+            <Text style={[styles.flipText, styles.zoomText]}>
+              Zoom: {this.state.zoom}
+            </Text>
+          )}
           <View
             style={{
-              backgroundColor: 'transparent',
+              flex: 0.1,
+              width: '100%',
               flexDirection: 'row',
-              justifyContent: 'space-around',
+              justifyContent: 'center',
             }}>
-
             {/*<TouchableOpacity*/}
-            {/*  style={styles.flipButton}*/}
-            {/*  onPress={this.toggleFlash.bind(this)}>*/}
-            {/*  <Text style={styles.flipText}> FLASH: {this.state.flash} </Text>*/}
+            {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
+            {/*  onPress={this.zoomOut.bind(this)}>*/}
+            {/*  <Text style={styles.flipText}> - </Text>*/}
             {/*</TouchableOpacity>*/}
+            <TouchableOpacity
+              disabled={this.state.loadingTakePicture}
+              style={{position: 'absolute', marginRight: 16, marginLeft: 16}}
+              onPress={this.takePicture.bind(this)}>
+              <Image source={IC_CAMERA} />
+              {this.state.loadingTakePicture && (
+                <ActivityIndicator
+                  style={{
+                    position: 'absolute',
+                    alignSelf: 'center',
+                    top: 12,
+                  }}
+                  color={Colors.white}
+                  size={'large'}
+                />
+              )}
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.flipButton}
+              onPress={this.toggleFacing.bind(this)}>
+              <Text style={styles.flipText}>
+                {this.state.type === 'front' ? 'Trước' : 'Sau'}
+              </Text>
+            </TouchableOpacity>
             {/*<TouchableOpacity*/}
-            {/*  style={styles.flipButton}*/}
-            {/*  onPress={this.toggleWB.bind(this)}>*/}
-            {/*  <Text style={styles.flipText}>*/}
-            {/*    {' '}*/}
-            {/*    WB: {this.state.whiteBalance}{' '}*/}
-            {/*  </Text>*/}
+            {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
+            {/*  onPress={this.zoomIn.bind(this)}>*/}
+            {/*  <Text style={styles.flipText}> + </Text>*/}
             {/*</TouchableOpacity>*/}
           </View>
-        </View>
-
-
-      </Header>
-      {this.renderCamera()}
-      <Bottom>
-        {this.state.zoom !== 0 && (
-          <Text style={[styles.flipText, styles.zoomText]}>
-            Zoom: {this.state.zoom}
-          </Text>
-        )}
-        <View
-          style={{
-            flex: 0.1,
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
-          {/*<TouchableOpacity*/}
-          {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
-          {/*  onPress={this.zoomOut.bind(this)}>*/}
-          {/*  <Text style={styles.flipText}> - </Text>*/}
-          {/*</TouchableOpacity>*/}
-          <TouchableOpacity
-            style={{marginRight: 16, marginLeft: 16}}
-            onPress={this.takePicture.bind(this)}>
-            <Image source={IC_CAMERA}/>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={this.toggleFacing.bind(this)}>
-            <Text style={styles.flipText}>
-              {
-                this.state.type === 'front' ? 'Sau' : 'Trước'
-              }
-            </Text>
-          </TouchableOpacity>
-          {/*<TouchableOpacity*/}
-          {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
-          {/*  onPress={this.zoomIn.bind(this)}>*/}
-          {/*  <Text style={styles.flipText}> + </Text>*/}
-          {/*</TouchableOpacity>*/}
-        </View>
-      </Bottom>
-    </View>;
+        </Bottom>
+      </View>
+    );
   }
 }
 
@@ -297,7 +285,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 80
+    minWidth: 80,
   },
   flipText: {
     color: 'white',

@@ -6,12 +6,19 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {HeaderBack} from '@/components/HeaderBack';
 import {styled} from '@/global';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
 import ImageEditor from '@react-native-community/image-editor';
-import {IC_ADD_USER, IC_DETECT_FACE, IC_EMPTY_IMAGE_DETECT} from '@/assets';
+import {
+  IC_ADD_USER,
+  IC_CAMERA_EDIT,
+  IC_DETECT_FACE,
+  IC_EDIT,
+  IC_EMPTY_IMAGE_DETECT,
+} from '@/assets';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {
   goBack,
@@ -34,10 +41,8 @@ import ButtonText from '@/components/button/ButtonText';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
-
 const CameraWidth = DWidth;
-const CameraHeight = 4 / 3 * DWidth;
-
+const CameraHeight = (4 / 3) * DWidth;
 
 export interface FaceDetectScreenProps {
   faces: any[];
@@ -153,7 +158,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           resizeMode: 'contain',
         };
 
-
         loadingTrue();
         // @ts-ignore
         ImageEditor.cropImage(imageUri, cropData).then((url) => {
@@ -198,7 +202,8 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       undefined,
       false,
       {onlyScaleDown: true},
-    ).then((response) => {
+    )
+      .then((response) => {
         FaceDetector.detectFacesAsync(response.uri, options).then((res) => {
           if (res.faces.length > 0) {
             cropImagePickerFace(
@@ -271,12 +276,22 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
 
   return (
     <View style={styles.container}>
-      <HeaderBack title={'Detect'} right={rightHeader} />
+      <HeaderBack title={'Thêm nhân viên'} right={rightHeader} />
       <ScrollView>
-        <SViewImage>
+        <SViewImage onPress={takePicture}>
           <SImage
             source={imageShow ? {uri: imageShow} : IC_DETECT_FACE}
             resizeMode={'cover'}
+          />
+          <Image
+            style={{
+              position: 'absolute',
+              alignSelf: 'flex-end',
+              bottom: 16,
+              borderWidth: 1,
+              opacity: 0.4,
+            }}
+            source={IC_CAMERA_EDIT}
           />
         </SViewImage>
 
@@ -306,15 +321,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
             size={'large'}
           />
         )}
-
-        <SViewButton>
-          {!loading && (
-            <View style={{flexDirection: 'row'}}>
-              <SButton title={'Chụp ảnh'} onPress={takePicture} />
-              <SButton title={'Chọn ảnh'} onPress={takePictureLibrary} />
-            </View>
-          )}
-        </SViewButton>
 
         <SInputBorder
           value={paramEmployee.name}
@@ -352,32 +358,19 @@ const SInputBorder = styled(InputBorder).attrs({
   },
 })``;
 
-const SViewBottom = styled.View`
-  width: 100%;
-  justify-content: center;
-`;
-
-const SButton = styled(SubmitButtonColor)`
-  margin-top: 24px;
-  padding: 0px 16px;
-`;
-
-const SViewImage = styled.View`
+const SViewImage = styled.TouchableOpacity`
   padding-bottom: 16px;
   padding-top: 16px;
   align-self: center;
   justify-content: center;
 `;
 
-const SViewButton = styled.View`
-  justify-content: center;
-  flex-direction: row;
-`;
-
 const SImage = styled.Image`
   height: 120px;
   width: 120px;
   border-radius: 4px;
+  border-color: ${Colors.grey5};
+  border-width: 1px;
 `;
 const SScrollView = styled.ScrollView`
   width: 100%;
