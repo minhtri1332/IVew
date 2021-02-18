@@ -9,14 +9,35 @@ import {
   Dimensions,
 } from 'react-native';
 // eslint-disable-next-line import/no-unresolved
-import {RNCamera} from 'react-native-camera';
+import {RNCamera, RNCameraProps} from 'react-native-camera';
 import ImageEditor from '@react-native-community/image-editor';
 import {Colors} from '@/themes/Colors';
 import {IC_CAMERA, IC_LOGO} from '@/assets';
 import {openFaceDetectScreen} from '@/utils/navigation';
+import {styled} from '@/global';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
+
+const CameraWidth = DWidth;
+const CameraHeight = 4 / 3 * DWidth;
+
+const ContentCamera = styled.View`
+    width: ${CameraWidth};
+    height: ${CameraHeight};
+`;
+
+const Header = styled.View`
+  flex: 1;
+  background-color: #000;
+  padding-top: 32px;
+`;
+
+const Bottom = styled.View`
+  flex: 1;
+  padding-top: 16px;
+  background-color: #000;
+`;
 const flashModeOrder = {
   off: 'on',
   on: 'auto',
@@ -36,14 +57,14 @@ const wbOrder = {
 const landmarkSize = 2;
 
 export default class CameraScreen extends React.Component {
-  state = {
+  state: any = {
     flash: 'off',
     zoom: 0,
     autoFocus: 'on',
     depth: 0,
-    type: 'back',
+    type: 'front',
     whiteBalance: 'auto',
-    ratio: '16:9',
+    ratio: '4:3',
     canDetectFaces: true,
     faces: [],
     uriImage: '',
@@ -82,14 +103,19 @@ export default class CameraScreen extends React.Component {
     });
   }
 
-  takePicture = async function () {
+  takePicture = async function() {
     if (this.camera) {
-      const data = await this.camera.takePictureAsync();
+      const data = await this.camera.takePictureAsync({
+        fixOrientation: this.state.type === 'front' ? true : false,
+        mirrorImage: this.state.type === 'front' ? true : false,
+      });
+
+
       this.setState({
         uriImage: data.uri,
         imageData: data,
       });
-      console.log('takePicture ', data);
+      console.log('takePicture ', data, data.width / data.height);
       openFaceDetectScreen({
         faces: this.state.faces,
         imageUri: data.uri,
@@ -106,36 +132,7 @@ export default class CameraScreen extends React.Component {
     this.setState({faces});
   };
 
-  onCapture() {
-    this.state.uriImage &&
-      this.state.faces.length > 0 &&
-      this.state.faces.map((item) => {
-        const ratioWidth = item.bounds.size.width / DWidth;
-        const ratioHeight = item.bounds.size.height / DHeight;
-        const offsetX = item.bounds.origin.x / DWidth;
-        const offsetY = item.bounds.origin.y / DHeight;
-
-        const cropData = {
-          offset: {
-            x: offsetX * this.state.imageData.width,
-            y: offsetY * this.state.imageData.height,
-          },
-          size: {
-            width: ratioWidth * this.state.imageData.width,
-            height: ratioHeight * this.state.imageData.height,
-          },
-          resizeMode: 'contain',
-        };
-
-        ImageEditor.cropImage(this.state.uriImage, cropData).then((url) => {
-          this.setState({
-            uriImage: url,
-          });
-        });
-      });
-  }
-
-  renderFace = ({bounds, faceID, rollAngle, yawAngle}) => (
+  renderFace = ({bounds, faceID, rollAngle, yawAngle}: any) => (
     <View
       key={faceID}
       transform={[
@@ -166,38 +163,48 @@ export default class CameraScreen extends React.Component {
   renderCamera() {
     const {canDetectFaces} = this.state;
     return (
-      <RNCamera
-        ref={(ref) => {
-          this.camera = ref;
-        }}
-        style={{
-          flex: 1,
-        }}
-        type={this.state.type}
-        flashMode={this.state.flash}
-        autoFocus={this.state.autoFocus}
-        zoom={this.state.zoom}
-        whiteBalance={this.state.whiteBalance}
-        ratio={this.state.ratio}
-        focusDepth={this.state.depth}
-        trackingEnabled
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        faceDetectionLandmarks={
-          RNCamera.Constants.FaceDetection.Landmarks
-            ? RNCamera.Constants.FaceDetection.Landmarks.all
-            : undefined
-        }
-        faceDetectionClassifications={
-          RNCamera.Constants.FaceDetection.Classifications
-            ? RNCamera.Constants.FaceDetection.Classifications.all
-            : undefined
-        }
-        onFacesDetected={canDetectFaces ? this.facesDetected : null}>
+      <ContentCamera>
+        <RNCamera
+          ref={(ref) => {
+            this.camera = ref;
+          }}
+          style={{
+            flex: 1,
+          }}
+          type={this.state.type}
+          flashMode={this.state.flash}
+          autoFocus={this.state.autoFocus}
+          zoom={this.state.zoom}
+          whiteBalance={this.state.whiteBalance}
+          ratio={this.state.ratio}
+          focusDepth={this.state.depth}
+          trackingEnabled
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+          faceDetectionLandmarks={
+            RNCamera.Constants.FaceDetection.Landmarks
+              ? RNCamera.Constants.FaceDetection.Landmarks.all
+              : undefined
+          }
+          faceDetectionClassifications={
+            RNCamera.Constants.FaceDetection.Classifications
+              ? RNCamera.Constants.FaceDetection.Classifications.all
+              : undefined
+          }
+          onFacesDetected={canDetectFaces ? this.facesDetected : null}>
+          {!!canDetectFaces && this.renderFaces()}
+        </RNCamera>
+      </ContentCamera>
+    );
+  }
+
+  render() {
+    return <View style={styles.container}>
+      <Header>
         <View
           style={{
             flex: 0.9,
@@ -209,27 +216,27 @@ export default class CameraScreen extends React.Component {
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}>
-            <TouchableOpacity
-              style={styles.flipButton}
-              onPress={this.toggleFacing.bind(this)}>
-              <Text style={styles.flipText}> FLIP </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.flipButton}
-              onPress={this.toggleFlash.bind(this)}>
-              <Text style={styles.flipText}> FLASH: {this.state.flash} </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.flipButton}
-              onPress={this.toggleWB.bind(this)}>
-              <Text style={styles.flipText}>
-                {' '}
-                WB: {this.state.whiteBalance}{' '}
-              </Text>
-            </TouchableOpacity>
+
+            {/*<TouchableOpacity*/}
+            {/*  style={styles.flipButton}*/}
+            {/*  onPress={this.toggleFlash.bind(this)}>*/}
+            {/*  <Text style={styles.flipText}> FLASH: {this.state.flash} </Text>*/}
+            {/*</TouchableOpacity>*/}
+            {/*<TouchableOpacity*/}
+            {/*  style={styles.flipButton}*/}
+            {/*  onPress={this.toggleWB.bind(this)}>*/}
+            {/*  <Text style={styles.flipText}>*/}
+            {/*    {' '}*/}
+            {/*    WB: {this.state.whiteBalance}{' '}*/}
+            {/*  </Text>*/}
+            {/*</TouchableOpacity>*/}
           </View>
         </View>
 
+
+      </Header>
+      {this.renderCamera()}
+      <Bottom>
         {this.state.zoom !== 0 && (
           <Text style={[styles.flipText, styles.zoomText]}>
             Zoom: {this.state.zoom}
@@ -242,30 +249,34 @@ export default class CameraScreen extends React.Component {
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity
-            style={[styles.flipButton, {flex: 0.1}]}
-            onPress={this.zoomOut.bind(this)}>
-            <Text style={styles.flipText}> - </Text>
-          </TouchableOpacity>
+          {/*<TouchableOpacity*/}
+          {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
+          {/*  onPress={this.zoomOut.bind(this)}>*/}
+          {/*  <Text style={styles.flipText}> - </Text>*/}
+          {/*</TouchableOpacity>*/}
           <TouchableOpacity
             style={{marginRight: 16, marginLeft: 16}}
             onPress={this.takePicture.bind(this)}>
-            <Image source={IC_CAMERA} />
+            <Image source={IC_CAMERA}/>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.flipButton, {flex: 0.1}]}
-            onPress={this.zoomIn.bind(this)}>
-            <Text style={styles.flipText}> + </Text>
+            style={styles.flipButton}
+            onPress={this.toggleFacing.bind(this)}>
+            <Text style={styles.flipText}>
+              {
+                this.state.type === 'front' ? 'Sau' : 'Trước'
+              }
+            </Text>
           </TouchableOpacity>
+          {/*<TouchableOpacity*/}
+          {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
+          {/*  onPress={this.zoomIn.bind(this)}>*/}
+          {/*  <Text style={styles.flipText}> + </Text>*/}
+          {/*</TouchableOpacity>*/}
         </View>
-        {!!canDetectFaces && this.renderFaces()}
-      </RNCamera>
-    );
-  }
-
-  render() {
-    return <View style={styles.container}>{this.renderCamera()}</View>;
+      </Bottom>
+    </View>;
   }
 }
 
@@ -274,7 +285,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   flipButton: {
-    flex: 0.3,
+    position: 'absolute',
+    right: 20,
     height: 40,
     marginHorizontal: 2,
     marginBottom: 10,
@@ -285,6 +297,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    minWidth: 80
   },
   flipText: {
     color: 'white',

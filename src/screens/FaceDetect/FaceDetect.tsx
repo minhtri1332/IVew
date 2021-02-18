@@ -33,6 +33,12 @@ import {SIcon} from '@/themes/BaseStyles';
 import ButtonText from '@/components/button/ButtonText';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
+
+
+const CameraWidth = DWidth;
+const CameraHeight = 4 / 3 * DWidth;
+
+
 export interface FaceDetectScreenProps {
   faces: any[];
   imageUri: string;
@@ -89,20 +95,21 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   const cropImageFace = useCallback((faces, imageUri, width, height) => {
     imageUri &&
       faces.map((item: any, index: number) => {
-        const ratioWidth = item.bounds.size.width / DWidth;
-        const ratioHeight = item.bounds.size.height / DHeight;
-        const offsetX = item.bounds.origin.x / DWidth;
-        const offsetY = item.bounds.origin.y / DHeight;
+        const ratioWidth = item.bounds.size.width / CameraWidth;
+        const ratioHeight = item.bounds.size.height / CameraHeight;
+        const offsetX = item.bounds.origin.x / CameraWidth;
+        const offsetY = item.bounds.origin.y / CameraHeight;
 
         const OX = offsetX * width > 0 ? offsetX * width : 0;
         const OY = offsetY * height > 0 ? offsetY * height : 0;
+
         const SW = ratioWidth * width > 0 ? ratioWidth * width : 0;
         const SY = ratioHeight * height > 0 ? ratioHeight * height : 0;
 
         const cropData = {
           offset: {x: OX, y: OY},
           size: {width: SW, height: SY},
-          resizeMode: 'contain',
+          resizeMode: 'cover',
         };
 
         // @ts-ignore
@@ -145,7 +152,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           size: {width: SW, height: SY},
           resizeMode: 'contain',
         };
-        console.log('cropData', cropData);
+
 
         loadingTrue();
         // @ts-ignore
@@ -191,12 +198,9 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       undefined,
       false,
       {onlyScaleDown: true},
-    )
-      .then((response) => {
-        console.log('response1', response);
+    ).then((response) => {
         FaceDetector.detectFacesAsync(response.uri, options).then((res) => {
           if (res.faces.length > 0) {
-            console.log('dêtct', res);
             cropImagePickerFace(
               res.faces,
               file[0].uri,
