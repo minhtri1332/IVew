@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo, useState} from 'react';
+import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
@@ -17,7 +17,7 @@ import {requestLogin} from '@/store/auth/function';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
 import {replaceWithMainScreen} from '@/utils/navigation';
 
-const keyExtractor = (item: any): string => {
+const keyExtractor = (item: any) => {
   return item;
 };
 export interface HistoryProps {
@@ -40,7 +40,6 @@ export const HistoryScreen = memo(function HistoryScreen() {
         [keyname]: value,
       });
     },
-
     [params],
   );
 
@@ -111,7 +110,7 @@ export const HistoryScreen = memo(function HistoryScreen() {
 
       <FlatList
         keyExtractor={keyExtractor}
-        data={ListHistory}
+        data={[...new Set(ListHistory)]}
         renderItem={renderItem}
         // refreshControl={
         //   <RefreshControl refreshing={loading} onRefresh={call} />
