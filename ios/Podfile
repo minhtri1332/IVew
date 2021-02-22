@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'iview' do
+target 'IView' do
   # Pods for IView
   config = use_native_modules!
   
@@ -17,7 +17,7 @@ target 'iview' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
-  target 'iviewTests' do
+  target 'IViewTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -32,10 +32,10 @@ target 'iview' do
   end
 end
 
-target 'iview-tvOS' do
-  # Pods for iview-tvOS
+target 'IView-tvOS' do
+  # Pods for IView-tvOS
 
-  target 'iview-tvOSTests' do
+  target 'IView-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

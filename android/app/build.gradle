@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.iview"
+        applicationId "vn.iview.android"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -201,6 +201,14 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "com.android.support:multidex:1.0.3"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    implementation (project(':react-native-camera')) {
+        exclude group: "com.google.android.gms"
+        exclude group: "com.google.android.gms", module: "play-services-vision"
+        exclude group: "com.google.firebase", module: "firebase-ml-vision-face-model"
+    }
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+    implementation 'com.google.android.gms:play-services-vision-common:19.1.3'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

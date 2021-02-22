@@ -11,7 +11,7 @@ export const requestGetBoxAi = async () => {
             limit:100
         }
     });
-
+    console.log(data.data)
     batch(() => {
         syncBoxAi(data.data.listBoxAI)
         setBoxAiQueries({ all: data.data.listBoxAI.map((item:RawBoxAi) => item.id) });

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "iview-tvOS.app"
-               BlueprintName = "iview-tvOS"
-               ReferencedContainer = "container:iview.xcodeproj">
+               BuildableName = "IView-tvOS.app"
+               BlueprintName = "IView-tvOS"
+               ReferencedContainer = "container:IView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "iview-tvOSTests.xctest"
-               BlueprintName = "iview-tvOSTests"
-               ReferencedContainer = "container:iview.xcodeproj">
+               BuildableName = "IView-tvOSTests.xctest"
+               BlueprintName = "IView-tvOSTests"
+               ReferencedContainer = "container:IView.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "iview-tvOS.app"
-            BlueprintName = "iview-tvOS"
-            ReferencedContainer = "container:iview.xcodeproj">
+            BuildableName = "IView-tvOS.app"
+            BlueprintName = "IView-tvOS"
+            ReferencedContainer = "container:IView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "iview-tvOS.app"
-            BlueprintName = "iview-tvOS"
-            ReferencedContainer = "container:iview.xcodeproj">
+            BuildableName = "IView-tvOS.app"
+            BlueprintName = "IView-tvOS"
+            ReferencedContainer = "container:IView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

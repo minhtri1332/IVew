@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* iviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* iviewTests.m */; };
+		00E356F31AD99517003FC87E /* IViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* IViewTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		14C4817C54C1480E915C0A79 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 544ADF01D2F74C2299E4808C /* Roboto-Italic.ttf */; };
-		2AF661EC14C33C677355A01E /* libPods-iview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D28ABBE048DEC22EBFC293 /* libPods-iview.a */; };
+		2AF661EC14C33C677355A01E /* libPods-IView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D28ABBE048DEC22EBFC293 /* libPods-IView.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* iviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* iviewTests.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* IViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* IViewTests.m */; };
 		3A00E9ED42BE460895E4352D /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A76ED8EE70C4140B45E5B40 /* Roboto-Medium.ttf */; };
 		3FA44F4D0D1345CDA15A0440 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9367DFDDE385472890CC5768 /* Roboto-Bold.ttf */; };
-		51956D085A0F2A9CAC90C1AC /* libPods-iview-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B0B6FBF44E6379331D1ED92 /* libPods-iview-tvOS.a */; };
-		58F3D083F19C49BBEC509735 /* libPods-iview-iviewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBA16BF3E13828ED99AD36C /* libPods-iview-iviewTests.a */; };
-		601334F6E6B2C89238CCFC93 /* libPods-iview-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A75A045F08A2B0525E770B /* libPods-iview-tvOSTests.a */; };
+		51956D085A0F2A9CAC90C1AC /* libPods-IView-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B0B6FBF44E6379331D1ED92 /* libPods-IView-tvOS.a */; };
+		58F3D083F19C49BBEC509735 /* libPods-IView-IViewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBA16BF3E13828ED99AD36C /* libPods-IView-IViewTests.a */; };
+		601334F6E6B2C89238CCFC93 /* libPods-IView-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A75A045F08A2B0525E770B /* libPods-IView-tvOSTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AB891C0D25C5190500358128 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB891C0C25C5190500358128 /* GoogleService-Info.plist */; };
 		B7822C8B966C4B2BB66484EB /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7D9B345C80F4428B80AD1AD /* Roboto-Regular.ttf */; };
@@ -34,51 +34,51 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = iview;
+			remoteInfo = IView;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "iview-tvOS";
+			remoteInfo = "IView-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* iviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* IViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* iviewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iviewTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* iview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iview.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iview/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = iview/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iview/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iview/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = iview/main.m; sourceTree = "<group>"; };
-		19A75A045F08A2B0525E770B /* libPods-iview-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iview-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F561D403055B634F6CEDBB8 /* Pods-iview-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-iview-tvOSTests/Pods-iview-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2CBA16BF3E13828ED99AD36C /* libPods-iview-iviewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iview-iviewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E47B1E0B4A5D006451C7 /* iview-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iview-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* iview-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iview-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D72B6ABDAF753C1F380AC21 /* Pods-iview-iviewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview-iviewTests.release.xcconfig"; path = "Target Support Files/Pods-iview-iviewTests/Pods-iview-iviewTests.release.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* IViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IViewTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* IView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = IView/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = IView/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = IView/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = IView/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IView/main.m; sourceTree = "<group>"; };
+		19A75A045F08A2B0525E770B /* libPods-IView-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IView-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F561D403055B634F6CEDBB8 /* Pods-IView-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-IView-tvOSTests/Pods-IView-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2CBA16BF3E13828ED99AD36C /* libPods-IView-IViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IView-IViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* IView-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IView-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* IView-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IView-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D72B6ABDAF753C1F380AC21 /* Pods-IView-IViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView-IViewTests.release.xcconfig"; path = "Target Support Files/Pods-IView-IViewTests/Pods-IView-IViewTests.release.xcconfig"; sourceTree = "<group>"; };
 		544ADF01D2F74C2299E4808C /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../src/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
-		5B0B6FBF44E6379331D1ED92 /* libPods-iview-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iview-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AD65F6932A911273A9E1A6A /* Pods-iview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview.debug.xcconfig"; path = "Target Support Files/Pods-iview/Pods-iview.debug.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = iview/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		85DA6D4A3F50844D2015F605 /* Pods-iview-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-iview-tvOSTests/Pods-iview-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		921A25A84AB93DB2303D5949 /* Pods-iview-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview-tvOS.release.xcconfig"; path = "Target Support Files/Pods-iview-tvOS/Pods-iview-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		5B0B6FBF44E6379331D1ED92 /* libPods-IView-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IView-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AD65F6932A911273A9E1A6A /* Pods-IView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView.debug.xcconfig"; path = "Target Support Files/Pods-IView/Pods-IView.debug.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = IView/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85DA6D4A3F50844D2015F605 /* Pods-IView-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-IView-tvOSTests/Pods-IView-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		921A25A84AB93DB2303D5949 /* Pods-IView-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView-tvOS.release.xcconfig"; path = "Target Support Files/Pods-IView-tvOS/Pods-IView-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		9367DFDDE385472890CC5768 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		95D28ABBE048DEC22EBFC293 /* libPods-iview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95D28ABBE048DEC22EBFC293 /* libPods-IView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A76ED8EE70C4140B45E5B40 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		9C46917A25558673CB9E35FE /* Pods-iview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview.release.xcconfig"; path = "Target Support Files/Pods-iview/Pods-iview.release.xcconfig"; sourceTree = "<group>"; };
+		9C46917A25558673CB9E35FE /* Pods-IView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView.release.xcconfig"; path = "Target Support Files/Pods-IView/Pods-IView.release.xcconfig"; sourceTree = "<group>"; };
 		A2114C2902D34934843FD1A2 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		AB891C0C25C5190500358128 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CA9C26434BB3E781C409F9FB /* Pods-iview-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-iview-tvOS/Pods-iview-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CA9C26434BB3E781C409F9FB /* Pods-IView-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-IView-tvOS/Pods-IView-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E7D9B345C80F4428B80AD1AD /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FADD2D0D9A0B675E70BC7DC4 /* Pods-iview-iviewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iview-iviewTests.debug.xcconfig"; path = "Target Support Files/Pods-iview-iviewTests/Pods-iview-iviewTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FADD2D0D9A0B675E70BC7DC4 /* Pods-IView-IViewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IView-IViewTests.debug.xcconfig"; path = "Target Support Files/Pods-IView-IViewTests/Pods-IView-IViewTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58F3D083F19C49BBEC509735 /* libPods-iview-iviewTests.a in Frameworks */,
+				58F3D083F19C49BBEC509735 /* libPods-IView-IViewTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AF661EC14C33C677355A01E /* libPods-iview.a in Frameworks */,
+				2AF661EC14C33C677355A01E /* libPods-IView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51956D085A0F2A9CAC90C1AC /* libPods-iview-tvOS.a in Frameworks */,
+				51956D085A0F2A9CAC90C1AC /* libPods-IView-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,20 +110,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				601334F6E6B2C89238CCFC93 /* libPods-iview-tvOSTests.a in Frameworks */,
+				601334F6E6B2C89238CCFC93 /* libPods-IView-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* iviewTests */ = {
+		00E356EF1AD99517003FC87E /* IViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* iviewTests.m */,
+				00E356F21AD99517003FC87E /* IViewTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = iviewTests;
+			path = IViewTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -134,7 +134,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* iview */ = {
+		13B07FAE1A68108700A75B9A /* IView */ = {
 			isa = PBXGroup;
 			children = (
 				AB891C0C25C5190500358128 /* GoogleService-Info.plist */,
@@ -146,7 +146,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = iview;
+			name = IView;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -154,10 +154,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				95D28ABBE048DEC22EBFC293 /* libPods-iview.a */,
-				2CBA16BF3E13828ED99AD36C /* libPods-iview-iviewTests.a */,
-				5B0B6FBF44E6379331D1ED92 /* libPods-iview-tvOS.a */,
-				19A75A045F08A2B0525E770B /* libPods-iview-tvOSTests.a */,
+				95D28ABBE048DEC22EBFC293 /* libPods-IView.a */,
+				2CBA16BF3E13828ED99AD36C /* libPods-IView-IViewTests.a */,
+				5B0B6FBF44E6379331D1ED92 /* libPods-IView-tvOS.a */,
+				19A75A045F08A2B0525E770B /* libPods-IView-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,14 +165,14 @@
 		7302249ACF934491891F38A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7AD65F6932A911273A9E1A6A /* Pods-iview.debug.xcconfig */,
-				9C46917A25558673CB9E35FE /* Pods-iview.release.xcconfig */,
-				FADD2D0D9A0B675E70BC7DC4 /* Pods-iview-iviewTests.debug.xcconfig */,
-				3D72B6ABDAF753C1F380AC21 /* Pods-iview-iviewTests.release.xcconfig */,
-				CA9C26434BB3E781C409F9FB /* Pods-iview-tvOS.debug.xcconfig */,
-				921A25A84AB93DB2303D5949 /* Pods-iview-tvOS.release.xcconfig */,
-				1F561D403055B634F6CEDBB8 /* Pods-iview-tvOSTests.debug.xcconfig */,
-				85DA6D4A3F50844D2015F605 /* Pods-iview-tvOSTests.release.xcconfig */,
+				7AD65F6932A911273A9E1A6A /* Pods-IView.debug.xcconfig */,
+				9C46917A25558673CB9E35FE /* Pods-IView.release.xcconfig */,
+				FADD2D0D9A0B675E70BC7DC4 /* Pods-IView-IViewTests.debug.xcconfig */,
+				3D72B6ABDAF753C1F380AC21 /* Pods-IView-IViewTests.release.xcconfig */,
+				CA9C26434BB3E781C409F9FB /* Pods-IView-tvOS.debug.xcconfig */,
+				921A25A84AB93DB2303D5949 /* Pods-IView-tvOS.release.xcconfig */,
+				1F561D403055B634F6CEDBB8 /* Pods-IView-tvOSTests.debug.xcconfig */,
+				85DA6D4A3F50844D2015F605 /* Pods-IView-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -187,9 +187,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* iview */,
+				13B07FAE1A68108700A75B9A /* IView */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* iviewTests */,
+				00E356EF1AD99517003FC87E /* IViewTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				7302249ACF934491891F38A1 /* Pods */,
@@ -203,10 +203,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* iview.app */,
-				00E356EE1AD99517003FC87E /* iviewTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* iview-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* iview-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* IView.app */,
+				00E356EE1AD99517003FC87E /* IViewTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* IView-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* IView-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,9 +226,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* iviewTests */ = {
+		00E356ED1AD99517003FC87E /* IViewTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "iviewTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "IViewTests" */;
 			buildPhases = (
 				951E7F8FB46EC16CF146BF82 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -241,14 +241,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = iviewTests;
-			productName = iviewTests;
-			productReference = 00E356EE1AD99517003FC87E /* iviewTests.xctest */;
+			name = IViewTests;
+			productName = IViewTests;
+			productReference = 00E356EE1AD99517003FC87E /* IViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* iview */ = {
+		13B07F861A680F5B00A75B9A /* IView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "iview" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "IView" */;
 			buildPhases = (
 				2BF3A2157C3F156C626E769F /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -262,14 +262,14 @@
 			);
 			dependencies = (
 			);
-			name = iview;
-			productName = iview;
-			productReference = 13B07F961A680F5B00A75B9A /* iview.app */;
+			name = IView;
+			productName = IView;
+			productReference = 13B07F961A680F5B00A75B9A /* IView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* iview-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* IView-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "iview-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "IView-tvOS" */;
 			buildPhases = (
 				F0B47C49F8AF09BE74048EF5 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -282,14 +282,14 @@
 			);
 			dependencies = (
 			);
-			name = "iview-tvOS";
-			productName = "iview-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* iview-tvOS.app */;
+			name = "IView-tvOS";
+			productName = "IView-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* IView-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* iview-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* IView-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "iview-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "IView-tvOSTests" */;
 			buildPhases = (
 				064801EA4755F57F22698424 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -301,9 +301,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "iview-tvOSTests";
-			productName = "iview-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* iview-tvOSTests.xctest */;
+			name = "IView-tvOSTests";
+			productName = "IView-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* IView-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -333,7 +333,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "iview" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "IView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -346,10 +346,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* iview */,
-				00E356ED1AD99517003FC87E /* iviewTests */,
-				2D02E47A1E0B4A5D006451C7 /* iview-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* iview-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* IView */,
+				00E356ED1AD99517003FC87E /* IViewTests */,
+				2D02E47A1E0B4A5D006451C7 /* IView-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* IView-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -424,7 +424,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iview-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IView-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -446,7 +446,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iview-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IView-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -473,7 +473,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iview/Pods-iview-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-IView/Pods-IView-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMLVisionFaceModel/GoogleMVFaceDetectorResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
@@ -488,7 +488,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iview/Pods-iview-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IView/Pods-IView-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		951E7F8FB46EC16CF146BF82 /* [CP] Check Pods Manifest.lock */ = {
@@ -506,7 +506,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iview-iviewTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IView-IViewTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -519,7 +519,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iview-iviewTests/Pods-iview-iviewTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-IView-IViewTests/Pods-IView-IViewTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMLVisionFaceModel/GoogleMVFaceDetectorResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
@@ -534,7 +534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iview-iviewTests/Pods-iview-iviewTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IView-IViewTests/Pods-IView-IViewTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F0B47C49F8AF09BE74048EF5 /* [CP] Check Pods Manifest.lock */ = {
@@ -552,7 +552,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iview-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IView-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -604,7 +604,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* iviewTests.m in Sources */,
+				00E356F31AD99517003FC87E /* IViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +630,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* iviewTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* IViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,12 +639,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* iview */;
+			target = 13B07F861A680F5B00A75B9A /* IView */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* iview-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* IView-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -652,14 +652,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FADD2D0D9A0B675E70BC7DC4 /* Pods-iview-iviewTests.debug.xcconfig */;
+			baseConfigurationReference = FADD2D0D9A0B675E70BC7DC4 /* Pods-IView-IViewTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = iviewTests/Info.plist;
+				INFOPLIST_FILE = IViewTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -669,17 +669,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iview.app/iview";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IView.app/IView";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D72B6ABDAF753C1F380AC21 /* Pods-iview-iviewTests.release.xcconfig */;
+			baseConfigurationReference = 3D72B6ABDAF753C1F380AC21 /* Pods-IView-IViewTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = iviewTests/Info.plist;
+				INFOPLIST_FILE = IViewTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -689,28 +689,28 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iview.app/iview";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IView.app/IView";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AD65F6932A911273A9E1A6A /* Pods-iview.debug.xcconfig */;
+			baseConfigurationReference = 7AD65F6932A911273A9E1A6A /* Pods-IView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2MAF62MXR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = iview/Info.plist;
+				INFOPLIST_FILE = IView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iview.iview;
-				PRODUCT_NAME = iview;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IView.IView;
+				PRODUCT_NAME = IView;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -719,21 +719,21 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C46917A25558673CB9E35FE /* Pods-iview.release.xcconfig */;
+			baseConfigurationReference = 9C46917A25558673CB9E35FE /* Pods-IView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2MAF62MXR;
-				INFOPLIST_FILE = iview/Info.plist;
+				INFOPLIST_FILE = IView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iview.iview;
-				PRODUCT_NAME = iview;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IView.IView;
+				PRODUCT_NAME = IView;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -741,7 +741,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA9C26434BB3E781C409F9FB /* Pods-iview-tvOS.debug.xcconfig */;
+			baseConfigurationReference = CA9C26434BB3E781C409F9FB /* Pods-IView-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -752,14 +752,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "iview-tvOS/Info.plist";
+				INFOPLIST_FILE = "IView-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.iview-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.IView-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -769,7 +769,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 921A25A84AB93DB2303D5949 /* Pods-iview-tvOS.release.xcconfig */;
+			baseConfigurationReference = 921A25A84AB93DB2303D5949 /* Pods-IView-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -780,14 +780,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "iview-tvOS/Info.plist";
+				INFOPLIST_FILE = "IView-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.iview-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.IView-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -797,7 +797,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F561D403055B634F6CEDBB8 /* Pods-iview-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 1F561D403055B634F6CEDBB8 /* Pods-IView-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -807,24 +807,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "iview-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "IView-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.iview-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.IView-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iview-tvOS.app/iview-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IView-tvOS.app/IView-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85DA6D4A3F50844D2015F605 /* Pods-iview-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 85DA6D4A3F50844D2015F605 /* Pods-IView-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -834,17 +834,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "iview-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "IView-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.iview-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.IView-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iview-tvOS.app/iview-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IView-tvOS.app/IView-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -965,7 +965,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "iviewTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "IViewTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -974,7 +974,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "iview" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "IView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -983,7 +983,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "iview-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "IView-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -992,7 +992,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "iview-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "IView-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1001,7 +1001,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "iview" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "IView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

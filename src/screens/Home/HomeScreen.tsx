@@ -3,30 +3,41 @@ import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
 import {ItemHome} from '@/screens/Home/components/ItemHome';
-import {IC_DETECT_FACE, IC_HOME_CHECKIN, IC_HOME_HEAD_MAP, IC_HOME_SCAN, IC_HOME_SERVICE} from '@/assets';
+import {
+  IC_DETECT_FACE,
+  IC_HOME_CHECKIN,
+  IC_HOME_HEAD_MAP,
+  IC_HOME_SCAN,
+  IC_HOME_SERVICE,
+} from '@/assets';
 import {
   navigateToFaceDetectScreen,
   navigateToHeadMapScreen,
   navigateToHistoryScreen,
   navigateToMScanScreen,
-  navigateToMServiceScreen, openFaceDetectScreen,
+  navigateToMServiceScreen,
+  openFaceDetectScreen,
 } from '@/utils/navigation';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {requestGetBoxAi} from '@/store/boxAI/functions';
 import {RefreshControl} from 'react-native';
+import {requestTokenDevice} from '@/store/auth/function';
+import {firebase} from '@react-native-firebase/messaging';
 
 export const HomeScreen = memo(function HomeScreen() {
-
   const {call, loading} = useAsyncEffect(async () => {
+    const tokenDevice = await firebase.messaging().getToken();
+    await requestTokenDevice(tokenDevice);
     await requestGetBoxAi();
   }, []);
 
   return (
     <SViewContainerHome>
       <HomeHeader />
-      <Container refreshControl={
-        <RefreshControl refreshing={loading} onRefresh={call} />
-      }>
+      <Container
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={call} />
+        }>
         <SViewFunction>
           <ItemHome
             icon={IC_HOME_CHECKIN}
@@ -59,8 +70,6 @@ export const HomeScreen = memo(function HomeScreen() {
             onPress={openFaceDetectScreen}
           />
         </SViewFunction>
-
-
       </Container>
     </SViewContainerHome>
   );
@@ -82,5 +91,4 @@ const SViewFunction = styled.View`
   margin-top: 16px;
   justify-content: center;
   flex-direction: row;
-
 `;

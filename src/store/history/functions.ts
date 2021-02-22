@@ -12,7 +12,7 @@ export const requestGetHistoryList = async (params?: HistoryProps) => {
             month: params?.month
         }
     });
-    console.log(data)
+
     batch(() => {
         syncHistory(data.data.listRecord)
         setHistoryQueries({ all: data.data.listRecord.map((item:RawHistory) => item.boxID) });
