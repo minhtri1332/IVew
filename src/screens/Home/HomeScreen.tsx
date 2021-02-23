@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
@@ -9,7 +9,6 @@ import {
   IC_HOME_HEAD_MAP,
   IC_HOME_SCAN,
   IC_HOME_SERVICE,
-  IC_LOGO_APP,
 } from '@/assets';
 import {
   navigateToFaceDetectScreen,
@@ -24,8 +23,7 @@ import {requestGetBoxAi} from '@/store/boxAI/functions';
 import {RefreshControl} from 'react-native';
 import {requestTokenDevice} from '@/store/auth/function';
 import {firebase} from '@react-native-firebase/messaging';
-import {requestGetDepartment} from '@/store/department/functions';
-import notifee from '@notifee/react-native';
+import {requestGetDepartment} from "@/store/department/functions";
 
 export const HomeScreen = memo(function HomeScreen() {
   const {call, loading} = useAsyncEffect(async () => {
@@ -33,23 +31,7 @@ export const HomeScreen = memo(function HomeScreen() {
     await requestTokenDevice(tokenDevice);
     await requestGetBoxAi();
     await requestGetDepartment();
-  }, []);
 
-  const a = useCallback(async () => {
-    // Create a channel
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
-
-    // Display a notification
-    await notifee.displayNotification({
-      title: 'Notification Title',
-      body: 'Main body content of the notification',
-      android: {
-        channelId,
-      },
-    });
   }, []);
 
   return (
@@ -60,7 +42,11 @@ export const HomeScreen = memo(function HomeScreen() {
           <RefreshControl refreshing={loading} onRefresh={call} />
         }>
         <SViewFunction>
-          <ItemHome icon={IC_HOME_CHECKIN} label={'Checkin'} onPress={a} />
+          <ItemHome
+            icon={IC_HOME_CHECKIN}
+            label={'Checkin'}
+            onPress={navigateToHistoryScreen}
+          />
           <ItemHome
             icon={IC_HOME_SERVICE}
             label={'MService'}

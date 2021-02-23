@@ -4,8 +4,8 @@ import {HistoryProps} from "@/screens/checkin/HistoryScreen";
 import {Fetch} from "@/utils/fetch";
 import {RawHistory} from "@/store/history/types";
 
-export const requestGetHistoryList = async (params?: HistoryProps) => {
-
+export const requestGetHistoryList = async (params: HistoryProps) => {
+    console.log(params)
     const {data} = await Fetch.get<{data: any}>('https://go.iview.vn/api/v1/attendence/list-record-month', {
         params: {
             boxID: params?.boxID,
@@ -13,9 +13,11 @@ export const requestGetHistoryList = async (params?: HistoryProps) => {
         }
     });
 
+    const param = params?.month + params?.boxID
+
     batch(() => {
         syncHistory(data.data.listRecord)
-        setHistoryQueries({ all: data.data.listRecord.map((item:RawHistory) => item.employeeID) });
+        setHistoryQueries({ [param]: data.data.listRecord.map((item:RawHistory) => item.employeeID) });
     });
     return data
 };

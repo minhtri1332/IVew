@@ -2,20 +2,15 @@ import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
-import {SearchBar} from '@/components/SearchBar';
 import {FlatList, ListRenderItem, RefreshControl} from 'react-native';
 import {ItemHistory} from '@/screens/checkin/components/ItemHistory';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {requestGetHistoryList} from '@/store/history/functions';
 import {useHistoryByQuery} from '@/store/history';
 import {FilterBoxOption} from '@/components/Filter/types';
-import {list12Month, list12MonthNumber} from '@/services/MomentService';
+import {list12MonthNumber} from '@/services/MomentService';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
-import {getBoxAi, useBoxAi, useBoxAiByQuery} from '@/store/boxAI';
-import {useAsyncFn} from '@/hooks/useAsyncFn';
-import {requestLogin} from '@/store/auth/function';
-import LocalStorageHelper from '@/services/LocalServiceHelper';
-import {replaceWithMainScreen} from '@/utils/navigation';
+import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 
 const keyExtractor = (item: any) => {
   return item;
@@ -26,12 +21,13 @@ export interface HistoryProps {
 }
 export const HistoryScreen = memo(function HistoryScreen() {
   const [textSearch, setTextSearch] = useState('');
-  const ListHistory = useHistoryByQuery('all');
+
   const listBoxAI = useBoxAiByQuery('all');
   const [params, setParams] = useState<HistoryProps>({
     boxID: '',
     month: '',
   });
+  const ListHistory = useHistoryByQuery(params?.month + params?.boxID);
 
   const setParamCustom = useCallback(
     (keyname: string, value: any) => {
@@ -44,8 +40,10 @@ export const HistoryScreen = memo(function HistoryScreen() {
   );
 
   const {call, error, loading: loadingData} = useAsyncEffect(async () => {
-    await requestGetHistoryList(params);
-  }, [params]);
+    if (params.boxID != '' && params.month != '') {
+      await requestGetHistoryList(params);
+    }
+  }, [params.boxID, params.month]);
 
   const renderItem: ListRenderItem<string> = useCallback(({item}) => {
     return <ItemHistory historyId={item} />;
@@ -77,7 +75,7 @@ export const HistoryScreen = memo(function HistoryScreen() {
     });
     return listFilterModel;
   }, [listBoxAI]);
-
+  console.log([...new Set(ListHistory)]);
   return (
     <ScreenWrapper>
       <HeaderBack title={'History'} />
@@ -112,9 +110,9 @@ export const HistoryScreen = memo(function HistoryScreen() {
         keyExtractor={keyExtractor}
         data={[...new Set(ListHistory)]}
         renderItem={renderItem}
-        // refreshControl={
-        //   <RefreshControl refreshing={loading} onRefresh={call} />
-        // }
+        refreshControl={
+          <RefreshControl refreshing={loadingData} onRefresh={call} />
+        }
       />
     </ScreenWrapper>
   );
