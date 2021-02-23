@@ -24,14 +24,14 @@ export const ItemHistory = memo(function ItemHistory({
       <SAvatar
         source={{
           uri:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1_YImJiJsDBeVjqy19Tq6M7MchZafcD32mg&usqp=CAU',
+            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
         }}
         size={40}
       />
       <SViewContent>
-        <STextName>{history?.value}</STextName>
-        <STextTitle>Khách đã ghé thăm 2 lần</STextTitle>
-        <STextTime>Lần cuối ghé thăm vào 10:00 3/1/2021</STextTime>
+        <STextName>{history?.name}</STextName>
+        <STextTitle>{`Khách đã ghé thăm ${history?.late} lần`}</STextTitle>
+        <STextTime>{`Lần cuối ghé thăm vào ${history?.date}`}</STextTime>
         <LineSeparator />
       </SViewContent>
       <SIcon source={IC_ARROW} size={28} tintColor={Colors.grey3} />

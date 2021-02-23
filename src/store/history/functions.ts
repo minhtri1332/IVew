@@ -15,7 +15,7 @@ export const requestGetHistoryList = async (params?: HistoryProps) => {
 
     batch(() => {
         syncHistory(data.data.listRecord)
-        setHistoryQueries({ all: data.data.listRecord.map((item:RawHistory) => item.boxID) });
+        setHistoryQueries({ all: data.data.listRecord.map((item:RawHistory) => item.employeeID) });
     });
     return data
 };

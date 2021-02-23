@@ -43,10 +43,6 @@ export const HistoryScreen = memo(function HistoryScreen() {
     [params],
   );
 
-  const [{loading}, startRequest] = useAsyncFn(async () => {
-    await requestGetHistoryList();
-  }, [params]);
-
   const {call, error, loading: loadingData} = useAsyncEffect(async () => {
     await requestGetHistoryList(params);
   }, [params]);

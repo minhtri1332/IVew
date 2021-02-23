@@ -5,7 +5,7 @@ import {StatusBar, YellowBox, Text, Alert} from 'react-native';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import Routes from './src/Routes';
-import messaging, {firebase} from '@react-native-firebase/messaging';
+import messaging, {firebase, Notification} from '@react-native-firebase/messaging';
 import {requestTokenDevice} from './src/store/auth/function';
 import {requestMessageCheckin} from './src/store/notification/functions';
 
@@ -40,6 +40,7 @@ export const App = memo(() => {
     const unsubscribe = messaging().onNotificationOpenedApp(
       async (remoteMessage) => {
         Alert.alert('onNotificationOpenedApp', JSON.stringify(remoteMessage));
+        const notification: Notification = remoteMessage.notification;
         await requestMessageCheckin(remoteMessage.data?.boxID || '');
       },
     );
