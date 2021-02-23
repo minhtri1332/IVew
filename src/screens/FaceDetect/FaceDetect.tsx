@@ -38,6 +38,11 @@ import {ItemFace} from '@/screens/FaceDetect/ItemFace';
 import {InputBorder} from '@/components/InputBorder';
 import {SIcon} from '@/themes/BaseStyles';
 import ButtonText from '@/components/button/ButtonText';
+import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
+import {FilterBoxOption} from '@/components/Filter/types';
+import {list12MonthNumber} from '@/services/MomentService';
+import {getDepartment, useDepartmentByQuery} from '@/store/department';
+import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
@@ -69,22 +74,40 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   } = useNavigationParams<FaceDetectScreenProps>();
   const [imageShow, setImageShow] = useState(imageUri);
   const [myFace, setMyFace] = useState('');
+  const departments = useDepartmentByQuery('all');
+  const boxAIs = useBoxAiByQuery('all');
   const [isLoading, loadingTrue, loadingFalse] = useBoolean();
   const [listFaceDetect, setListFaceDetect] = useState<Set<string>>(() => {
     return new Set([]);
   });
+
   const [paramEmployee, setParamEmployee] = useState<ParamEmployee>(() => ({
-    name: 'tri',
-    position: 'dev',
-    listBoxAI: ['123'],
-    department: 'home',
+    name: '',
+    position: '',
+    listBoxAI: [],
+    department: '',
     avatar: '',
     image: '',
   }));
+  const [listBoxAI, setListBoxAI] = useState<Set<string>>(() => {
+    return new Set([]);
+  });
 
   const setParamCustom = (name: string, value: any) => {
     setParamEmployee((state) => ({...state, [name]: value}));
   };
+
+  const setParamBoxAi = (name: string, value: any) => {
+    setListBoxAI((set) => {
+      const newSet = new Set(set);
+      newSet.has(value) ? newSet.delete(value) : newSet.add(value);
+      return newSet;
+    });
+  };
+
+  useEffect(() => {
+    setParamEmployee((state) => ({...state, listBoxAI: [...listBoxAI]}));
+  }, [listBoxAI]);
 
   useEffect(() => {
     setImageShow(imageUri);
@@ -132,96 +155,8 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       });
   }, []);
 
-  const cropImagePickerFace = useCallback((faces, imageUri, width, height) => {
-    setListFaceDetect(() => {
-      return new Set([]);
-    });
-    RNFetchBlob.fs.readFile(imageUri, 'base64').then((data) => {
-      setParamCustom('avatar', data);
-    });
-    imageUri &&
-      faces.map((item: any, index: number) => {
-        const size = item.bounds.size.width > DWidth ? 8 : 1;
-        const ratioWidth = item.bounds.size.width / size / DWidth;
-        const ratioHeight = item.bounds.size.height / size / DHeight;
-        const offsetX = item.bounds.origin.x / size / DWidth;
-        const offsetY = item.bounds.origin.y / size / DHeight;
-
-        const OX = offsetX * width > 0 ? offsetX * width : 0;
-        const OY = offsetY * height > 0 ? offsetY * height : 0;
-        const SW = ratioWidth * width > 0 ? ratioWidth * width : 0;
-        const SY = ratioHeight * height > 0 ? ratioHeight * height : 0;
-
-        const cropData = {
-          offset: {x: OX, y: OY},
-          size: {width: SW, height: SY},
-          resizeMode: 'contain',
-        };
-
-        loadingTrue();
-        // @ts-ignore
-        ImageEditor.cropImage(imageUri, cropData).then((url) => {
-          RNFetchBlob.fs.readFile(url, 'base64').then((data) => {
-            setParamCustom('image', data);
-            setMyFace(url);
-          });
-          setListFaceDetect((set) => {
-            const newSet = new Set(set);
-            newSet.has(url) ? newSet.delete(url) : newSet.add(url);
-            return newSet;
-          });
-          loadingFalse();
-        });
-      });
-  }, []);
-
   const takePicture = useCallback(() => {
     navigateToFaceDetectScreen();
-  }, []);
-
-  const takePictureLibrary = useCallback(async () => {
-    const options = {
-      mode: FaceDetector.Constants.Mode.fast,
-    };
-    const file = await File.pickImage({multiple: false} || {});
-    setImageShow(file[0].uri);
-
-    loadingTrue();
-    RNFetchBlob.fs.readFile(file[0].uri, 'base64').then((data) => {
-      setParamCustom('image', data);
-      setMyFace(url);
-    });
-
-    ImageResizer.createResizedImage(
-      file[0].uri,
-      file[0].width - 10,
-      file[0].height - 10,
-      'JPEG',
-      0.01,
-      0,
-      undefined,
-      false,
-      {onlyScaleDown: true},
-    )
-      .then((response) => {
-        FaceDetector.detectFacesAsync(response.uri, options).then((res) => {
-          if (res.faces.length > 0) {
-            cropImagePickerFace(
-              res.faces,
-              file[0].uri,
-              file[0].width,
-              file[0].height,
-            );
-          } else {
-            console.log('No faces: ');
-          }
-          loadingFalse();
-        });
-      })
-      .catch((err) => {
-        // Oops, something went wrong. Check that the filename is correct and
-        // inspect err to get more details.
-      });
   }, []);
 
   const [{loading}, requestData] = useAsyncFn(async () => {
@@ -251,28 +186,29 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     );
   }, [loading]);
 
-  // @ts-ignore
-  const renderFace = ({bounds, faceID, rollAngle, yawAngle}) => (
-    <View
-      key={faceID}
-      transform={[
-        {perspective: 600},
-        {rotateZ: `${rollAngle.toFixed(0)}deg`},
-        {rotateY: `${yawAngle.toFixed(0)}deg`},
-      ]}
-      style={[
-        styles.face,
-        {
-          ...bounds.size,
-          left: bounds.origin.x,
-          top: bounds.origin.y,
-        },
-      ]}>
-      {/*<Text style={styles.faceText}>ID: {faceID}</Text>*/}
-      {/*<Text style={styles.faceText}>rollAngle: {rollAngle.toFixed(0)}</Text>*/}
-      {/*<Text style={styles.faceText}>yawAngle: {yawAngle.toFixed(0)}</Text>*/}
-    </View>
-  );
+  const getListDepartment = useMemo(() => {
+    let listFilterModel: FilterBoxOption[] = [];
+    departments.map((item) => {
+      const department = getDepartment(item);
+      listFilterModel.push({
+        label: department?.name || '',
+        value: item,
+      });
+    });
+    return listFilterModel;
+  }, [departments]);
+
+  const getListBoxAI = useMemo(() => {
+    let listFilterModel: FilterBoxOption[] = [];
+    boxAIs.map((item) => {
+      const boxAI = getBoxAi(item);
+      listFilterModel.push({
+        label: boxAI?.name || '',
+        value: item,
+      });
+    });
+    return listFilterModel;
+  }, [boxAIs]);
 
   return (
     <View style={styles.container}>
@@ -338,12 +274,21 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           required={false}
         />
 
-        <SInputBorder
-          value={paramEmployee.department}
-          keyName={'department'}
-          onTextChange={setParamCustom}
-          placeHolder={'Phòng ban'}
-          required={true}
+        <SSelectModalBottom
+          label={'Phòng ban'}
+          options={getListDepartment}
+          inputName={'department'}
+          placeholder={'Lựa chọn'}
+          selectedValue={paramEmployee.department}
+          onSelectOption={setParamCustom}
+        />
+        <SSelectModalBottom
+          label={'Cơ sở'}
+          options={getListBoxAI}
+          inputName={'listBoxAI'}
+          placeholder={'Lựa chọn'}
+          selectedValue={String(paramEmployee.listBoxAI)}
+          onSelectOption={setParamBoxAi}
         />
       </ScrollView>
     </View>
@@ -351,6 +296,14 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
 });
 
 const SInputBorder = styled(InputBorder).attrs({
+  containerStyle: {
+    marginTop: 16,
+    marginRight: 16,
+    marginLeft: 16,
+  },
+})``;
+
+const SSelectModalBottom = styled(SelectModalBottom).attrs({
   containerStyle: {
     marginTop: 16,
     marginRight: 16,

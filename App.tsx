@@ -1,49 +1,71 @@
 // @ts-ignore
-import React, {memo, useEffect} from 'react';
-import {StatusBar, YellowBox, Text, Alert} from 'react-native';
+import React, {memo, useCallback, useEffect, useMemo} from 'react';
+import {StatusBar, YellowBox} from 'react-native';
 //@ts-ignore
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import Routes from './src/Routes';
-import messaging, {firebase, Notification} from '@react-native-firebase/messaging';
-import {requestTokenDevice} from './src/store/auth/function';
+import messaging, {firebase} from '@react-native-firebase/messaging';
+import notifee from '@notifee/react-native';
 import {requestMessageCheckin} from './src/store/notification/functions';
-
+import Toast from 'react-native-simple-toast';
 YellowBox.ignoreWarnings(['']);
 
 export const App = memo(() => {
-  useEffect(async () => {
+  useEffect(() => {
+    notification().then();
+  }, []);
+
+  const createNotification = useCallback(
+    async (title: string, value: string) => {
+      // Create a channel
+      const channelId = await notifee.createChannel({
+        id: 'default',
+        name: 'Default Channel',
+      });
+
+      // Display a notification
+      await notifee.displayNotification({
+        title: title || '',
+        body: value || '',
+        android: {
+          channelId,
+        },
+      });
+
+      Toast.showWithGravity(`${title} ${value}`, Toast.LONG, Toast.TOP);
+    },
+    [],
+  );
+
+  const notification = useCallback(async () => {
     await requestUserPermission();
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      createNotification(
+        remoteMessage.data?.title || '',
+        remoteMessage.data?.value || '',
+      ).then();
       await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
 
-    return unsubscribe;
-  }, []);
-
-  useEffect(async () => {
-    const notificationOpen = messaging().getInitialNotification();
-    if (notificationOpen) {
-      const {title, body} = notificationOpen.notification;
-      Alert.alert('getInitialNotification', title, body);
-    }
-  }, []);
-
-  useEffect(async () => {
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    messaging().onNotificationOpenedApp(async (remoteMessage) => {
+      createNotification(
+        remoteMessage.data?.title || '',
+        remoteMessage.data?.value || '',
+      ).then();
+      await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
-  }, []);
 
-  useEffect(async () => {
-    const unsubscribe = messaging().onNotificationOpenedApp(
-      async (remoteMessage) => {
-        Alert.alert('onNotificationOpenedApp', JSON.stringify(remoteMessage));
-        const notification: Notification = remoteMessage.notification;
-        await requestMessageCheckin(remoteMessage.data?.boxID || '');
-      },
-    );
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        if (remoteMessage) {
+          console.log(
+            'Notification caused app to open from quit state:',
+            remoteMessage.notification,
+          );
+        }
+      });
 
     return unsubscribe;
   }, []);

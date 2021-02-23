@@ -18,6 +18,5 @@ export const requestLogin = async (userName:string, pass:string) => {
 export const requestTokenDevice = async (token:string) => {
 
     const response = await Fetch.put<{token: string}>('https://go.iview.vn/api/v1/user/set-mobile-token', {mobileToken: token});
-    console.log("response123",response)
     return response;
 };

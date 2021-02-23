@@ -31,12 +31,6 @@ export const LoginScreen = memo(function LoginScreen() {
   const [username, setUsername] = useState('thanh191997@gmail.com');
   const [password, setPassword] = useState('meditech1234');
 
-  useCallback(() => {
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log('Login:Message handled in the background!', remoteMessage);
-    });
-  }, []);
-
   const onTextChange = useCallback((keyname: string, value: string) => {
     if (keyname == 'username') {
       setUsername(value);

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import {
   StyleSheet,
@@ -9,14 +8,11 @@ import {
   Dimensions,
   ActivityIndicator,
 } from 'react-native';
-// eslint-disable-next-line import/no-unresolved
-import {RNCamera, RNCameraProps} from 'react-native-camera';
-import ImageEditor from '@react-native-community/image-editor';
+import {RNCamera} from 'react-native-camera';
 import {Colors} from '@/themes/Colors';
-import {IC_BACK, IC_CAMERA, IC_LOGO} from '@/assets';
+import {IC_BACK, IC_CAMERA} from '@/assets';
 import {goBack, openFaceDetectScreen} from '@/utils/navigation';
 import {styled} from '@/global';
-import {HeaderBack} from '@/components/HeaderBack';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
@@ -151,8 +147,6 @@ export default class CameraScreen extends React.Component {
       {this.state.loadingTakePicture && (
         <Text style={styles.faceText}>Đang định dạng...</Text>
       )}
-      {/*<Text style={styles.faceText}>rollAngle: {rollAngle.toFixed(0)}</Text>*/}
-      {/*<Text style={styles.faceText}>yawAngle: {yawAngle.toFixed(0)}</Text>*/}
     </View>
   );
 
@@ -226,11 +220,6 @@ export default class CameraScreen extends React.Component {
               flexDirection: 'row',
               justifyContent: 'center',
             }}>
-            {/*<TouchableOpacity*/}
-            {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
-            {/*  onPress={this.zoomOut.bind(this)}>*/}
-            {/*  <Text style={styles.flipText}> - </Text>*/}
-            {/*</TouchableOpacity>*/}
             <TouchableOpacity
               disabled={this.state.loadingTakePicture}
               style={{position: 'absolute', marginRight: 16, marginLeft: 16}}
@@ -256,11 +245,6 @@ export default class CameraScreen extends React.Component {
                 {this.state.type === 'front' ? 'Trước' : 'Sau'}
               </Text>
             </TouchableOpacity>
-            {/*<TouchableOpacity*/}
-            {/*  style={[styles.flipButton, {flex: 0.1}]}*/}
-            {/*  onPress={this.zoomIn.bind(this)}>*/}
-            {/*  <Text style={styles.flipText}> + </Text>*/}
-            {/*</TouchableOpacity>*/}
           </View>
         </Bottom>
       </View>

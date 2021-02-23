@@ -54,9 +54,13 @@ export const HistoryScreen = memo(function HistoryScreen() {
   const getListMonth = useMemo(() => {
     let listFilterModel: FilterBoxOption[] = [];
     list12MonthNumber.map((item) => {
+      let number = String(item);
+      if (item < 10) {
+        number = '0' + number;
+      }
       listFilterModel.push({
         label: `Tháng ${item}`,
-        value: item,
+        value: number,
       });
     });
     return listFilterModel;
