@@ -4,6 +4,7 @@ import {Core} from "@/global";
 // import {replaceLoginScreen} from "@/utils/navigation";
 import {Alert} from "react-native";
 import {navigateToLoginScreen} from "@/utils/navigation";
+import ToastService from "@/services/ToastService";
 
 let headers = {
     Authorization: '',
@@ -15,10 +16,15 @@ export const Fetch = axios.create({baseURL: Core.baseUrl, headers}); // baseURL:
 Fetch.interceptors.response.use((response) => {
     return response;
 }, (error) => {
-    console.log("error", error)
+    console.log("error", error.response)
     if (error.response.status === 500) {
-        Alert.alert('Lỗi', 'Request failed with status code 500');
-        return Promise.resolve({error});
+        ToastService.showError(error.response.data.message, true, true, "")
+        return error.response.data;
+    }
+
+    if (error.response.status === 400) {
+        ToastService.showError(error.response.data.message, true, true, "")
+        return error.response.data;
     }
     if (error.response.status === 401) {
          // setTokenAction('');
@@ -26,7 +32,7 @@ Fetch.interceptors.response.use((response) => {
         updateFetchToken('');
         // setUserAction(null);
         Alert.alert('Token error', 'Please login again');
-        return Promise.resolve({error});
+        return error.response.data;
     }
     return Promise.resolve({error});
 });

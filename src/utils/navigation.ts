@@ -73,3 +73,10 @@ export const openModalCreateCustomer = createNavigate(
 export const openFaceDetectScreen = createNavigate<FaceDetectScreenProps>(
   'FaceDetectScreen'
 );
+
+export const navigateProfileScreen = createNavigate(
+  'ProfileScreen'
+)
+export const navigateComingSoonScreen = createNavigate(
+  'ComingSoon'
+);

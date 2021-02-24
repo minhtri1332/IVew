@@ -11,6 +11,7 @@ import {
   IC_HOME_SERVICE,
 } from '@/assets';
 import {
+  navigateComingSoonScreen,
   navigateToFaceDetectScreen,
   navigateToHeadMapScreen,
   navigateToHistoryScreen,
@@ -23,7 +24,7 @@ import {requestGetBoxAi} from '@/store/boxAI/functions';
 import {RefreshControl} from 'react-native';
 import {requestTokenDevice} from '@/store/auth/function';
 import {firebase} from '@react-native-firebase/messaging';
-import {requestGetDepartment} from "@/store/department/functions";
+import {requestGetDepartment} from '@/store/department/functions';
 
 export const HomeScreen = memo(function HomeScreen() {
   const {call, loading} = useAsyncEffect(async () => {
@@ -31,7 +32,6 @@ export const HomeScreen = memo(function HomeScreen() {
     await requestTokenDevice(tokenDevice);
     await requestGetBoxAi();
     await requestGetDepartment();
-
   }, []);
 
   return (
@@ -48,31 +48,34 @@ export const HomeScreen = memo(function HomeScreen() {
             onPress={navigateToHistoryScreen}
           />
           <ItemHome
-            icon={IC_HOME_SERVICE}
-            label={'MService'}
-            onPress={navigateToMServiceScreen}
+            icon={IC_DETECT_FACE}
+            label={'Face detect'}
+            onPress={openFaceDetectScreen}
           />
         </SViewFunction>
         <SViewFunction>
           <ItemHome
             icon={IC_HOME_HEAD_MAP}
             label={'Headmap'}
-            onPress={navigateToHeadMapScreen}
+            onPress={navigateComingSoonScreen}
+            //navigateToHeadMapScreen
           />
           <ItemHome
             icon={IC_HOME_SCAN}
             label={'MScan'}
-            onPress={navigateToMScanScreen}
+            onPress={navigateComingSoonScreen}
+            //navigateToMScanScreen
           />
         </SViewFunction>
 
-        <SViewFunction>
-          <ItemHome
-            icon={IC_DETECT_FACE}
-            label={'Face detect'}
-            onPress={openFaceDetectScreen}
-          />
-        </SViewFunction>
+        {/*<SViewFunction>*/}
+        {/*  <ItemHome*/}
+        {/*    icon={IC_HOME_SERVICE}*/}
+        {/*    label={'MService'}*/}
+        {/*    onPress={navigateComingSoonScreen}*/}
+        {/*    //navigateToMServiceScreen*/}
+        {/*  />*/}
+        {/*</SViewFunction>*/}
       </Container>
     </SViewContainerHome>
   );

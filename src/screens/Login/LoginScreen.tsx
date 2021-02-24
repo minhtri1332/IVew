@@ -17,8 +17,6 @@ import {BaseStyles} from '@/themes/BaseStyles';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestLogin} from '@/store/auth/function';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
-import messaging from '@react-native-firebase/messaging';
-
 const {width: DWidth} = Dimensions.get('window');
 
 const SInputBorder = styled(InputBorder).attrs({
@@ -28,8 +26,8 @@ const SInputBorder = styled(InputBorder).attrs({
 })``;
 
 export const LoginScreen = memo(function LoginScreen() {
-  const [username, setUsername] = useState('thanh191997@gmail.com');
-  const [password, setPassword] = useState('meditech1234');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const onTextChange = useCallback((keyname: string, value: string) => {
     if (keyname == 'username') {
@@ -57,10 +55,13 @@ export const LoginScreen = memo(function LoginScreen() {
   }, []);
 
   const [{loading}, startLogin] = useAsyncFn(async () => {
-    await requestLogin(username, password);
-    await LocalStorageHelper.set('username', username);
-    await LocalStorageHelper.set('password', password);
-    replaceWithMainScreen();
+    const response = await requestLogin(username, password);
+    console.log(response);
+    if (response) {
+      await LocalStorageHelper.set('username', username);
+      await LocalStorageHelper.set('password', password);
+      replaceWithMainScreen();
+    }
   }, [username, password]);
 
   return (

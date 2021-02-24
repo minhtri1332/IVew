@@ -3,6 +3,8 @@ import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {Colors} from '@/themes/Colors';
 import {styled, useNavigation} from '@/global';
 import {IC_BACKGROUND_HOME, IC_LOGO, IC_LOGO_APP} from '@/assets';
+import {TouchableOpacity} from 'react-native';
+import {navigateProfileScreen} from '@/utils/navigation';
 
 interface Props {
   title?: string;
@@ -12,7 +14,10 @@ export const HomeHeader = memo(function HomeHeader(props: Props) {
   return (
     <Container>
       <Left>
-        <SLogo source={IC_LOGO_APP} />
+        <TouchableOpacity activeOpacity={0.6} onPress={navigateProfileScreen}>
+          <SLogo source={IC_LOGO_APP} />
+        </TouchableOpacity>
+
         <SText>iVIEW</SText>
         <STextTitle>Nền tảng Camera AI</STextTitle>
       </Left>

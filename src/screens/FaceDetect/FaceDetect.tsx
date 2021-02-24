@@ -160,9 +160,11 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   }, []);
 
   const [{loading}, requestData] = useAsyncFn(async () => {
-    await requestAddEmployee(paramEmployee);
-    ToastService.show('Success!');
-    goBack();
+    const data = await requestAddEmployee(paramEmployee);
+    if (data) {
+      ToastService.show('Success!');
+      goBack();
+    }
   }, [paramEmployee]);
 
   const onPressImage = useCallback(
@@ -184,7 +186,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
         loading={loading}
       />
     );
-  }, [loading]);
+  }, [loading, paramEmployee]);
 
   const getListDepartment = useMemo(() => {
     let listFilterModel: FilterBoxOption[] = [];
