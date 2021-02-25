@@ -5,14 +5,14 @@ import {Fetch} from "@/utils/fetch";
 import {RawHistory} from "@/store/history/types";
 
 export const requestGetHistoryList = async (params: HistoryProps) => {
-    console.log(params)
+
     const {data} = await Fetch.get<{data: any}>('https://go.iview.vn/api/v1/attendence/list-record-month', {
         params: {
             boxID: params?.boxID,
             month: params?.month
         }
     });
-
+    console.log(data)
     const param = params?.month + params?.boxID
 
     batch(() => {

@@ -2,7 +2,13 @@ import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
-import {FlatList, ListRenderItem, RefreshControl} from 'react-native';
+import {
+  FlatList,
+  ListRenderItem,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 import {ItemHistory} from '@/screens/checkin/components/ItemHistory';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {requestGetHistoryList} from '@/store/history/functions';
@@ -11,6 +17,7 @@ import {FilterBoxOption} from '@/components/Filter/types';
 import {list12MonthNumber} from '@/services/MomentService';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
+import {Colors} from '@/themes/Colors';
 
 const keyExtractor = (item: any, index: number) => {
   return item + index;
@@ -20,8 +27,6 @@ export interface HistoryProps {
   month: string;
 }
 export const HistoryScreen = memo(function HistoryScreen() {
-  const [textSearch, setTextSearch] = useState('');
-
   const listBoxAI = useBoxAiByQuery('all');
   const [params, setParams] = useState<HistoryProps>({
     boxID: '',
@@ -30,10 +35,8 @@ export const HistoryScreen = memo(function HistoryScreen() {
   const ListHistory = useHistoryByQuery(params?.month + params?.boxID);
 
   const data = useMemo(() => {
-    return [...new Set(ListHistory)]
+    return [...new Set(ListHistory)];
   }, [ListHistory]);
-
-  console.log('data', data);
 
   const setParamCustom = useCallback(
     (keyname: string, value: any) => {
@@ -82,9 +85,22 @@ export const HistoryScreen = memo(function HistoryScreen() {
     return listFilterModel;
   }, [listBoxAI]);
 
+  const renderEmpty = useMemo(() => {
+    return (
+      <View
+        style={{
+          alignItems: 'center',
+        }}>
+        <Text style={{marginTop: 100, fontSize: 18, color: Colors.grey3}}>
+          Không có dữ liệu!
+        </Text>
+      </View>
+    );
+  }, []);
+
   return (
     <ScreenWrapper>
-      <HeaderBack title={'History'} />
+      <HeaderBack title={'Lịch sử'} />
       <SViewSelect>
         <SelectModalBottom
           label={'Chọn tháng'}
@@ -116,6 +132,7 @@ export const HistoryScreen = memo(function HistoryScreen() {
         keyExtractor={keyExtractor}
         data={data}
         renderItem={renderItem}
+        ListEmptyComponent={renderEmpty}
         refreshControl={
           <RefreshControl refreshing={loadingData} onRefresh={call} />
         }

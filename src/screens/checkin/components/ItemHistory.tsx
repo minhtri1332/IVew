@@ -19,19 +19,23 @@ export const ItemHistory = memo(function ItemHistory({
     navigateToHistoryDetail({id: historyId});
   }, [historyId]);
 
+  if (!history) return null;
+
   return (
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
       <SAvatar
         source={{
-          uri:
-            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+          uri: history?.path,
         }}
         size={40}
       />
       <SViewContent>
         <STextName>{history?.name}</STextName>
-        <STextTitle>{`Khách đã ghé thăm ${history?.late} lần`}</STextTitle>
-        <STextTime>{`Lần cuối ghé thăm vào ${history?.date}`}</STextTime>
+        <STextTitle>{`Chấm công lúc ${history?.time} ${history?.date}`}</STextTitle>
+        <STextTime
+          isLate={
+            history?.late <= 0
+          }>{`Thời gian muộn: ${history?.late} phút`}</STextTime>
         <LineSeparator />
       </SViewContent>
       <SIcon source={IC_ARROW} size={28} tintColor={Colors.grey3} />
@@ -51,19 +55,19 @@ const SViewContent = styled.View`
 `;
 
 const STextName = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
   font-family: Roboto;
-  color: ${Colors.blue};
+  color: ${Colors.grey2};
 `;
 const STextTitle = styled.Text`
-  font-size: 15px;
+  font-size: 14px;
   line-height: 20px;
 `;
-const STextTime = styled.Text`
+const STextTime = styled.Text<{isLate: boolean}>`
   font-size: 13px;
   line-height: 18px;
   font-family: Roboto-Medium;
-  color: ${Colors.grey3};
+  color: ${(props: any) => (props.isLate ? Colors.green1 : Colors.red0)};
   padding-bottom: 8px;
 `;
