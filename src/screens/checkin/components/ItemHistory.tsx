@@ -40,7 +40,7 @@ export const ItemHistory = memo(function ItemHistory({
 });
 
 const SViewContainer = styled.TouchableOpacity`
-  flex: 1;
+
   margin: 8px 16px 0px 16px;
   flex-direction: row;
   align-items: center;

@@ -12,8 +12,8 @@ import {list12MonthNumber} from '@/services/MomentService';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 
-const keyExtractor = (item: any) => {
-  return item;
+const keyExtractor = (item: any, index: number) => {
+  return item + index;
 };
 export interface HistoryProps {
   boxID: string;
@@ -28,6 +28,12 @@ export const HistoryScreen = memo(function HistoryScreen() {
     month: '',
   });
   const ListHistory = useHistoryByQuery(params?.month + params?.boxID);
+
+  const data = useMemo(() => {
+    return [...new Set(ListHistory)]
+  }, [ListHistory]);
+
+  console.log('data', data);
 
   const setParamCustom = useCallback(
     (keyname: string, value: any) => {
@@ -75,7 +81,7 @@ export const HistoryScreen = memo(function HistoryScreen() {
     });
     return listFilterModel;
   }, [listBoxAI]);
-  console.log([...new Set(ListHistory)]);
+
   return (
     <ScreenWrapper>
       <HeaderBack title={'History'} />
@@ -108,7 +114,7 @@ export const HistoryScreen = memo(function HistoryScreen() {
 
       <FlatList
         keyExtractor={keyExtractor}
-        data={[...new Set(ListHistory)]}
+        data={data}
         renderItem={renderItem}
         refreshControl={
           <RefreshControl refreshing={loadingData} onRefresh={call} />

@@ -44,24 +44,24 @@ export const HomeScreen = memo(function HomeScreen() {
         <SViewFunction>
           <ItemHome
             icon={IC_HOME_CHECKIN}
-            label={'Checkin'}
+            label={'Lịch sử'}
             onPress={navigateToHistoryScreen}
           />
           <ItemHome
             icon={IC_HOME_SERVICE}
-            label={'MService'}
+            label={'Dịch vụ'}
             onPress={navigateToMServiceScreen}
           />
         </SViewFunction>
         <SViewFunction>
           <ItemHome
             icon={IC_HOME_HEAD_MAP}
-            label={'Headmap'}
+            label={'Sơ đồ'}
             onPress={navigateToHeadMapScreen}
           />
           <ItemHome
             icon={IC_HOME_SCAN}
-            label={'MScan'}
+            label={'Quét văn bản'}
             onPress={navigateToMScanScreen}
           />
         </SViewFunction>
@@ -69,7 +69,7 @@ export const HomeScreen = memo(function HomeScreen() {
         <SViewFunction>
           <ItemHome
             icon={IC_DETECT_FACE}
-            label={'Face detect'}
+            label={'Thêm nhân viên'}
             onPress={openFaceDetectScreen}
           />
         </SViewFunction>

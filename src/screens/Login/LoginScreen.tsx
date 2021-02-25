@@ -71,7 +71,7 @@ export const LoginScreen = memo(function LoginScreen() {
         <Top>
           <Logo source={IC_LOGO_APP} />
           <TopTitle>iVIEW</TopTitle>
-          <TopSubTitle>{`Nền tẳng camera AI`}</TopSubTitle>
+          <TopSubTitle>{`Nền tảng camera AI`}</TopSubTitle>
         </Top>
         <Bottom>
           <ContainerInput style={BaseStyles.viewShadow}>
