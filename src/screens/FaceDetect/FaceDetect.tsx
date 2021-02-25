@@ -43,6 +43,7 @@ import {FilterBoxOption} from '@/components/Filter/types';
 import {list12MonthNumber} from '@/services/MomentService';
 import {getDepartment, useDepartmentByQuery} from '@/store/department';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
+import useAutoToastError from '@/hooks/useAutoToastError';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
@@ -89,6 +90,8 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     avatar: '',
     image: '',
   }));
+
+  console.log(paramEmployee);
   const [listBoxAI, setListBoxAI] = useState<Set<string>>(() => {
     return new Set([]);
   });
@@ -159,13 +162,15 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     navigateToFaceDetectScreen();
   }, []);
 
-  const [{loading}, requestData] = useAsyncFn(async () => {
+
+  const [{loading, error}, requestData] = useAsyncFn(async () => {
     const data = await requestAddEmployee(paramEmployee);
-    if (data) {
+    if (data){
       ToastService.show('Success!');
       goBack();
     }
   }, [paramEmployee]);
+
 
   const onPressImage = useCallback(
     (value: string) => {
@@ -211,6 +216,13 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     });
     return listFilterModel;
   }, [boxAIs]);
+
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
+
+  useAutoToastError(error)
 
   return (
     <View style={styles.container}>
