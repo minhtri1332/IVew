@@ -7,7 +7,7 @@ export const requestLogin = async (userName:string, pass:string) => {
         "password": pass,
     });
     console.log('data ',params)
-    const {data} = await Fetch.post<{token: string}>('https://ai.iview.vn/api/v1/login', params);
+    const {data} = await Fetch.post<{token: string}>('https://go.iview.vn/api/v1/login', params);
     console.log('data 11', data)
     if (!data) {
         return null
@@ -23,6 +23,6 @@ export const requestTokenDevice = async (token:string) => {
 };
 
 export const requestProfile = async () => {
-    const {data} = await Fetch.get('https://ai.iview.vn/api/v1/user/user-detail', {});
+    const {data} = await Fetch.get('https://go.iview.vn/api/v1/user/user-detail', {});
     return data.data.data;
 };
