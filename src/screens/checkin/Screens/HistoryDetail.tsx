@@ -17,39 +17,36 @@ export interface HistoryDetailProps {
 export const HistoryDetail = memo(function HistoryDetail() {
   const {id} = useNavigationParams<HistoryDetailProps>();
   const history = useHistory(id);
-  const rightHeader = useMemo(() => {
-    return <SIcon source={IC_EDIT} size={24} />;
-  }, []);
 
   return (
     <ScreenWrapper>
-      <HeaderBack title={'Chi tiết khách hàng'} right={rightHeader} />
+      <HeaderBack title={'Chi tiết'}  />
       <SViewAvatar>
         <SAvatar
           source={{
-            uri:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1_YImJiJsDBeVjqy19Tq6M7MchZafcD32mg&usqp=CAU',
+            uri: history?.path,
           }}
           size={100}
         />
-        <STextName>{history?.value}</STextName>
+        <STextName>{history?.name}</STextName>
       </SViewAvatar>
 
-      <Item label={'Độ tuổi'} divider={true}>
-        <ItemContent>32</ItemContent>
+      <Item label={'Ngày chấm công'} divider={true}>
+        <ItemContent>{history?.date}</ItemContent>
       </Item>
-      <Item label={'Cảm xúc'} divider={true}>
-        <ItemContent>Surprised</ItemContent>
+      <Item label={'Giờ chấm công'} divider={true}>
+        <ItemContent>{history?.time}</ItemContent>
       </Item>
-      <Item label={'Số lần ghé thăm'} divider={true}>
-        <ItemContent>12</ItemContent>
+      <Item label={'Trạng thái'} divider={true}>
+        <ItemContent>{history?.status}</ItemContent>
       </Item>
-      <Item label={'Ghé thăm lại'} divider={true}>
-        <ItemContent>Store 1</ItemContent>
+      <Item label={'Số phút trễ'} divider={true}>
+        <ItemContent>{history?.late} phút</ItemContent>
       </Item>
-      <Item label={'Ngày/giờ'} divider={true}>
-        <ItemContent>{moment().format('DD/MM/YYYY HH:mm')}</ItemContent>
+      <Item label={'Phòng ban'} >
+        <ItemContent>{history?.department}</ItemContent>
       </Item>
+
     </ScreenWrapper>
   );
 });

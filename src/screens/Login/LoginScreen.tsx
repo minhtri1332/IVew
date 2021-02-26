@@ -17,6 +17,8 @@ import {BaseStyles} from '@/themes/BaseStyles';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestLogin} from '@/store/auth/function';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
+import DeviceInfo from 'react-native-device-info';
+
 const {width: DWidth} = Dimensions.get('window');
 
 const SInputBorder = styled(InputBorder).attrs({
@@ -26,6 +28,7 @@ const SInputBorder = styled(InputBorder).attrs({
 })``;
 
 export const LoginScreen = memo(function LoginScreen() {
+  const buildVersion = DeviceInfo.getVersion();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -108,6 +111,7 @@ export const LoginScreen = memo(function LoginScreen() {
         </Bottom>
       </SViewBox>
 
+      <STextVersion>Phiên bản {buildVersion}</STextVersion>
       {/*<Footer>*/}
       {/*  <FooterText>Copyright 2020 Tên app. All Rights Reserved</FooterText>*/}
       {/*</Footer>*/}
@@ -115,6 +119,8 @@ export const LoginScreen = memo(function LoginScreen() {
   );
 });
 
+const STextVersion = styled.Text`
+`;
 const SImageBackground = styled.Image`
   flex: 1;
   width: 100%;
