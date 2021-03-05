@@ -28,10 +28,11 @@ import {requestGetDepartment} from '@/store/department/functions';
 
 export const HomeScreen = memo(function HomeScreen() {
   const {call, loading} = useAsyncEffect(async () => {
+
+    await requestGetDepartment();
     const tokenDevice = await firebase.messaging().getToken();
     await requestTokenDevice(tokenDevice);
     await requestGetBoxAi();
-    await requestGetDepartment();
   }, []);
 
   return (
