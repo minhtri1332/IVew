@@ -1,6 +1,11 @@
 import React, {memo, PropsWithChildren, ReactElement} from 'react';
 import {styled} from '@/global';
-import {ImageSourcePropType, TouchableOpacity} from 'react-native';
+import {
+  ImageSourcePropType,
+  ImageStyle,
+  TextStyle,
+  TouchableOpacity,
+} from 'react-native';
 import {Colors} from '@/themes/Colors';
 
 const ItemContainer = styled.View`
@@ -8,12 +13,11 @@ const ItemContainer = styled.View`
   min-height: 44px;
   padding: 0 16px;
   flex-direction: row;
-  justify-content: space-between;
 `;
 
 const Icon = styled.Image`
   tint-color: ${Colors.grey3};
-  margin: 8px 8px 6px -4px;
+  margin: 10px 8px 6px -4px;
   width: 24px;
   height: 24px;
 `;
@@ -34,23 +38,27 @@ const SDivider = styled.View`
 interface ItemProps {
   icon?: ImageSourcePropType;
   label: string;
+  labelStyle?: TextStyle;
+  iconStyle?: ImageStyle;
   divider?: boolean;
   children?: React.ReactNode;
   willTranslate?: boolean;
 }
 
-export const Item = memo(({icon, label, children, divider}: ItemProps) => {
-  return (
-    <>
-      <ItemContainer>
-        {icon && <Icon source={icon} />}
-        <Label>{label}</Label>
-        {children}
-      </ItemContainer>
-      {divider && <SDivider />}
-    </>
-  );
-});
+export const Item = memo(
+  ({icon, label, children, divider, labelStyle, iconStyle}: ItemProps) => {
+    return (
+      <>
+        <ItemContainer>
+          {icon && <Icon style={iconStyle} source={icon} />}
+          <Label style={labelStyle}>{label}</Label>
+          {children}
+        </ItemContainer>
+        {divider && <SDivider />}
+      </>
+    );
+  },
+);
 
 interface ClickableItemProps extends ItemProps {
   disabled?: boolean;

@@ -17,7 +17,7 @@ export const ViewLineSpace = memo(() => {
 const SViewLine = styled.View`
   height: 8px;
   width: 100%;
-  background-color: ${(props: any) => props.theme.black10};
+  background-color: ${Colors.grey5};
 `;
 
 const SViewRoot = styled.View<LineSeparatorProps>`
