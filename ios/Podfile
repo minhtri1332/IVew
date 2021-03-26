@@ -12,15 +12,11 @@ target 'IView' do
   ]
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
   
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
-
-  target 'IViewTests' do
-    inherit! :complete
-    # Pods for testing
-  end
 
   # Enables Flipper.
   #
@@ -31,13 +27,4 @@ target 'IView' do
 #  post_install do |installer|
 #    flipper_post_install(installer)
 #  end
-end
-
-target 'IView-tvOS' do
-  # Pods for IView-tvOS
-
-  target 'IView-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 end
