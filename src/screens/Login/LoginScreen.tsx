@@ -59,7 +59,7 @@ export const LoginScreen = memo(function LoginScreen() {
 
   const [{loading}, startLogin] = useAsyncFn(async () => {
     const response = await requestLogin(username, password);
-    console.log(response);
+
     if (response) {
       await LocalStorageHelper.set('username', username);
       await LocalStorageHelper.set('password', password);
@@ -119,8 +119,7 @@ export const LoginScreen = memo(function LoginScreen() {
   );
 });
 
-const STextVersion = styled.Text`
-`;
+const STextVersion = styled.Text``;
 const SImageBackground = styled.Image`
   flex: 1;
   width: 100%;

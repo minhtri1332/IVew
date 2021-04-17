@@ -18,7 +18,7 @@ export const HomeHeader = memo(function HomeHeader(props: Props) {
           <SLogo source={IC_LOGO_APP} />
         </TouchableOpacity>
 
-        <SText>iVIEW</SText>
+        <SText>CXVIEW</SText>
         <STextTitle>Nền tảng Camera AI</STextTitle>
       </Left>
       <Right>

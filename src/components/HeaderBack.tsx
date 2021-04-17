@@ -41,8 +41,8 @@ const Right = styled.View`
 `;
 
 const Icon = styled.Image`
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   tint-color: ${Colors.white};
 `;
 const BannerText = styled.Text`

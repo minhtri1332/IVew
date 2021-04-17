@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "vn.iview.android"
+        applicationId "com.cxview"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

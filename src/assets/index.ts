@@ -22,6 +22,7 @@ export const IC_CAMERA_EDIT = require('./icons/ic_camera_edit.png');
 export const IC_COMING_SOON = require('./icons/ic_comming_soon.png');
 export const IC_LOGOUT = require('./icons/logout.png');
 export const IC_VERSION = require('./icons/ic-version.png');
+export const IC_CHECKIN_EMPLOYEE = require('./icons/ic_checin_employee.png');
 
 export const IC_HOME_SCAN = require('./icons/ic_scanning.png');
 export const IC_HOME_HEAD_MAP = require('./icons/ic_headmap.png');

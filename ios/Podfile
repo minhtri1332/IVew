@@ -3,8 +3,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'IView' do
-  # Pods for IView
+target 'CXView' do
+  # Pods for CXView
   config = use_native_modules!
   
   pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
@@ -12,7 +12,7 @@ target 'IView' do
   ]
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
+
   
   use_react_native!(:path => config["reactNativePath"])
 

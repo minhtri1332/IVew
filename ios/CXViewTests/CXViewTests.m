@@ -7,18 +7,18 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface IViewTests : XCTestCase
+@interface CXViewTests : XCTestCase
 
 @end
 
-@implementation IViewTests
+@implementation CXViewTests
 
-- (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
+- (BOOL)findSubviewInView:(UCXView *)view matching:(BOOL(^)(UCXView *view))test
 {
   if (test(view)) {
     return YES;
   }
-  for (UIView *subview in [view subviews]) {
+  for (UCXView *subview in [view subviews]) {
     if ([self findSubviewInView:subview matching:test]) {
       return YES;
     }
@@ -28,7 +28,7 @@
 
 - (void)testRendersWelcomeScreen
 {
-  UIViewController *vc = [[[RCTSharedApplication() delegate] window] rootViewController];
+  UCXViewController *vc = [[[RCTSharedApplication() delegate] window] rootViewController];
   NSDate *date = [NSDate dateWithTimeIntervalSinceNow:TIMEOUT_SECONDS];
   BOOL foundElement = NO;
 
@@ -45,7 +45,7 @@
     [[NSRunLoop mainRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     [[NSRunLoop mainRunLoop] runMode:NSRunLoopCommonModes beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 
-    foundElement = [self findSubviewInView:vc.view matching:^BOOL(UIView *view) {
+    foundElement = [self findSubviewInView:vc.view matching:^BOOL(UCXView *view) {
       if ([view.accessibilityLabel isEqualToString:TEXT_TO_LOOK_FOR]) {
         return YES;
       }

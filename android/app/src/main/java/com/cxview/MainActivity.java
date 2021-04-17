@@ -1,4 +1,4 @@
-package vn.iview.android;
+package com.cxview;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "IView";
+        return "CXView";
     }
 }

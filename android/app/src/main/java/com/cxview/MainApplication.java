@@ -1,4 +1,4 @@
-package vn.iview.android;
+package com.cxview;
 
 import android.app.Application;
 import android.content.Context;

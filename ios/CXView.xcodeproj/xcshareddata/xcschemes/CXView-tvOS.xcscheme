@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "IView-tvOS.app"
-               BlueprintName = "IView-tvOS"
-               ReferencedContainer = "container:IView.xcodeproj">
+               BuildableName = "CXView-tvOS.app"
+               BlueprintName = "CXView-tvOS"
+               ReferencedContainer = "container:CXView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "IView-tvOSTests.xctest"
-               BlueprintName = "IView-tvOSTests"
-               ReferencedContainer = "container:IView.xcodeproj">
+               BuildableName = "CXView-tvOSTests.xctest"
+               BlueprintName = "CXView-tvOSTests"
+               ReferencedContainer = "container:CXView.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "IView-tvOS.app"
-            BlueprintName = "IView-tvOS"
-            ReferencedContainer = "container:IView.xcodeproj">
+            BuildableName = "CXView-tvOS.app"
+            BlueprintName = "CXView-tvOS"
+            ReferencedContainer = "container:CXView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "IView-tvOS.app"
-            BlueprintName = "IView-tvOS"
-            ReferencedContainer = "container:IView.xcodeproj">
+            BuildableName = "CXView-tvOS.app"
+            BlueprintName = "CXView-tvOS"
+            ReferencedContainer = "container:CXView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
