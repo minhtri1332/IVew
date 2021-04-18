@@ -33,11 +33,11 @@ interface SubmitButtonProps {
   loading?: boolean;
   textStyle?: TextStyle;
   style?: ViewStyle;
-  onPress: (value?: string) => void;
+  onPress: () => void;
 }
 export const ButtonText = memo(function ButtonText({
   title,
-  value,
+
   color,
   loading = false,
   textStyle,
@@ -45,8 +45,8 @@ export const ButtonText = memo(function ButtonText({
   onPress,
 }: SubmitButtonProps) {
   const onPressListener = useCallback(() => {
-    value ? onPress(value || '') : onPress();
-  }, [onPress, value]);
+    onPress();
+  }, [onPress]);
 
   return (
     <Wrapper

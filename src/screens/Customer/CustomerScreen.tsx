@@ -34,7 +34,7 @@ export const CustomerScreen = memo(function CustomerScreen() {
     return (
       <ButtonText
         color={Colors.white}
-        title={'Add'}
+        title={'Tạo'}
         onPress={openModalCreateCustomer}
       />
     );

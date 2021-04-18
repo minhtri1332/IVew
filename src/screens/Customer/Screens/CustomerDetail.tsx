@@ -13,8 +13,16 @@ import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {
   requestGetCustomer,
   requestGetCustomerDetail,
+  requestRemoveCustomer,
 } from '@/store/customer/functions';
 import {useCustomer} from '@/store/customer';
+import SubmitButtonColor from '@/components/button/ButtonSubmit';
+import {useAsyncFn} from '@/hooks/useAsyncFn';
+import {requestAddCustomer} from '@/store/faceDetect/function';
+import ToastService from '@/services/ToastService';
+import {goBack} from '@/utils/navigation';
+import {Colors} from '@/themes/Colors';
+import {Alert} from 'react-native';
 
 export interface CustomerDetailProps {
   id: string;
@@ -27,6 +35,23 @@ export const CustomerDetail = memo(function CustomerDetail() {
   const {call, error, loading: loadingData} = useAsyncEffect(async () => {
     await requestGetCustomerDetail(id);
   }, [id]);
+
+  const [{loading, error: errDelete}, onDelete] = useAsyncFn(async () => {
+    Alert.alert('Bạn có chắc chắn muốn xóa khách hàng này?', '', [
+      {
+        text: 'Hủy',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Xóa',
+        onPress: async () => {
+          await requestRemoveCustomer(id);
+          goBack();
+        },
+      },
+    ]);
+  }, []);
 
   return (
     <ScreenWrapper>
@@ -52,6 +77,13 @@ export const CustomerDetail = memo(function CustomerDetail() {
           {customer?.active ? 'Đang hoạt đông' : 'Không hoạt động'}
         </ItemContent>
       </Item>
+
+      <SubmitButtonColor
+        title={'Xóa'}
+        onPress={onDelete}
+        loading={loading}
+        color={Colors.red1}
+      />
     </ScreenWrapper>
   );
 });
