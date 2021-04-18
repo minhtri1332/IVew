@@ -1,48 +1,22 @@
 import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, View,} from 'react-native';
 import {HeaderBack} from '@/components/HeaderBack';
 import {styled} from '@/global';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
 import ImageEditor from '@react-native-community/image-editor';
-import {
-  IC_ADD_USER,
-  IC_CAMERA_EDIT,
-  IC_CHECK,
-  IC_DETECT_FACE,
-  IC_EDIT,
-  IC_EMPTY_IMAGE_DETECT,
-  IC_UN_CHECK,
-} from '@/assets';
-import SubmitButtonColor from '@/components/button/ButtonSubmit';
-import {
-  goBack,
-  navigateToFaceDetectScreen,
-  openModalCreateCustomer,
-} from '@/utils/navigation';
+import {IC_CAMERA_EDIT, IC_DETECT_FACE,} from '@/assets';
+import {goBack, navigateToFaceDetectScreen,} from '@/utils/navigation';
 import {Colors} from '@/themes/Colors';
-import {FaceDetector} from 'react-native-camera';
-import File from '@/utils/file';
 import useBoolean from '@/hooks/useBoolean';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
-import ImageResizer from 'react-native-image-resizer';
 import RNFetchBlob from 'rn-fetch-blob';
 import {requestAddEmployee} from '@/store/faceDetect/function';
 import ToastService from '@/services/ToastService';
 import {ItemFace} from '@/screens/FaceDetect/ItemFace';
 import {InputBorder} from '@/components/InputBorder';
-import {SIcon} from '@/themes/BaseStyles';
 import ButtonText from '@/components/button/ButtonText';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
 import {FilterBoxOption} from '@/components/Filter/types';
-import {list12MonthNumber} from '@/services/MomentService';
 import {getDepartment, useDepartmentByQuery} from '@/store/department';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 import useAutoToastError from '@/hooks/useAutoToastError';

@@ -14,6 +14,9 @@ import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestAddCustomer} from '@/store/faceDetect/function';
 import ToastService from '@/services/ToastService';
 import {goBack} from '@/utils/navigation';
+import {useNavigationParams} from '@/hooks/useNavigationParams';
+import {HistoryDetailProps} from '@/screens/checkin/Screens/HistoryDetail';
+import {useCustomer} from '@/store/customer';
 
 export interface ParamCreateCustomer {
   age: string;
@@ -24,12 +27,18 @@ export interface ParamCreateCustomer {
 
 const paramGender = ['Nam', 'Nữ', 'Khác'];
 
+export interface ModalCreateCustomerProps {
+  id?: string;
+}
+
 export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
+  const {id} = useNavigationParams<ModalCreateCustomerProps>();
+  const customer = useCustomer(id);
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
-    name: '',
-    age: '',
-    gender: '',
-    image: '',
+    name: customer ? customer.name : '',
+    age: customer ? String(customer.age) : '',
+    gender: customer ? customer.gender : '',
+    image: customer ? customer.avatarPath : '',
   });
 
   const setParamCustom = useCallback(
@@ -54,12 +63,16 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   }, [paramGender]);
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
-    const data = await requestAddCustomer(paramCustomer);
-    if (data) {
-      ToastService.show('Success!');
-      goBack();
+    if (id) {
+      await requestAddCustomer(paramCustomer);
+    } else {
+      const data = await requestAddCustomer(paramCustomer);
+      if (data) {
+        ToastService.show('Success!');
+        goBack();
+      }
     }
-  }, [paramCustomer]);
+  }, [paramCustomer, id]);
 
   const rightHeader = useMemo(() => {
     return (

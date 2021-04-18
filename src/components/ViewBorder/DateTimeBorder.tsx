@@ -14,7 +14,7 @@ import DateTimePickerModal, {
 import {Colors} from '@/themes/Colors';
 import useBoolean from '@/hooks/useBoolean';
 import moment from '@/services/MomentService';
-import {IC_CALENDAR, IC_CLOCK} from "@/assets";
+import {IC_CALENDAR, IC_CLOCK} from '@/assets';
 
 interface Props {
   label: string;
@@ -23,7 +23,7 @@ interface Props {
   keyName: string;
   mode: 'date' | 'time' | 'datetime';
   containerStyle?: ViewStyle;
-  onChangeValue: (keyName: string, value: string) => void;
+  onChangeValue: (value: string, keyName?: string) => void;
   dateTimePickerProps?: ReactNativeModalDateTimePickerProps;
   required?: boolean;
   format?: string;
@@ -65,7 +65,7 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
 
   const onChange = useCallback(
     (value: string) => {
-      onChangeValue(keyName, value);
+      onChangeValue(value, keyName);
     },
     [onChangeValue],
   );

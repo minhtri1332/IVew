@@ -20,9 +20,10 @@ import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestAddCustomer} from '@/store/faceDetect/function';
 import ToastService from '@/services/ToastService';
-import {goBack} from '@/utils/navigation';
+import {goBack, openModalCreateCustomer} from '@/utils/navigation';
 import {Colors} from '@/themes/Colors';
 import {Alert} from 'react-native';
+import ButtonText from '@/components/button/ButtonText';
 
 export interface CustomerDetailProps {
   id: string;
@@ -53,9 +54,21 @@ export const CustomerDetail = memo(function CustomerDetail() {
     ]);
   }, []);
 
+  const rightHeader = useMemo(() => {
+    return (
+      <ButtonText
+        color={Colors.white}
+        title={'Sửa'}
+        onPress={() => {
+          openModalCreateCustomer({id});
+        }}
+      />
+    );
+  }, [id]);
+
   return (
     <ScreenWrapper>
-      <HeaderBack title={'Chi tiết khách hàng'} />
+      <HeaderBack title={'Chi tiết khách hàng'} right={rightHeader} />
       <SViewAvatar>
         <SAvatar
           source={{
