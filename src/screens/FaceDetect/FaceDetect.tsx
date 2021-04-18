@@ -15,9 +15,11 @@ import ImageEditor from '@react-native-community/image-editor';
 import {
   IC_ADD_USER,
   IC_CAMERA_EDIT,
+  IC_CHECK,
   IC_DETECT_FACE,
   IC_EDIT,
   IC_EMPTY_IMAGE_DETECT,
+  IC_UN_CHECK,
 } from '@/assets';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {
@@ -162,15 +164,13 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     navigateToFaceDetectScreen();
   }, []);
 
-
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     const data = await requestAddEmployee(paramEmployee);
-    if (data){
+    if (data) {
       ToastService.show('Success!');
       goBack();
     }
   }, [paramEmployee]);
-
 
   const onPressImage = useCallback(
     (value: string) => {
@@ -221,8 +221,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     console.log(error);
   }, [error]);
 
-
-  useAutoToastError(error)
+  useAutoToastError(error);
 
   return (
     <View style={styles.container}>

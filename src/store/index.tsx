@@ -8,6 +8,7 @@ import {setHistoryStore, historyReducer} from '@/store/history';
 import {authReducer, setAuthStore} from '@/store/auth';
 import {boxAiReducer, setBoxAiStore} from '@/store/boxAI';
 import {departmentReducer, setDepartmentStore} from '@/store/department';
+import {customerReducer, setCustomerStore} from '@/store/customer';
 
 const middlewares: any[] = [];
 
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
   auth: authReducer,
   boxAi: boxAiReducer,
   department: departmentReducer,
+  customer: customerReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -55,3 +57,4 @@ setHistoryStore(store);
 setAuthStore(store);
 setBoxAiStore(store);
 setDepartmentStore(store);
+setCustomerStore(store);

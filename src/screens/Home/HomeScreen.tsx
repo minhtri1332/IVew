@@ -12,6 +12,7 @@ import {
 } from '@/assets';
 import {
   navigateComingSoonScreen,
+  navigateToCustomerScreen,
   navigateToHistoryScreen,
   openFaceDetectScreen,
 } from '@/utils/navigation';
@@ -54,7 +55,7 @@ export const HomeScreen = memo(function HomeScreen() {
           <ItemHome
             icon={IC_CHECKIN_EMPLOYEE}
             label={'Lịch sử nhân viên'}
-            onPress={navigateComingSoonScreen}
+            onPress={navigateToCustomerScreen}
             //navigateToHeadMapScreen
           />
 

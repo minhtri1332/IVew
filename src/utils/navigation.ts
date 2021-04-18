@@ -67,6 +67,12 @@ export const navigateToMScanScreen = createNavigate(
 export const navigateToFaceDetectScreen = createNavigate(
   'CameraScreen'
 );
+export const navigateToCustomerScreen = createNavigate(
+  'CustomerScreen'
+);
+export const navigateToCustomerDetailScreen = createNavigate(
+  'CustomerDetail'
+);
 export const openModalCreateCustomer = createNavigate(
   'ModalCreateCustomer'
 );

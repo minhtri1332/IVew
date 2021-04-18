@@ -9,3 +9,5 @@ export interface RawFile {
     uri: string,
     width: number|string
 }
+
+export const urlProduct = 'k8s.backend.dev.staging.cxview.ai';
