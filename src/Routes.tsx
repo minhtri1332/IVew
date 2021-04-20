@@ -21,6 +21,7 @@ import ComingSoon from '@/screens/ComingSoon';
 import CustomerScreen from '@/screens/Customer/CustomerScreen';
 import {CustomerDetail} from '@/screens/Customer/Screens/CustomerDetail';
 import ModalCreateCustomer from '@/screens/Customer/Modal/ModalCreateCustomer';
+import CustomerRecordDetail from '@/screens/checkin/Screens/CustomerRecordDetail';
 
 const RootStack = createStackNavigator();
 const ModalStack = createStackNavigator();
@@ -49,6 +50,7 @@ const MainStackComponent = memo(function MainStackComponent() {
       <MainStack.Screen name={'CameraScreen'} component={CameraScreen} />
       <MainStack.Screen name={'CustomerScreen'} component={CustomerScreen} />
       <MainStack.Screen name={'CustomerDetail'} component={CustomerDetail} />
+      <MainStack.Screen name={'CustomerRecordDetail'} component={CustomerRecordDetail} />
       <MainStack.Screen
         name={'FaceDetectScreen'}
         component={FaceDetectScreen}

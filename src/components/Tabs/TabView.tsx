@@ -76,7 +76,7 @@ export const STabView = styled(ScrollableTabView).attrs({
 
 export const SDefaultTabView = styled(ScrollableTabView).attrs({
   tabBarTextStyle: styles.defaultTabBarTextStyle,
-  tabBarInactiveTextColor: Colors.grey1,
+  tabBarInactiveTextColor: Colors.grey3,
   tabBarActiveTextColor: Colors.blue1,
   tabBarUnderlineStyle: styles.tabBarUnderline,
   renderTabBar: renderDefaultTabBar,
@@ -84,4 +84,5 @@ export const SDefaultTabView = styled(ScrollableTabView).attrs({
 
 export const TabViewItem = styled.View<{tabLabel: string}>`
   flex: 1;
+  background-color: coral;
 `;

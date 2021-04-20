@@ -1,9 +1,9 @@
 import React, {memo, useCallback} from 'react';
 import {styled} from '@/global';
-import {SAvatar, SIcon} from '@/themes/BaseStyles';
+import {SAvatar} from '@/themes/BaseStyles';
 import {Colors} from '@/themes/Colors';
 import {LineSeparator} from '@/components/LineSeparator';
-import {navigateToHistoryDetail} from '@/utils/navigation';
+import {navigateToCustomerRecordDetail} from '@/utils/navigation';
 import {useCustomerRecord} from '@/store/customerRecord';
 
 interface ItemCustomerRecordProps {
@@ -16,7 +16,7 @@ export const ItemCustomerRecord = memo(function ItemCustomerRecord({
   const customer = useCustomerRecord(id);
 
   const onPress = useCallback(() => {
-    navigateToHistoryDetail({id: id});
+    navigateToCustomerRecordDetail({id: id});
   }, [id]);
 
   if (!customer) return null;
@@ -31,8 +31,7 @@ export const ItemCustomerRecord = memo(function ItemCustomerRecord({
       />
       <SViewContent>
         <STextName>{customer?.customerName}</STextName>
-        <STextTitle>{`Ghé thăm: ${customer?.date}`}</STextTitle>
-
+        <STextTitle>{`Ghé thăm: ${customer?.date}   •   Tuổi: ${customer?.age}`}</STextTitle>
         <LineSeparator />
       </SViewContent>
     </SViewContainer>

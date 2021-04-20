@@ -1,7 +1,6 @@
-import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {memo, useCallback, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {ScreenWrapper} from '@/themes/BaseStyles';
-import {HeaderBack} from '@/components/HeaderBack';
 import {
   FlatList,
   ListRenderItem,
@@ -18,6 +17,7 @@ import {list12MonthNumber} from '@/services/MomentService';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 import {Colors} from '@/themes/Colors';
+import {LineSeparator} from '@/components/LineSeparator';
 
 const keyExtractor = (item: any, index: number) => {
   return item + index;
@@ -100,6 +100,7 @@ export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
 
   return (
     <ScreenWrapper>
+      <LineSeparator />
       <SViewSelect>
         <SelectModalBottom
           label={'Chọn tháng'}

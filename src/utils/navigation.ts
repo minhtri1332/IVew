@@ -8,6 +8,7 @@ import {TransitionPresets} from "@react-navigation/stack";
 import {HistoryDetailProps} from "@/screens/checkin/Screens/HistoryDetail";
 import {FaceDetectScreenProps} from '@/screens/FaceDetect/FaceDetect';
 import {ModalCreateCustomerProps} from "@/screens/Customer/Modal/ModalCreateCustomer";
+import {CustomerRecordDetailProps} from '@/screens/checkin/Screens/CustomerRecordDetail';
 
 export const defaultScreenOptions = TransitionPresets.SlideFromRightIOS;
 
@@ -73,6 +74,9 @@ export const navigateToCustomerScreen = createNavigate(
 );
 export const navigateToCustomerDetailScreen = createNavigate(
   'CustomerDetail'
+);
+export const navigateToCustomerRecordDetail = createNavigate<CustomerRecordDetailProps>(
+  'CustomerRecordDetail'
 );
 export const openModalCreateCustomer = createNavigate<ModalCreateCustomerProps>(
   'ModalCreateCustomer'

@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
@@ -7,7 +7,6 @@ import {
   IC_CHECKIN_EMPLOYEE,
   IC_DETECT_FACE,
   IC_HOME_CHECKIN,
-  IC_HOME_HEAD_MAP,
   IC_HOME_SCAN,
 } from '@/assets';
 import {
@@ -15,20 +14,35 @@ import {
   navigateToCustomerScreen,
   navigateToHistoryScreen,
   openFaceDetectScreen,
+  openModalCreateCustomer,
 } from '@/utils/navigation';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {requestGetBoxAi} from '@/store/boxAI/functions';
-import {RefreshControl} from 'react-native';
+import {InteractionManager, RefreshControl} from 'react-native';
 import {requestTokenDevice} from '@/store/auth/function';
 import {firebase} from '@react-native-firebase/messaging';
 import {requestGetDepartment} from '@/store/department/functions';
+import SelectTypesCreateModal from '@/screens/FaceDetect/Modal/SelectTypesCreateModal';
+import useBoolean from '@/hooks/useBoolean';
 
 export const HomeScreen = memo(function HomeScreen() {
+  const [visible, show, hide] = useBoolean(false);
   const {call, loading} = useAsyncEffect(async () => {
     await requestGetDepartment();
     await requestGetBoxAi();
     const tokenDevice = await firebase.messaging().getToken();
     await requestTokenDevice(tokenDevice);
+  }, []);
+
+  const openCreateEmployee = useCallback((value: string) => {
+    InteractionManager.runAfterInteractions(() => {
+      hide();
+    });
+    if (value == 'employee') {
+      openFaceDetectScreen({});
+    } else {
+      openModalCreateCustomer({});
+    }
   }, []);
 
   return (
@@ -48,13 +62,13 @@ export const HomeScreen = memo(function HomeScreen() {
           <ItemHome
             icon={IC_DETECT_FACE}
             label={'Thêm nhân viên'}
-            onPress={openFaceDetectScreen}
+            onPress={show}
           />
         </SViewFunction>
         <SViewFunction>
           <ItemHome
             icon={IC_CHECKIN_EMPLOYEE}
-            label={'Lịch sử nhân viên'}
+            label={'Khách hàng'}
             onPress={navigateToCustomerScreen}
             //navigateToHeadMapScreen
           />
@@ -82,6 +96,13 @@ export const HomeScreen = memo(function HomeScreen() {
         {/*  />*/}
         {/*</SViewFunction>*/}
       </Container>
+
+      <SelectTypesCreateModal
+        isVisible={visible}
+        coverScreen={false}
+        onCloseRequest={hide}
+        onPressItem={openCreateEmployee}
+      />
     </SViewContainerHome>
   );
 });

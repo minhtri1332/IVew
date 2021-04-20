@@ -27,7 +27,7 @@ export interface ParamCreateCustomer {
   image: string;
 }
 
-const paramGender = ['Nam', 'Nữ', 'Khác'];
+const paramGender = ['Nam', 'Nữ'];
 
 export interface ModalCreateCustomerProps {
   id?: string;
@@ -38,7 +38,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const customer = useCustomer(id);
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
     name: customer ? customer.name : '',
-    age: customer ? customer.age : 0,
+    age: customer ? customer.age : '',
     gender: customer ? customer.gender : '',
     image: customer ? customer.avatarPath : '',
   });

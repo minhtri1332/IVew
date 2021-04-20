@@ -8,17 +8,16 @@ import {
   Text,
   View,
 } from 'react-native';
-import {ItemHistory} from '@/screens/checkin/components/ItemHistory';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {Colors} from '@/themes/Colors';
 import {DateTimeBorder} from '@/components/ViewBorder/DateTimeBorder';
 import moment from 'moment';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
-import useAutoToastError from '@/hooks/useAutoToastError';
 import {requestFilterCustomer} from '@/store/customerRecord/functions';
 import {useCustomerRecordByQuery} from '@/store/customerRecord';
 import {ItemCustomerRecord} from '@/screens/checkin/components/ItemCustomerRecord';
+import {LineSeparator} from '@/components/LineSeparator';
 
 const keyExtractor = (item: any, index: number) => {
   return item + index;
@@ -77,9 +76,9 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
     );
   }, []);
 
-  useAutoToastError(errorFilter);
   return (
     <ScreenWrapper>
+      <LineSeparator />
       <SViewSelect>
         <DateTimeBorder
           label={'Ngày bắt đầu'}
@@ -87,7 +86,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
           keyName={'dateStart'}
           mode={'date'}
           onChangeValue={setParamCustom}
-          containerStyle={{flex: 1, marginLeft: 8}}
+          containerStyle={{flex: 1, marginRight: 8}}
           format={'YYYY-MM-DD'}
         />
         <DateTimeBorder
@@ -102,7 +101,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
       </SViewSelect>
 
       <SubmitButtonColor
-        style={{marginTop: -8}}
+        style={{marginTop: 8, marginBottom: 8}}
         title={'Tìm kiếm'}
         onPress={filterDate}
       />
@@ -122,7 +121,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
 
 const SViewSelect = styled.View`
   flex-direction: row;
-  margin: 16px;
+  margin: 8px 16px 0px;
 `;
 
 export default TabCustomerCheckin;
