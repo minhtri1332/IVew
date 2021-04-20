@@ -23,7 +23,7 @@ interface Props {
   keyName: string;
   mode: 'date' | 'time' | 'datetime';
   containerStyle?: ViewStyle;
-  onChangeValue: (value: string, keyName?: string) => void;
+  onChangeValue: (value: string, keyName: string) => void;
   dateTimePickerProps?: ReactNativeModalDateTimePickerProps;
   required?: boolean;
   format?: string;

@@ -1,7 +1,7 @@
 import React, {memo, useCallback, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from "@/themes/Colors";
-import {InputBorder} from '@/components/InputBorder';
+import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import {HeaderBack} from "@/components/HeaderBack";
 import {getBottomSpace} from 'react-native-iphone-x-helper';
 

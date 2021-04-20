@@ -1,25 +1,17 @@
-import React, {memo, useCallback, useMemo, useState} from 'react';
+import React, {memo, useMemo} from 'react';
 import {styled} from '@/global';
-import {ScreenWrapper} from '@/themes/BaseStyles';
+import {SAvatar, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
-import {SIcon} from '@/themes/BaseStyles';
-import {IC_ARROW, IC_EDIT, IC_LOGO} from '@/assets';
-import {SAvatar} from '@/themes/BaseStyles';
 import {Item, ItemContent} from '@/components/ViewItem';
-import moment from 'moment';
-import {useHistory} from '@/store/history';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {
-  requestGetCustomer,
   requestGetCustomerDetail,
   requestRemoveCustomer,
 } from '@/store/customer/functions';
 import {useCustomer} from '@/store/customer';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
-import {requestAddCustomer} from '@/store/faceDetect/function';
-import ToastService from '@/services/ToastService';
 import {goBack, openModalCreateCustomer} from '@/utils/navigation';
 import {Colors} from '@/themes/Colors';
 import {Alert} from 'react-native';

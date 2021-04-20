@@ -41,7 +41,7 @@ const Gray1Text = styled.Text`
 
 interface Props extends TextInputProps {
   containerStyle?: ViewStyle;
-  value: string;
+  value: any;
   keyName: string;
   placeHolder: string;
   multiline?: boolean;
@@ -160,7 +160,7 @@ export const InputBorder = memo(function InputBorder(props: Props) {
               multiline={multiline}
               ref={inputRef}
               style={styles.textInput}
-              value={value}
+              value={String(value)}
               onBlur={onBlur}
               onChangeText={onChange}
               onFocus={onFocus}

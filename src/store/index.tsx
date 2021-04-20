@@ -9,6 +9,14 @@ import {authReducer, setAuthStore} from '@/store/auth';
 import {boxAiReducer, setBoxAiStore} from '@/store/boxAI';
 import {departmentReducer, setDepartmentStore} from '@/store/department';
 import {customerReducer, setCustomerStore} from '@/store/customer';
+import {
+  customerRecordReducer,
+  setCustomerRecordStore,
+} from '@/store/customerRecord';
+import {
+  customerGroupReducer,
+  setCustomerGroupStore,
+} from '@/store/customerGroups';
 
 const middlewares: any[] = [];
 
@@ -25,6 +33,8 @@ const appReducer = combineReducers({
   boxAi: boxAiReducer,
   department: departmentReducer,
   customer: customerReducer,
+  customerRecord: customerRecordReducer,
+  customerGroup: customerGroupReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -58,3 +68,5 @@ setAuthStore(store);
 setBoxAiStore(store);
 setDepartmentStore(store);
 setCustomerStore(store);
+setCustomerRecordStore(store);
+setCustomerGroupStore(store);

@@ -26,11 +26,6 @@ const Center = styled.View`
   justify-content: center;
 `;
 
-const Title = styled.Text`
-  font-size: 16px;
-  color: white;
-`;
-
 const Right = styled.View`
   width: 60px;
   height: 100%;

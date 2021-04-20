@@ -13,7 +13,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 import {requestAddEmployee} from '@/store/faceDetect/function';
 import ToastService from '@/services/ToastService';
 import {ItemFace} from '@/screens/FaceDetect/ItemFace';
-import {InputBorder} from '@/components/InputBorder';
+import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import ButtonText from '@/components/button/ButtonText';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
 import {FilterBoxOption} from '@/components/Filter/types';

@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import {InputBorder} from '@/components/InputBorder';
+import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import {BG_LOGIN, IC_LOGO_APP} from '@/assets';
 import {
   navigateToForgotPasswordScreen,
@@ -74,7 +74,7 @@ export const LoginScreen = memo(function LoginScreen() {
       <SViewBox>
         <Top>
           <Logo source={IC_LOGO_APP} />
-          <TopTitle>iVIEW</TopTitle>
+          <TopTitle>CXVIEW</TopTitle>
           <TopSubTitle>{`Nền tảng camera AI`}</TopSubTitle>
         </Top>
         <Bottom>

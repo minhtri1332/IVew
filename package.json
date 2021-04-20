@@ -17,6 +17,7 @@
     "@react-native-community/hooks": "^2.6.0",
     "@react-native-community/image-editor": "^2.3.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/viewpager": "3.3.1",
     "@react-native-firebase/app": "^10.1.0",
     "@react-native-firebase/messaging": "^10.1.0",
     "@react-navigation/bottom-tabs": "^5.7.1",
@@ -26,6 +27,7 @@
     "@reduxjs/toolkit": "^1.4.0",
     "@types/axios": "^0.14.0",
     "@types/react-native-modal": "^4.1.1",
+    "@types/react-native-scrollable-tab-view": "^0.10.1",
     "@types/react-navigation": "^3.4.0",
     "axios": "^0.21.0",
     "he": "^1.2.0",
@@ -51,6 +53,7 @@
     "react-native-root-siblings": "^4.1.0",
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "^2.13.0",
+    "react-native-scrollable-tab-view": "^1.0.0",
     "react-native-share": "^5.1.0",
     "react-native-simple-toast": "git://github.com/LVBK/react-native-simple-toast.git",
     "react-native-splash-screen": "^3.2.0",
@@ -94,6 +97,9 @@
     "prettier": "^2.0.4",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "react-native-scrollable-tab-view/**/@react-native-community/viewpager": "3.3.1"
   },
   "jest": {
     "preset": "react-native"

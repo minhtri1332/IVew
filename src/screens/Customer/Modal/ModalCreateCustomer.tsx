@@ -1,9 +1,8 @@
 import React, {memo, useCallback, useMemo, useState} from 'react';
-import {ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import PickImageModalComponent from '@/screens/Customer/components/PickImageModalComponent';
 import {styled} from '@/global';
-import {InputBorder} from '@/components/InputBorder';
+import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {CheckBoxBorder} from '@/components/ViewBorder/CheckboxBorder';
 import {StyleSheet} from 'react-native';
@@ -11,15 +10,18 @@ import {FilterBoxOption} from '@/components/Filter/types';
 import {Colors} from '@/themes/Colors';
 import ButtonText from '@/components/button/ButtonText';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
-import {requestAddCustomer} from '@/store/faceDetect/function';
 import ToastService from '@/services/ToastService';
 import {goBack} from '@/utils/navigation';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
-import {HistoryDetailProps} from '@/screens/checkin/Screens/HistoryDetail';
 import {useCustomer} from '@/store/customer';
+import {
+  requestAddCustomer,
+  requestEditCustomer,
+} from '@/store/customer/functions';
+import {removeAccents} from '@/utils/string';
 
 export interface ParamCreateCustomer {
-  age: string;
+  age: number;
   name: string;
   gender: string;
   image: string;
@@ -36,7 +38,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const customer = useCustomer(id);
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
     name: customer ? customer.name : '',
-    age: customer ? String(customer.age) : '',
+    age: customer ? customer.age : 0,
     gender: customer ? customer.gender : '',
     image: customer ? customer.avatarPath : '',
   });
@@ -51,12 +53,22 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     [paramCustomer],
   );
 
+  const setParamCustomNumber = useCallback(
+    (keyName: string, value: any) => {
+      setParamCustomer({
+        ...paramCustomer,
+        [keyName]: Number(value),
+      });
+    },
+    [paramCustomer],
+  );
+
   const getOptionTarget = useMemo(() => {
     let listFilterModel: FilterBoxOption[] = [];
     paramGender.map((item, index) => {
       listFilterModel.push({
         label: item,
-        value: item,
+        value: removeAccents(item),
       });
     });
     return listFilterModel;
@@ -64,11 +76,15 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     if (id) {
-      await requestAddCustomer(paramCustomer);
+      const data = await requestEditCustomer(id, paramCustomer);
+      if (data == 'Success') {
+        ToastService.show('Sửa thành công');
+        goBack();
+      }
     } else {
       const data = await requestAddCustomer(paramCustomer);
       if (data) {
-        ToastService.show('Success!');
+        ToastService.show('Tạo thành công');
         goBack();
       }
     }
@@ -88,7 +104,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   return (
     <SViewKeyBroadAware enableOnAndroid={true}>
       <SContainer>
-        <HeaderBack title={'New Customer'} right={rightHeader} />
+        <HeaderBack title={'Khách hàng mới'} right={rightHeader} />
         <PickImageModalComponent onImageCallback={setParamCustom} />
 
         <SInputBorder
@@ -101,9 +117,10 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
         <SInputBorder
           value={paramCustomer.age}
           keyName={'age'}
-          onTextChange={setParamCustom}
+          onTextChange={setParamCustomNumber}
           placeHolder={'Tuổi'}
           required={true}
+          keyboardType={'numeric'}
         />
         <CheckBoxBorder
           placeholder={'Giới tính'}

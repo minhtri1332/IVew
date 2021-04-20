@@ -1,8 +1,8 @@
-import React, {memo, ReactElement, useCallback} from 'react';
+import React, {memo, ReactElement} from 'react';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {Colors} from '@/themes/Colors';
-import {styled, useNavigation} from '@/global';
-import {IC_BACKGROUND_HOME, IC_LOGO, IC_LOGO_APP} from '@/assets';
+import {styled} from '@/global';
+import {IC_BACKGROUND_HOME, IC_LOGO_APP} from '@/assets';
 import {TouchableOpacity} from 'react-native';
 import {navigateProfileScreen} from '@/utils/navigation';
 

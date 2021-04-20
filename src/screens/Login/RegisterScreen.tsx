@@ -2,7 +2,7 @@ import React, {memo, useCallback, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {Dimensions, KeyboardAvoidingView} from 'react-native';
-import {InputBorder} from '@/components/InputBorder';
+import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import {IC_BACK, IC_LOGO_APP, IMG_LOGO_SMALL} from '@/assets';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {goBack} from '@/utils/navigation';
