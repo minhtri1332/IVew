@@ -6,6 +6,8 @@ import {Alert} from 'react-native';
 import {navigateToLoginScreen} from '@/utils/navigation';
 import ToastService from '@/services/ToastService';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
+import {setStore} from "@/store/getStore";
+import store from "@/store";
 
 let headers = {
   Authorization: '',
@@ -50,4 +52,5 @@ export const logout = async () => {
   await LocalStorageHelper.set('password', '');
   navigateToLoginScreen();
   ToastService.show('Đăng xuất thành công');
+  setStore(store);
 };

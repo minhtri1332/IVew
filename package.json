@@ -31,7 +31,7 @@
     "@types/react-navigation": "^3.4.0",
     "axios": "^0.21.0",
     "he": "^1.2.0",
-    "mime": "^2.5.0",
+    "mime": "^2.5.2",
     "moment": "^2.29.1",
     "querystring": "^0.2.0",
     "react": "16.13.1",

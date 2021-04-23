@@ -19,6 +19,10 @@ import {
   requestEditCustomer,
 } from '@/store/customer/functions';
 import {removeAccents} from '@/utils/string';
+import PickFileActionsSheet from '@/components/PickFileActionsSheet';
+import useBoolean from '@/hooks/useBoolean';
+import {TakeCameraOptions} from '@/utils/file';
+import {FileType} from '@/types';
 
 export interface ParamCreateCustomer {
   age: number;
@@ -33,8 +37,14 @@ export interface ModalCreateCustomerProps {
   id?: string;
 }
 
+export const takeCameraOptions: TakeCameraOptions = {
+  mediaType: 'photo',
+  forceJpg: true,
+};
+
 export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const {id} = useNavigationParams<ModalCreateCustomerProps>();
+
   const customer = useCustomer(id);
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
     name: customer ? customer.name : '',
@@ -55,13 +65,17 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
 
   const setParamCustomNumber = useCallback(
     (keyName: string, value: any) => {
+      const age = Number(value.replace(/,/g, ''));
+
       setParamCustomer({
         ...paramCustomer,
-        [keyName]: Number(value),
+        [keyName]: age > 100 ? 100 : age,
       });
     },
     [paramCustomer],
   );
+
+
 
   const getOptionTarget = useMemo(() => {
     let listFilterModel: FilterBoxOption[] = [];
@@ -133,6 +147,8 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           flexDirection={true}
         />
       </SContainer>
+
+
     </SViewKeyBroadAware>
   );
 });

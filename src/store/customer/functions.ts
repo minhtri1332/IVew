@@ -6,7 +6,7 @@ import {ParamCreateCustomer} from '@/screens/Customer/Modal/ModalCreateCustomer'
 
 export const requestGetCustomer = async () => {
   const {data} = await Fetch.get<{data: any}>(
-    'https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/list-customer',
+    'https://go.iview.vn/api/v1/customer/list-customer',
     {
       params: {
         page: 1,
@@ -25,7 +25,7 @@ export const requestGetCustomer = async () => {
 
 export const requestGetCustomerDetail = async (id: string) => {
   const {data} = await Fetch.get<{data: any}>(
-    `https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/customer/${id}`,
+    `https://go.iview.vn/api/v1/customer/customer/${id}`,
     {
       params: {},
     },
@@ -41,7 +41,7 @@ export const requestEditCustomer = async (
   params?: ParamCreateCustomer,
 ) => {
   const {data} = await Fetch.put(
-    `https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/customer/${id}`,
+    `https://go.iview.vn/api/v1/customer/customer/${id}`,
     params,
   );
   if (data.message == 'Success') {
@@ -51,7 +51,7 @@ export const requestEditCustomer = async (
 };
 export const requestRemoveCustomer = async (idRemove: string) => {
   const {data} = await Fetch.delete<{data: any}>(
-    `https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/customer/${idRemove}`,
+    `https://go.iview.vn/api/v1/customer/customer/${idRemove}`,
   );
 
   const list = getStore()
@@ -64,7 +64,7 @@ export const requestRemoveCustomer = async (idRemove: string) => {
 
 export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
   const {data} = await Fetch.post(
-    'https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/customer',
+    'https://go.iview.vn/api/v1/customer/customer',
     params,
   );
 

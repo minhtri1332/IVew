@@ -5,6 +5,10 @@ import {Colors} from '@/themes/Colors';
 import File from '@/utils/file';
 import RNFetchBlob from 'rn-fetch-blob';
 import {IC_SINGLE_IMAGE} from '@/assets';
+import PickFileActionsSheet from '@/components/PickFileActionsSheet';
+import {takeCameraOptions} from '@/screens/Customer/Modal/ModalCreateCustomer';
+import useBoolean from '@/hooks/useBoolean';
+import {FileType} from '@/types';
 
 interface ImageParams {
   onImageCallback: (keyName: string, value: any) => void;
@@ -14,6 +18,7 @@ export const PickImageModalComponent = memo(function PickImageModalComponent({
   onImageCallback,
 }: ImageParams) {
   const [avatar, setAvatar] = useState('');
+  const [isFilePickerVisible, showFilePicker, hideFilePicker] = useBoolean();
   const pickAvatar = useCallback(async () => {
     const file = await File.pickImage({multiple: false} || {});
 
@@ -23,9 +28,17 @@ export const PickImageModalComponent = memo(function PickImageModalComponent({
     });
   }, [onImageCallback]);
 
+  const fileCallback = useCallback((files: FileType[]) => {
+    RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
+      onImageCallback('image', `data:image/jpeg;base64,${data}`);
+      setAvatar(files[0].uri);
+    });
+    hideFilePicker();
+  }, []);
+
   return (
     <SViewContainer>
-      <SViewAvatar onPress={pickAvatar}>
+      <SViewAvatar onPress={showFilePicker}>
         <SImage
           source={avatar === '' ? IC_SINGLE_IMAGE : {uri: avatar}}
           resizeMode={'cover'}
@@ -33,6 +46,16 @@ export const PickImageModalComponent = memo(function PickImageModalComponent({
         />
         {avatar === '' && <SText>Thêm ảnh đại diện</SText>}
       </SViewAvatar>
+
+      <PickFileActionsSheet
+        isVisible={isFilePickerVisible}
+        onCloseRequest={hideFilePicker}
+        onFilePicked={fileCallback}
+        pickFileOptions={{multiple: false}}
+        pickImageOptions={{multiple: false}}
+        takeCameraOptions={takeCameraOptions}
+        includeTakeCamera={true}
+      />
     </SViewContainer>
   );
 });

@@ -61,7 +61,7 @@ export const HomeScreen = memo(function HomeScreen() {
 
           <ItemHome
             icon={IC_DETECT_FACE}
-            label={'Thêm nhân viên'}
+            label={'Thêm khuôn mặt'}
             onPress={show}
           />
         </SViewFunction>
