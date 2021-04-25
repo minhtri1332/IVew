@@ -8,6 +8,5 @@ export const requestMessageCheckin = async (boxID: string) => {
             boxID: boxID
         }
     });
-    console.log("dataNoti", data)
     return data
 };

@@ -12,8 +12,10 @@ import {logout} from '@/utils/fetch';
 import {Colors} from '@/themes/Colors';
 import DeviceInfo from 'react-native-device-info';
 import FastImage from 'react-native-fast-image';
+import {useDispatch} from 'react-redux';
 
 export const ProfileScreen = memo(function ProfileScreen() {
+  const dispatch = useDispatch();
   const [user, setUser] = useState({name: '', email: '', phoneNumber: ''});
   const buildVersion = DeviceInfo.getVersion();
   const {call, loading} = useAsyncEffect(async () => {
@@ -54,7 +56,7 @@ export const ProfileScreen = memo(function ProfileScreen() {
       </Item>
 
       <ClickableItem
-        onPress={logout}
+        onPress={() => logout(dispatch)}
         labelStyle={{color: Colors.red1}}
         iconStyle={{tintColor: Colors.red1}}
         icon={IC_LOGOUT}

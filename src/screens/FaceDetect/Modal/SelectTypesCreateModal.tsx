@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {memo, PropsWithChildren, useCallback} from 'react';
+import {memo, PropsWithChildren} from 'react';
 import Modal, {ModalProps} from 'react-native-modal';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {IC_CHECKIN_EMPLOYEE} from '@/assets';
-import {
-  openFaceDetectScreen,
-  openModalCreateCustomer,
-} from '@/utils/navigation';
-import {InteractionManager} from 'react-native';
-
 interface Props extends Partial<ModalProps> {
   isVisible: boolean;
   onPressItem: (value: string) => void;

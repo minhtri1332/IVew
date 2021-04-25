@@ -5,7 +5,7 @@ import {RawDepartment} from '@/store/department/types';
 
 export const requestGetDepartment = async () => {
   const {data} = await Fetch.get<{data: any}>(
-    'https://go.iview.vn/api/v1/department/show-department',
+    'https://k8s.backend.dev.staging.cxview.ai/api/v1/department/show-department',
     {
       params: {
         page: 1,
@@ -13,11 +13,22 @@ export const requestGetDepartment = async () => {
       },
     },
   );
-  // console.log("asds",data.data.listDepartment)
+
   batch(() => {
     syncDepartment(data.data.listDepartment);
     setDepartmentQueries({
       all: data.data.listDepartment.map((item: RawDepartment) => item.id),
     });
   });
+};
+export const requestCreateDepartment = async (name:string) => {
+  const {data} = await Fetch.post(
+    'https://k8s.backend.dev.staging.cxview.ai/api/v1/department/create-department',
+    {name: name},
+  );
+
+  if (data.message == 'Success') {
+   await requestGetDepartment()
+  }
+return data.message
 };

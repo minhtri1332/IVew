@@ -9,7 +9,7 @@ import {CustomerRecordProps} from '@/screens/checkin/Tabs/TabCustomerCheckin';
 
 export const requestFilterCustomer = async (params: CustomerRecordProps) => {
   const {data} = await Fetch.get<{data: any}>(
-    'https://go.iview.vn/api/v1/customer/get-customer-record',
+    'https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/get-customer-record',
     {
       params: params,
     },

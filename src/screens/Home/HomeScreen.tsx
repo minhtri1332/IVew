@@ -109,11 +109,11 @@ export const HomeScreen = memo(function HomeScreen() {
 
 const SViewContainerHome = styled.View`
   flex: 1;
+  height: 100%;
   background-color: ${Colors.backgroundHeader};
 `;
 
 const Container = styled.ScrollView`
-  flex: 1;
   background-color: ${Colors.white};
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;

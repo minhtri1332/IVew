@@ -39,7 +39,7 @@ export const createReplace = <T extends object>(screenName: string) => (
 export const goBack = () => navigation().goBack();
 
 
-export const replaceWithMainScreen = createNavigate(
+export const replaceWithMainScreen = createReplace(
   'HomeScreen'
 );
 
@@ -78,8 +78,11 @@ export const navigateToCustomerDetailScreen = createNavigate(
 export const navigateToCustomerRecordDetail = createNavigate<CustomerRecordDetailProps>(
   'CustomerRecordDetail'
 );
-export const openModalCreateCustomer = createNavigate<ModalCreateCustomerProps>(
+export const openModalCreateCustomer = createPush<ModalCreateCustomerProps>(
   'ModalCreateCustomer'
+);
+export const openModalCreateDepartment = createPush(
+  'CreateDepartmentModel'
 );
 export const openFaceDetectScreen = createNavigate<FaceDetectScreenProps>(
   'FaceDetectScreen'

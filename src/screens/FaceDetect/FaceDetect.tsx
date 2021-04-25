@@ -1,11 +1,22 @@
 import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
-import {ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, View,} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {HeaderBack} from '@/components/HeaderBack';
 import {styled} from '@/global';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
 import ImageEditor from '@react-native-community/image-editor';
-import {IC_CAMERA_EDIT, IC_DETECT_FACE,} from '@/assets';
-import {goBack, navigateToFaceDetectScreen,} from '@/utils/navigation';
+import {IC_CAMERA_EDIT, IC_DETECT_FACE} from '@/assets';
+import {
+  goBack,
+  navigateToFaceDetectScreen,
+  openModalCreateDepartment,
+} from '@/utils/navigation';
 import {Colors} from '@/themes/Colors';
 import useBoolean from '@/hooks/useBoolean';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
@@ -20,6 +31,7 @@ import {FilterBoxOption} from '@/components/Filter/types';
 import {getDepartment, useDepartmentByQuery} from '@/store/department';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 import useAutoToastError from '@/hooks/useAutoToastError';
+import SubmitButtonColor from '@/components/button/ButtonSubmit';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
@@ -67,7 +79,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     image: '',
   }));
 
-  console.log(paramEmployee);
   const [listBoxAI, setListBoxAI] = useState<Set<string>>(() => {
     return new Set([]);
   });
@@ -191,10 +202,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     return listFilterModel;
   }, [boxAIs]);
 
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
   useAutoToastError(error);
 
   return (
@@ -268,6 +275,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           placeholder={'Lựa chọn'}
           selectedValue={paramEmployee.department}
           onSelectOption={setParamCustom}
+          onPressRight={openModalCreateDepartment}
         />
         <SSelectModalBottom
           label={'Cơ sở'}
@@ -276,6 +284,11 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           placeholder={'Lựa chọn'}
           selectedValue={String(paramEmployee.listBoxAI)}
           onSelectOption={setParamBoxAi}
+        />
+
+        <SubmitButtonColor
+          title={'tao'}
+          onPress={() => openModalCreateDepartment()}
         />
       </ScrollView>
     </View>

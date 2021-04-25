@@ -8,6 +8,7 @@ import ToastService from '@/services/ToastService';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
 import {setStore} from "@/store/getStore";
 import store from "@/store";
+import {createStandardAction} from "typesafe-actions/dist/deprecated/create-standard-action";
 
 let headers = {
   Authorization: '',
@@ -21,7 +22,6 @@ Fetch.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log('error', error.response);
     if (error.response.status === 500) {
       ToastService.showError(error.response.data.message, true, true, '');
       return error.response.data;
@@ -47,10 +47,10 @@ export const updateFetchToken = (_token: string) => {
   Fetch.defaults.headers['Authorization'] = `${_token}`;
 };
 
-export const logout = async () => {
+export const logout = async (dispatch: any) => {
   Fetch.defaults.headers['Authorization'] = '';
   await LocalStorageHelper.set('password', '');
+  dispatch({type: "RESET_STORE_DATA"})
   navigateToLoginScreen();
   ToastService.show('Đăng xuất thành công');
-  setStore(store);
 };

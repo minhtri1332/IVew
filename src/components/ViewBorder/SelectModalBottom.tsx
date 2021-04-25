@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  InteractionManager,
 } from 'react-native';
 import {
   BottomMenuContainer,
@@ -54,6 +55,7 @@ export const SelectModalBottom = memo(function SelectModalBottom({
   father,
   hideBottom,
   optionsChildren,
+  onPressRight,
 }: Props) {
   const [visible, setVisible] = useState(false);
 
@@ -84,6 +86,13 @@ export const SelectModalBottom = memo(function SelectModalBottom({
   const onClearSelect = useCallback(() => {
     onSelectOption(inputName, '');
   }, [inputName, onSelectOption]);
+
+  const onPressActionRight = useCallback(() => {
+    hideMenu();
+    InteractionManager.runAfterInteractions(() => {
+      onPressRight && onPressRight();
+    });
+  }, [onPressRight]);
 
   const showMenu = useCallback(() => {
     setVisible(true);
@@ -125,7 +134,11 @@ export const SelectModalBottom = memo(function SelectModalBottom({
         onClose={hideMenu}
         propagateSwipe={true}>
         <BottomMenuContainer>
-          <BottomMenuHeader title={label} onClose={hideMenu} />
+          <BottomMenuHeader
+            title={label}
+            onClose={hideMenu}
+            onPressRight={onPressActionRight}
+          />
           <ScrollView style={styles.maxHeightScroll}>
             {options.map((option, index) => {
               const selected = option.value === selectedValue;

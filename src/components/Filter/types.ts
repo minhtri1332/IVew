@@ -27,4 +27,5 @@ export interface FilterModalBottomProps {
   dropDownStyle?: ImageStyle;
   hideDivider?: boolean;
   isButtonClearValue?:boolean;
+  onPressRight?: ()=>void;
 }

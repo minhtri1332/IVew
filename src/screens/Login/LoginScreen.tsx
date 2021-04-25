@@ -19,8 +19,6 @@ import {requestLogin} from '@/store/auth/function';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
 import DeviceInfo from 'react-native-device-info';
 
-const {width: DWidth} = Dimensions.get('window');
-
 const SInputBorder = styled(InputBorder).attrs({
   containerStyle: {
     marginTop: 12,

@@ -75,8 +75,6 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     [paramCustomer],
   );
 
-
-
   const getOptionTarget = useMemo(() => {
     let listFilterModel: FilterBoxOption[] = [];
     paramGender.map((item, index) => {
@@ -147,8 +145,6 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           flexDirection={true}
         />
       </SContainer>
-
-
     </SViewKeyBroadAware>
   );
 });

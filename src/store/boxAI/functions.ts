@@ -5,7 +5,7 @@ import {RawBoxAi} from '@/store/boxAI/types';
 
 export const requestGetBoxAi = async () => {
   const {data} = await Fetch.get<{data: any}>(
-    'https://go.iview.vn/api/v1/boxAI/list-boxAI',
+    'https://k8s.backend.dev.staging.cxview.ai/api/v1/boxAI/list-boxAI',
     {
       params: {
         page: 1,
@@ -13,7 +13,6 @@ export const requestGetBoxAi = async () => {
       },
     },
   );
-  console.log(data);
   batch(() => {
     syncBoxAi(data.data.listBoxAI);
     setBoxAiQueries({all: data.data.listBoxAI.map((item: any) => item.id)});

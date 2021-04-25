@@ -14,7 +14,6 @@ export const requestGetHistoryList = async (params: HistoryProps) => {
       },
     },
   );
-  console.log(data);
   const param = params?.month + params?.boxID;
 
   batch(() => {
