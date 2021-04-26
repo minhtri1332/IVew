@@ -6,10 +6,11 @@ import {
 } from '@/store/customerRecord/index';
 import {RawCustomerRecord} from '@/store/customerRecord/types';
 import {CustomerRecordProps} from '@/screens/checkin/Tabs/TabCustomerCheckin';
+import {urlProduct} from '@/store/types';
 
 export const requestFilterCustomer = async (params: CustomerRecordProps) => {
   const {data} = await Fetch.get<{data: any}>(
-    'https://k8s.backend.dev.staging.cxview.ai/api/v1/customer/get-customer-record',
+    `${urlProduct}/api/v1/customer/get-customer-record`,
     {
       params: params,
     },

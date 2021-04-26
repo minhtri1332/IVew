@@ -1,12 +1,16 @@
-import {Fetch} from "../../utils/fetch";
-
+import {Fetch} from '../../utils/fetch';
+import {urlProduct} from '@/store/types';
 
 export const requestMessageCheckin = async (boxID: string) => {
-    const {data} = await Fetch.get<{data: any}>('https://go.iview.vn/api/v1/top-record', {
-        params: {
-            device: "mobile",
-            boxID: boxID
-        }
-    });
-    return data
+  const {data} = await Fetch.get<{data: any}>(
+    `${urlProduct}/api/v1/top-record`,
+    {
+      params: {
+        device: 'mobile',
+        boxID: boxID,
+      },
+    },
+  );
+
+  return data;
 };
