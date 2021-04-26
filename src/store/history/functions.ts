@@ -3,10 +3,11 @@ import {setHistoryQueries, syncHistory} from '@/store/history/index';
 import {Fetch} from '@/utils/fetch';
 import {RawHistory} from '@/store/history/types';
 import {HistoryProps} from '@/screens/checkin/Tabs/TabEmployeeCheckin';
+import {urlProduct} from '@/store/types';
 
 export const requestGetHistoryList = async (params: HistoryProps) => {
   const {data} = await Fetch.get<{data: any}>(
-    'https://go.iview.vn/api/v1/attendence/list-record-month',
+    `${urlProduct}/api/v1/attendence/list-record-month`,
     {
       params: {
         boxID: params?.boxID,
