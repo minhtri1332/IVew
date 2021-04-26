@@ -94,7 +94,9 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
         goBack();
       }
     } else {
+      console.log('ok', paramCustomer);
       const data = await requestAddCustomer(paramCustomer);
+
       if (data) {
         ToastService.show('Tạo thành công');
         goBack();

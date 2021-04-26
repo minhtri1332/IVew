@@ -98,9 +98,9 @@ const SRow = styled.TouchableOpacity`
 `;
 
 const SIcon = styled.Image`
-  line-height: 44px;
-  font-size: 18px;
-  width: 32px;
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
   color: ${Colors.grey1};
 `;
 

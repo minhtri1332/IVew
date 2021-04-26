@@ -2,14 +2,14 @@ import React, {memo, useCallback} from 'react';
 import {PickFileContentProps} from './types';
 import {TakePhoto} from './TakePhoto';
 import Modal from 'react-native-modal';
-import {Dimensions, PermissionsAndroid, Platform} from 'react-native';
+import {Dimensions, PermissionsAndroid, Platform, View} from 'react-native';
 import {styled} from '@/global';
 import useBoolean from '@/hooks/useBoolean';
 import File from '@/components/PickFileActionsSheet/File';
 import {ActionSheetRow} from '@/components/PickFileActionsSheet/ActionSheet';
 import {useDeviceOrientation} from '@react-native-community/hooks';
 import {getBottomSpace, getStatusBarHeight} from 'react-native-iphone-x-helper';
-import {IC_CHECK, IC_CLOSE, IC_EDIT} from '@/assets';
+import {IC_CAMERA_PICK, IC_GALLERY} from '@/assets';
 
 const dims = Dimensions.get('screen');
 let screenWidth = dims.width;
@@ -87,22 +87,24 @@ const PickFileContent = memo(
                 ? onPressTakeCameraAndroid
                 : onPressTakeCamera
             }
-            iconName={IC_EDIT}
-            text={'chụp ảnh'}
+            iconName={IC_CAMERA_PICK}
+            text={'Chụp ảnh'}
           />
         )}
         <ActionSheetRow
           onPress={onSelectFromGallery}
-          iconName={IC_EDIT}
+          iconName={IC_GALLERY}
           text={'Chọn ảnh'}
         />
-        {!!includePickFile && (
-          <ActionSheetRow
-            onPress={onPickFile}
-            iconName={IC_EDIT}
-            text={'Chọn file'}
-          />
-        )}
+
+        <View style={{height: 40}} />
+        {/*{!!includePickFile && (*/}
+        {/*  <ActionSheetRow*/}
+        {/*    onPress={onPickFile}*/}
+        {/*    iconName={IC_EDIT}*/}
+        {/*    text={'Chọn file'}*/}
+        {/*  />*/}
+        {/*)}*/}
         {Platform.OS === 'android' && (
           <SWrapper
             isVisible={visible}

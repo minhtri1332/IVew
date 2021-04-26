@@ -285,11 +285,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           selectedValue={String(paramEmployee.listBoxAI)}
           onSelectOption={setParamBoxAi}
         />
-
-        <SubmitButtonColor
-          title={'tao'}
-          onPress={() => openModalCreateDepartment()}
-        />
       </ScrollView>
     </View>
   );

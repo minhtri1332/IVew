@@ -68,9 +68,11 @@ export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
     `${urlProduct}/api/v1/customer/customer`,
     params,
   );
-
+  console.log(data);
   if (data.message == 'Success') {
     requestGetCustomer().then();
+  } else {
+    console.log(data.message);
   }
   return data.message;
 };
