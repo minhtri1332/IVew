@@ -3,10 +3,13 @@ import {ParamEmployee} from '@/screens/FaceDetect/FaceDetect';
 import {urlProduct} from '@/store/types';
 
 export const requestAddEmployee = async (params?: ParamEmployee) => {
+  console.log(params)
   const {data} = await Fetch.post<{data: any}>(
     `${urlProduct}/api/v1/employee/add-employee`,
     params,
   );
+
+
   return data;
 };
 

@@ -50,19 +50,28 @@ const PickFileContent = memo(
     takeCameraOptions,
     includeTakeCamera = true,
     includePickFile = true,
+    onPressDetect,
   }: PickFileContentProps) => {
     const [visible, setVisibleTrue, setVisibleFalse] = useBoolean(false);
 
     const onPressTakeCameraAndroid = useCallback(async () => {
-      await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
-      await requestWriteStoragePermission();
-      setVisibleTrue();
-    }, []);
+      if (!onPressDetect) {
+        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+        await requestWriteStoragePermission();
+        setVisibleTrue();
+      } else {
+        onPressDetect();
+      }
+    }, [onPressDetect]);
 
     const onPressTakeCamera = useCallback(async () => {
-      const files = await File.takeCamera(takeCameraOptions || {});
-      onFilePicked(files);
-    }, [onFilePicked]);
+      if (!onPressDetect) {
+        const files = await File.takeCamera(takeCameraOptions || {});
+        onFilePicked(files);
+      } else {
+        onPressDetect();
+      }
+    }, [onFilePicked, onPressDetect]);
 
     const onSelectFromGallery = useCallback(async () => {
       const files = await File.pickImage(pickImageOptions || {});

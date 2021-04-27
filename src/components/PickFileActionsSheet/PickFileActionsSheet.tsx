@@ -17,6 +17,7 @@ const PickFileActionsSheet = memo(
     title,
     includeTakeCamera = true,
     includePickFile = true,
+    onPressDetect,
   }: PickFileActionsSheetProps) => {
     return (
       <ActionSheetWrapper isVisible={isVisible} onCloseRequest={onCloseRequest}>
@@ -32,6 +33,7 @@ const PickFileActionsSheet = memo(
           takeCameraOptions={takeCameraOptions}
           includeTakeCamera={includeTakeCamera}
           includePickFile={includePickFile}
+          onPressDetect={onPressDetect}
         />
       </ActionSheetWrapper>
     );
