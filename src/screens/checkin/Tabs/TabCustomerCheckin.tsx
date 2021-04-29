@@ -23,14 +23,14 @@ const keyExtractor = (item: any, index: number) => {
   return item + index;
 };
 export interface CustomerRecordProps {
-  dateStart: string;
-  dateEnd: string;
+  dateStart: number;
+  dateEnd: number;
 }
 export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const data = useCustomerRecordByQuery('all');
   const [params, setParams] = useState<CustomerRecordProps>({
-    dateStart: moment().format('YYYY-MM-DD'),
-    dateEnd: moment().format('YYYY-MM-DD'),
+    dateStart: moment().unix(),
+    dateEnd: moment().unix(),
   });
 
   const setParamCustom = useCallback(

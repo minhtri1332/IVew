@@ -64,17 +64,17 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
   const [isModalVisible, showModal, hideModal] = useBoolean();
 
   const onChange = useCallback(
-    (value: string) => {
+    (value: any) => {
       onChangeValue(value, keyName);
     },
-    [onChangeValue],
+    [onChangeValue, keyName],
   );
 
   const onConfirm = useCallback(
     (date: Date) => {
       hideModal();
       requestAnimationFrame(() => {
-        onChange?.(moment(date).format(format || formatByMode[mode]));
+        onChange?.(moment(date).unix());
       });
     },
     [mode, onChange, hideModal, format],
@@ -102,7 +102,9 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
             </STextGrey>
             {value ? (
               <View>
-                <STextGrey1 style={styles.contentText}>{value}</STextGrey1>
+                <STextGrey1 style={styles.contentText}>
+                  {moment(value, 'X').format(format)}
+                </STextGrey1>
               </View>
             ) : (
               <STextGrey style={styles.contentText}>{placeholder}</STextGrey>

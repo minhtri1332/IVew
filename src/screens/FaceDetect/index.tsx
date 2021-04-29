@@ -108,7 +108,6 @@ export default class CameraScreen extends React.Component {
         fixOrientation: this.state.type === 'front' ? true : false,
         mirrorImage: this.state.type === 'front' ? true : false,
       });
-      console.log('data', data);
       this.setState({
         loadingTakePicture: false,
       });

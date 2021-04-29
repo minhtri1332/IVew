@@ -167,10 +167,20 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   }, []);
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
-    const data = await requestAddEmployee(paramEmployee);
-    if (data) {
-      ToastService.show('Success!');
-      goBack();
+    let result = true;
+    console.log(paramEmployee);
+    Object.values(paramEmployee).map((item) => {
+      if (item == '' || item == []) {
+        ToastService.show('Bạn cần điền đầy đủ thông tin');
+        result = false;
+      }
+    });
+    if (result) {
+      const data = await requestAddEmployee(paramEmployee);
+      if (data) {
+        ToastService.show('Success!');
+        goBack();
+      }
     }
   }, [paramEmployee]);
 
@@ -234,15 +244,25 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     setListFaceDetect(() => {
       return new Set([]);
     });
-    RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
-      setParamCustom('image', data);
-      setListFaceDetect((set) => {
-        const newSet = new Set(set);
-        newSet.add(files[0].uri);
-        return newSet;
+
+    ImageResizer.createResizedImage(files[0].uri, 400, 400, 'JPEG', 10, 0)
+      .then((response) => {
+        RNFetchBlob.fs.readFile(response.uri, 'base64').then((data) => {
+          setParamCustom('image', data);
+          setParamCustom('avatar', data);
+          setListFaceDetect((set) => {
+            const newSet = new Set(set);
+            newSet.add(response.uri);
+            return newSet;
+          });
+          setImageShow(response.uri);
+        });
+      })
+      .catch((err) => {
+        // Oops, something went wrong. Check that the filename is correct and
+        // inspect err to get more details.
       });
-      setImageShow(files[0].uri);
-    });
+
     hideFilePicker();
   }, []);
 
@@ -320,15 +340,8 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           selectedValue={paramEmployee.department}
           onSelectOption={setParamCustom}
           onPressRight={openModalCreateDepartment}
+          required={true}
         />
-        {/*<SSelectModalBottom*/}
-        {/*  label={'Cơ sở'}*/}
-        {/*  options={getListBoxAI}*/}
-        {/*  inputName={'listBoxAI'}*/}
-        {/*  placeholder={'Lựa chọn'}*/}
-        {/*  selectedValue={String(paramEmployee.listBoxAI)}*/}
-        {/*  onSelectOption={setParamBoxAi}*/}
-        {/*/>*/}
         <SCheckBoxBorder
           placeholder={'Lựa chọn'}
           label={'Cơ sở'}
@@ -337,6 +350,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           inputName={'listBoxAI'}
           onSelectOption={setParamBoxAi}
           multiple={true}
+          required={true}
         />
       </ScrollView>
 
