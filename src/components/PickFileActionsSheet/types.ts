@@ -16,5 +16,6 @@ export interface PickFileContentProps {
     pickImageOptions?: PickImageOptions,
     pickFileOptions?: PickFileOptions,
     includeTakeCamera?: boolean,
-    includePickFile?: boolean
+    includePickFile?: boolean,
+    onPressDetect?:()=>void
 }

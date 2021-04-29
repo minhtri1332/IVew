@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Dimensions,
   Image,
+  InteractionManager,
   ScrollView,
   StyleSheet,
   View,
@@ -31,9 +32,11 @@ import {FilterBoxOption} from '@/components/Filter/types';
 import {getDepartment, useDepartmentByQuery} from '@/store/department';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 import useAutoToastError from '@/hooks/useAutoToastError';
-import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import ImageResizer from 'react-native-image-resizer';
 import {CheckBoxBorder} from '@/components/ViewBorder/CheckboxBorder';
+
+import PickFileActionsSheet from '@/components/PickFileActionsSheet';
+import {FileType} from '@/types';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
@@ -65,6 +68,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   } = useNavigationParams<FaceDetectScreenProps>();
   const [imageShow, setImageShow] = useState(imageUri);
   const [myFace, setMyFace] = useState('');
+  const [isFilePickerVisible, showFilePicker, hideFilePicker] = useBoolean();
   const departments = useDepartmentByQuery('all');
   const boxAIs = useBoxAiByQuery('all');
   const [isLoading, loadingTrue, loadingFalse] = useBoolean();
@@ -75,7 +79,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   const [paramEmployee, setParamEmployee] = useState<ParamEmployee>(() => ({
     name: '',
     position: '',
-    listBoxAI: [],
+    listBoxAI: [''],
     department: '',
     avatar: '',
     image: '',
@@ -162,10 +166,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       });
   }, []);
 
-  const takePicture = useCallback(() => {
-    navigateToFaceDetectScreen();
-  }, []);
-
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     const data = await requestAddEmployee(paramEmployee);
     if (data) {
@@ -218,6 +218,33 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     });
     return listFilterModel;
   }, [boxAIs]);
+
+  const navigateToCamera = useCallback(() => {
+    hideFilePicker();
+    InteractionManager.runAfterInteractions(() => {
+      navigateToFaceDetectScreen();
+    });
+  }, []);
+
+  const takePicture = useCallback(() => {
+    showFilePicker();
+  }, []);
+
+  const fileCallback = useCallback((files: FileType[]) => {
+    setListFaceDetect(() => {
+      return new Set([]);
+    });
+    RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
+      setParamCustom('image', data);
+      setListFaceDetect((set) => {
+        const newSet = new Set(set);
+        newSet.add(files[0].uri);
+        return newSet;
+      });
+      setImageShow(files[0].uri);
+    });
+    hideFilePicker();
+  }, []);
 
   useAutoToastError(error);
 
@@ -312,6 +339,16 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           multiple={true}
         />
       </ScrollView>
+
+      <PickFileActionsSheet
+        isVisible={isFilePickerVisible}
+        onCloseRequest={hideFilePicker}
+        onFilePicked={fileCallback}
+        pickFileOptions={{multiple: false}}
+        pickImageOptions={{multiple: false}}
+        onPressDetect={navigateToCamera}
+        includeTakeCamera={true}
+      />
     </View>
   );
 });
