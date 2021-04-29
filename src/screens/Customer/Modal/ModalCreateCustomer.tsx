@@ -10,7 +10,6 @@ import {FilterBoxOption} from '@/components/Filter/types';
 import {Colors} from '@/themes/Colors';
 import ButtonText from '@/components/button/ButtonText';
 import {useAsyncFn} from '@/hooks/useAsyncFn';
-import ToastService from '@/services/ToastService';
 import {goBack} from '@/utils/navigation';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
 import {useCustomer} from '@/store/customer';
@@ -19,16 +18,12 @@ import {
   requestEditCustomer,
 } from '@/store/customer/functions';
 import {removeAccents} from '@/utils/string';
-import PickFileActionsSheet from '@/components/PickFileActionsSheet';
-import useBoolean from '@/hooks/useBoolean';
 import {TakeCameraOptions} from '@/utils/file';
-import {FileType} from '@/types';
 
 export interface ParamCreateCustomer {
   age: number;
   name: string;
   gender: string;
-  image: string;
 }
 
 const paramGender = ['Nam', 'Nữ'];
@@ -47,10 +42,10 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
 
   const customer = useCustomer(id);
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
+    id: customer ? customer.id : '',
     name: customer ? customer.name : '',
     age: customer ? customer.age : '',
     gender: customer ? customer.gender : '',
-    image: customer ? customer.avatarPath : '',
   });
 
   const setParamCustom = useCallback(
@@ -88,20 +83,12 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     if (id) {
-      const data = await requestEditCustomer(id, paramCustomer);
-      if (data == 'Success') {
-        ToastService.show('Sửa thành công');
-        goBack();
-      }
+      await requestEditCustomer(id, paramCustomer);
     } else {
-      console.log('ok', paramCustomer);
-      const data = await requestAddCustomer(paramCustomer);
-
-      if (data) {
-        ToastService.show('Tạo thành công');
-        goBack();
-      }
+      await requestAddCustomer(paramCustomer);
     }
+
+    goBack();
   }, [paramCustomer, id]);
 
   const rightHeader = useMemo(() => {
@@ -118,8 +105,12 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   return (
     <SViewKeyBroadAware enableOnAndroid={true}>
       <SContainer>
-        <HeaderBack title={'Khách hàng mới'} right={rightHeader} />
-        <PickImageModalComponent onImageCallback={setParamCustom} />
+        <HeaderBack
+          title={id ? 'Sửa khách hàng' : 'Khách hàng mới'}
+          right={rightHeader}
+        />
+
+        {!id && <PickImageModalComponent onImageCallback={setParamCustom} />}
 
         <SInputBorder
           value={paramCustomer.name}

@@ -19,11 +19,9 @@ export const CreateDepartmentModel = memo(function CreateDepartmentModel() {
   const [name, setName] = useState('');
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
-    const message = await requestCreateDepartment(name);
-    if (message === 'Success') {
-      goBack();
-    }
-  }, [name]);
+    await requestCreateDepartment(name);
+    goBack();
+  }, []);
 
   return (
     <SContainer>
@@ -39,7 +37,11 @@ export const CreateDepartmentModel = memo(function CreateDepartmentModel() {
         isFocus={true}
       />
 
-      <SubmitButtonColor title={'Lưu'} onPress={requestData} />
+      <SubmitButtonColor
+        loading={loading}
+        title={'Lưu'}
+        onPress={requestData}
+      />
     </SContainer>
   );
 });

@@ -4,6 +4,7 @@ import {setCustomerQueries, syncCustomer} from '@/store/customer/index';
 import getStore from '@/store/getStore';
 import {ParamCreateCustomer} from '@/screens/Customer/Modal/ModalCreateCustomer';
 import {urlProduct} from '@/store/types';
+import store from '@/store';
 
 export const requestGetCustomer = async () => {
   const {data} = await Fetch.get<{data: any}>(
@@ -15,13 +16,14 @@ export const requestGetCustomer = async () => {
       },
     },
   );
-
-  batch(() => {
-    syncCustomer(data.data.listCustomer);
-    setCustomerQueries({
-      all: data.data.listCustomer.map((item: any) => item.id),
+  if (data.data.listCustomer) {
+    batch(() => {
+      syncCustomer(data.data.listCustomer);
+      setCustomerQueries({
+        all: data.data.listCustomer.map((item: any) => item.id),
+      });
     });
-  });
+  }
 };
 
 export const requestGetCustomerDetail = async (id: string) => {
@@ -45,22 +47,24 @@ export const requestEditCustomer = async (
     `${urlProduct}/api/v1/customer/customer/${id}`,
     params,
   );
-  if (data.message == 'Success') {
-    requestGetCustomerDetail(id).then();
-  }
-  return data.message;
+
+  batch(() => {
+    syncCustomer([data.data.customer]);
+  });
+  return data.data.customer;
 };
 export const requestRemoveCustomer = async (idRemove: string) => {
   const {data} = await Fetch.delete<{data: any}>(
     `${urlProduct}/api/v1/customer/customer/${idRemove}`,
   );
-
-  const list = getStore()
-    .getState()
-    .customer.query['all'].filter((id) => id !== idRemove);
-  batch(() => {
-    setCustomerQueries({all: list});
-  });
+  if (data) {
+    const list = getStore()
+      .getState()
+      .customer.query['all'].filter((id) => id !== idRemove);
+    batch(() => {
+      setCustomerQueries({all: list});
+    });
+  }
 };
 
 export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
@@ -68,8 +72,17 @@ export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
     `${urlProduct}/api/v1/customer/customer`,
     params,
   );
-  if (data.message == 'Success') {
-    requestGetCustomer().then();
-  }
-  return data.message;
+
+  const newQuery = [
+    data.data.newCustomer.id,
+    ...(store.getState().customer.query['all'] || []),
+  ];
+
+  batch(() => {
+    syncCustomer([data.data.newCustomer]);
+    setCustomerQueries({
+      all: newQuery,
+    });
+  });
+  return data;
 };

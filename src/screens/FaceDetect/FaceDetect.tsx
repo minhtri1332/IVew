@@ -44,10 +44,10 @@ const CameraWidth = DWidth;
 const CameraHeight = (4 / 3) * DWidth;
 
 export interface FaceDetectScreenProps {
-  faces: any[];
-  imageUri: string;
-  width: number;
-  height: number;
+  faces?: any[];
+  imageUri?: string;
+  width?: number;
+  height?: number;
 }
 
 export interface ParamEmployee {
@@ -55,7 +55,7 @@ export interface ParamEmployee {
   name: string;
   position: string;
   listBoxAI: string[];
-  avatar: string;
+  avatar?: string;
   image: string;
 }
 
@@ -81,7 +81,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     position: '',
     listBoxAI: [''],
     department: '',
-    avatar: '',
     image: '',
   }));
 
@@ -168,7 +167,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     let result = true;
-    console.log(paramEmployee);
     Object.values(paramEmployee).map((item) => {
       if (item == '' || item == []) {
         ToastService.show('Bạn cần điền đầy đủ thông tin');
@@ -249,7 +247,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       .then((response) => {
         RNFetchBlob.fs.readFile(response.uri, 'base64').then((data) => {
           setParamCustom('image', data);
-          setParamCustom('avatar', data);
+
           setListFaceDetect((set) => {
             const newSet = new Set(set);
             newSet.add(response.uri);

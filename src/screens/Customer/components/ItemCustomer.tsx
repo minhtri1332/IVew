@@ -29,7 +29,7 @@ export const ItemCustomer = memo(function ItemCustomer({
         style={{borderWidth: 1, borderColor: Colors.grey6, borderRadius: 40}}>
         <SAvatar
           source={{
-            uri: customer?.avatarPath,
+            uri: customer?.image,
           }}
           size={40}
         />

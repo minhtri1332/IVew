@@ -3,7 +3,6 @@ import {RNCamera} from 'react-native-camera';
 import {
   Animated,
   Image,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,7 +11,7 @@ import {
 import {FileType} from '@/types';
 import {useToggle} from '@/hooks/useToggle';
 import {PhotoPreview} from '@/components/PickFileActionsSheet/PhotoPreview';
-import {IC_CAMERA} from '@/assets';
+import {IC_FLIP} from '@/assets';
 
 interface Props {
   onCloseRequest: () => any;
@@ -103,7 +102,7 @@ export const TakePhoto = memo(
             <Image
               resizeMode="contain"
               style={styles.flipIcon}
-              source={IC_CAMERA}
+              source={IC_FLIP}
             />
           </TouchableOpacity>
         </Animated.View>

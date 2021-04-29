@@ -5,6 +5,6 @@ export interface RawCustomer {
   faceID: string;
   age: number;
   gender: string;
-  avatarPath: string;
+  image: string;
   active: string;
 }

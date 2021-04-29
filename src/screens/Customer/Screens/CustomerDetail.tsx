@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {styled} from '@/global';
 import {SAvatar, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
@@ -30,6 +30,11 @@ export const CustomerDetail = memo(function CustomerDetail() {
   }, [id]);
 
   const [{loading, error: errDelete}, onDelete] = useAsyncFn(async () => {
+    await requestRemoveCustomer(id);
+    goBack();
+  }, [id]);
+
+  const deleteFN = useCallback(() => {
     Alert.alert('Bạn có chắc chắn muốn xóa khách hàng này?', '', [
       {
         text: 'Hủy',
@@ -39,12 +44,11 @@ export const CustomerDetail = memo(function CustomerDetail() {
       {
         text: 'Xóa',
         onPress: async () => {
-          await requestRemoveCustomer(id);
-          goBack();
+          onDelete().then();
         },
       },
     ]);
-  }, []);
+  }, [id]);
 
   const rightHeader = useMemo(() => {
     return (
@@ -64,7 +68,7 @@ export const CustomerDetail = memo(function CustomerDetail() {
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: customer?.avatarPath,
+            uri: customer?.image,
           }}
           size={100}
         />
@@ -85,7 +89,7 @@ export const CustomerDetail = memo(function CustomerDetail() {
 
       <SubmitButtonColor
         title={'Xóa'}
-        onPress={onDelete}
+        onPress={deleteFN}
         loading={loading}
         color={Colors.red1}
       />

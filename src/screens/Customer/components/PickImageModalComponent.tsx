@@ -2,7 +2,6 @@ import React, {memo, useCallback, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 // @ts-ignore
-import File from '@/utils/file';
 import RNFetchBlob from 'rn-fetch-blob';
 import {IC_SINGLE_IMAGE} from '@/assets';
 import PickFileActionsSheet from '@/components/PickFileActionsSheet';
@@ -19,14 +18,14 @@ export const PickImageModalComponent = memo(function PickImageModalComponent({
 }: ImageParams) {
   const [avatar, setAvatar] = useState('');
   const [isFilePickerVisible, showFilePicker, hideFilePicker] = useBoolean();
-  const pickAvatar = useCallback(async () => {
-    const file = await File.pickImage({multiple: false} || {});
-
-    RNFetchBlob.fs.readFile(file[0].uri, 'base64').then((data) => {
-      onImageCallback('image', `data:image/jpeg;base64,${data}`);
-      setAvatar(file[0].uri);
-    });
-  }, [onImageCallback]);
+  // const pickAvatar = useCallback(async () => {
+  //   const file = await File.pickImage({multiple: false} || {});
+  //
+  //   RNFetchBlob.fs.readFile(file[0].uri, 'base64').then((data) => {
+  //     onImageCallback('image', `data:image/jpeg;base64,${data}`);
+  //     setAvatar(file[0].uri);
+  //   });
+  // }, [onImageCallback]);
 
   const fileCallback = useCallback((files: FileType[]) => {
     RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {

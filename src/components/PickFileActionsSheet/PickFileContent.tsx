@@ -5,11 +5,11 @@ import Modal from 'react-native-modal';
 import {Dimensions, PermissionsAndroid, Platform, View} from 'react-native';
 import {styled} from '@/global';
 import useBoolean from '@/hooks/useBoolean';
-import File from '@/components/PickFileActionsSheet/File';
 import {ActionSheetRow} from '@/components/PickFileActionsSheet/ActionSheet';
 import {useDeviceOrientation} from '@react-native-community/hooks';
 import {getBottomSpace, getStatusBarHeight} from 'react-native-iphone-x-helper';
 import {IC_CAMERA_PICK, IC_GALLERY} from '@/assets';
+import File from '@/utils/file';
 
 const dims = Dimensions.get('screen');
 let screenWidth = dims.width;

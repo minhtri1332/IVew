@@ -47,12 +47,12 @@ export const PhotoPreview = memo(({file, onRetry, onOk}: Props) => {
           )}
         </View>
         <View style={styles.footer}>
-          {/*<TouchableOpacity style={styles.button} onPress={onRetry}>*/}
-          {/*  <Text style={styles.buttonText}>{translate('uikit/retake')}</Text>*/}
-          {/*</TouchableOpacity>*/}
-          {/*<TouchableOpacity style={styles.button} onPress={onOkPress}>*/}
-          {/*  <Text style={styles.buttonText}>{translate('uikit/usePhoto')}</Text>*/}
-          {/*</TouchableOpacity>*/}
+          <TouchableOpacity style={styles.button} onPress={onRetry}>
+            <Text style={styles.buttonText}>Quay lại</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={onOkPress}>
+            <Text style={styles.buttonText}>Dùng ảnh</Text>
+          </TouchableOpacity>
         </View>
       </SContainer>
     </SWrapper>
