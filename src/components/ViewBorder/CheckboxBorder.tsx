@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -23,6 +23,7 @@ interface CheckboxBottomProps {
   flexDirection?: boolean;
   filtered?: boolean | undefined;
   required?: boolean | undefined;
+  multiple?: boolean | undefined;
 }
 
 export const CheckBoxBorder = memo(function CheckBoxBorder({
@@ -35,7 +36,20 @@ export const CheckBoxBorder = memo(function CheckBoxBorder({
   onSelectOption,
   containerStyle,
   required,
+  multiple,
 }: CheckboxBottomProps) {
+  const [listOption, setListOption] = useState<Set<string>>(() => {
+    return new Set([]);
+  });
+
+  useEffect(() => {
+    // @ts-ignore
+    setListOption((set) => {
+      const newSet = new Set(selectedValue);
+      return newSet;
+    });
+  }, [selectedValue]);
+
   const onSelectOptionCb = useCallback(
     (value: string) => {
       onSelectOption(inputName, value);
@@ -55,8 +69,12 @@ export const CheckBoxBorder = memo(function CheckBoxBorder({
         </Row>
         <View style={flexDirection ? {flexDirection: 'row'} : {}}>
           {options.map((option, index) => {
-            const selected = option.value === selectedValue;
-
+            let selected;
+            if (multiple) {
+              selected = listOption.has(option.value);
+            } else {
+              selected = option.value === selectedValue;
+            }
             return (
               <TouchableOpacity
                 activeOpacity={0.6}
@@ -106,6 +124,7 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   titleText: {
+    color: Colors.gray1,
     fontSize: 11,
     lineHeight: 13,
   },

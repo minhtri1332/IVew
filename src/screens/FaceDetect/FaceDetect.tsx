@@ -32,6 +32,8 @@ import {getDepartment, useDepartmentByQuery} from '@/store/department';
 import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
 import useAutoToastError from '@/hooks/useAutoToastError';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
+import ImageResizer from 'react-native-image-resizer';
+import {CheckBoxBorder} from '@/components/ViewBorder/CheckboxBorder';
 
 const {width: DWidth, height: DHeight} = Dimensions.get('window');
 
@@ -87,27 +89,42 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     setParamEmployee((state) => ({...state, [name]: value}));
   };
 
-  const setParamBoxAi = (name: string, value: any) => {
+  const setParamBoxAi = useCallback((name: string, value: any) => {
     setListBoxAI((set) => {
       const newSet = new Set(set);
       newSet.has(value) ? newSet.delete(value) : newSet.add(value);
       return newSet;
     });
-  };
+  }, []);
 
   useEffect(() => {
-    setParamEmployee((state) => ({...state, listBoxAI: [...listBoxAI]}));
+    setParamCustom('listBoxAI', [...listBoxAI]);
   }, [listBoxAI]);
 
   useEffect(() => {
-    setImageShow(imageUri);
     setListFaceDetect(() => {
       return new Set([]);
     });
-    RNFetchBlob.fs.readFile(imageUri, 'base64').then((data) => {
-      setParamCustom('avatar', data);
-    });
-    cropImageFace(faces, imageUri, width, height);
+
+    if (imageUri) {
+      ImageResizer.createResizedImage(imageUri, 400, 400, 'JPEG', 10, 0)
+        .then((response) => {
+          // response.uri is the URI of the new image that can now be displayed, uploaded...
+          // response.path is the path of the new image
+          // response.name is the name of the new image with the extension
+          // response.size is the size of the new image
+          // console.log('response', response);
+          setImageShow(response.uri);
+          RNFetchBlob.fs.readFile(response.uri, 'base64').then((data) => {
+            setParamCustom('image', data);
+          });
+          cropImageFace(faces, response.uri, response.width, response.height);
+        })
+        .catch((err) => {
+          // Oops, something went wrong. Check that the filename is correct and
+          // inspect err to get more details.
+        });
+    }
   }, [faces, imageUri, height, width]);
 
   const cropImageFace = useCallback((faces, imageUri, width, height) => {
@@ -138,7 +155,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
             return newSet;
           });
           RNFetchBlob.fs.readFile(url, 'base64').then((data) => {
-            setParamCustom('image', data);
+            setParamCustom('avatar', data);
             setMyFace(url);
           });
         });
@@ -161,7 +178,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     (value: string) => {
       setMyFace(value);
       RNFetchBlob.fs.readFile(value, 'base64').then((data) => {
-        setParamCustom('image', data);
+        setParamCustom('avatar', data);
       });
     },
     [setParamCustom],
@@ -277,13 +294,22 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           onSelectOption={setParamCustom}
           onPressRight={openModalCreateDepartment}
         />
-        <SSelectModalBottom
+        {/*<SSelectModalBottom*/}
+        {/*  label={'Cơ sở'}*/}
+        {/*  options={getListBoxAI}*/}
+        {/*  inputName={'listBoxAI'}*/}
+        {/*  placeholder={'Lựa chọn'}*/}
+        {/*  selectedValue={String(paramEmployee.listBoxAI)}*/}
+        {/*  onSelectOption={setParamBoxAi}*/}
+        {/*/>*/}
+        <SCheckBoxBorder
+          placeholder={'Lựa chọn'}
           label={'Cơ sở'}
           options={getListBoxAI}
+          selectedValue={paramEmployee.listBoxAI}
           inputName={'listBoxAI'}
-          placeholder={'Lựa chọn'}
-          selectedValue={String(paramEmployee.listBoxAI)}
           onSelectOption={setParamBoxAi}
+          multiple={true}
         />
       </ScrollView>
     </View>
@@ -299,6 +325,14 @@ const SInputBorder = styled(InputBorder).attrs({
 })``;
 
 const SSelectModalBottom = styled(SelectModalBottom).attrs({
+  containerStyle: {
+    marginTop: 16,
+    marginRight: 16,
+    marginLeft: 16,
+  },
+})``;
+
+const SCheckBoxBorder = styled(CheckBoxBorder).attrs({
   containerStyle: {
     marginTop: 16,
     marginRight: 16,
