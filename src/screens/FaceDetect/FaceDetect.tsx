@@ -158,7 +158,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
             return newSet;
           });
           RNFetchBlob.fs.readFile(url, 'base64').then((data) => {
-            setParamCustom('avatar', data);
+            //setParamCustom('avatar', data);
             setMyFace(url);
           });
         });
