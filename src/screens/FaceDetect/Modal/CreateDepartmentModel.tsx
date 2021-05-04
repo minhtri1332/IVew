@@ -21,7 +21,7 @@ export const CreateDepartmentModel = memo(function CreateDepartmentModel() {
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     await requestCreateDepartment(name);
     goBack();
-  }, []);
+  }, [name]);
 
   return (
     <SContainer>

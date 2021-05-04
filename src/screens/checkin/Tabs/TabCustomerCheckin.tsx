@@ -29,8 +29,8 @@ export interface CustomerRecordProps {
 export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const data = useCustomerRecordByQuery('all');
   const [params, setParams] = useState<CustomerRecordProps>({
-    dateStart: moment().unix(),
-    dateEnd: moment().unix(),
+    dateStart: moment(new Date(), 'X').unix(),
+    dateEnd: moment(new Date(), 'X').unix(),
   });
 
   const setParamCustom = useCallback(
