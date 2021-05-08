@@ -5,7 +5,7 @@ export interface RawHistory {
     employeeID: string;
     late: number;
     name: string;
-    path: string;
+    image: string;
     status: string;
     time: string;
     timestamp: number;

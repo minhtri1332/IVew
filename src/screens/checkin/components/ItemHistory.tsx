@@ -25,7 +25,7 @@ export const ItemHistory = memo(function ItemHistory({
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
       <SAvatar
         source={{
-          uri: history?.path,
+          uri: history?.image,
         }}
         size={40}
       />

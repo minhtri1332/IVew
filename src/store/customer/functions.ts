@@ -57,6 +57,7 @@ export const requestRemoveCustomer = async (idRemove: string) => {
   const {data} = await Fetch.delete<{data: any}>(
     `${urlProduct}/api/v1/customer/customer/${idRemove}`,
   );
+
   if (data) {
     const list = getStore()
       .getState()
@@ -65,6 +66,7 @@ export const requestRemoveCustomer = async (idRemove: string) => {
       setCustomerQueries({all: list});
     });
   }
+  return data;
 };
 
 export const requestAddCustomer = async (params?: ParamCreateCustomer) => {

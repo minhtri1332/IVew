@@ -20,11 +20,11 @@ export const HistoryDetail = memo(function HistoryDetail() {
 
   return (
     <ScreenWrapper>
-      <HeaderBack title={'Chi tiết'}  />
+      <HeaderBack title={'Chi tiết'} />
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: history?.path,
+            uri: history?.image,
           }}
           size={100}
         />
@@ -43,10 +43,9 @@ export const HistoryDetail = memo(function HistoryDetail() {
       <Item label={'Số phút trễ'} divider={true}>
         <ItemContent>{history?.late} phút</ItemContent>
       </Item>
-      <Item label={'Phòng ban'} >
+      <Item label={'Phòng ban'}>
         <ItemContent>{history?.department}</ItemContent>
       </Item>
-
     </ScreenWrapper>
   );
 });

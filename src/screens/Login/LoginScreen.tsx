@@ -1,12 +1,7 @@
 import React, {memo, useCallback, useEffect, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
-import {
-  ActivityIndicator,
-  Dimensions,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {ActivityIndicator, KeyboardAvoidingView, Platform} from 'react-native';
 import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import {BG_LOGIN, IC_LOGO_APP} from '@/assets';
 import {
@@ -110,9 +105,6 @@ export const LoginScreen = memo(function LoginScreen() {
       </SViewBox>
 
       <STextVersion>Phiên bản {buildVersion}</STextVersion>
-      {/*<Footer>*/}
-      {/*  <FooterText>Copyright 2020 Tên app. All Rights Reserved</FooterText>*/}
-      {/*</Footer>*/}
     </Container>
   );
 });

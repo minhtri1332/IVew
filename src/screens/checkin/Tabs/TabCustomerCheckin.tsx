@@ -29,8 +29,8 @@ export interface CustomerRecordProps {
 export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const data = useCustomerRecordByQuery('all');
   const [params, setParams] = useState<CustomerRecordProps>({
-    dateStart: moment(new Date(), 'X').unix(),
-    dateEnd: moment(new Date(), 'X').unix(),
+    dateStart: moment(new Date().setHours(0, 0, 0, 0)).unix(),
+    dateEnd: moment(new Date(), 'X').endOf('day').unix(),
   });
 
   const setParamCustom = useCallback(
@@ -43,12 +43,12 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
     [params],
   );
 
-  const ListCustomerRecord = useMemo(() => {
-    return [...new Set(data)];
-  }, [data]);
-
   const {call, error, loading: loadingData} = useAsyncEffect(async () => {
-    await requestFilterCustomer(params);
+    const paramsBegin: CustomerRecordProps = {
+      dateStart: moment(params.dateStart, 'X').startOf('day').unix(),
+      dateEnd: moment(params.dateEnd, 'X').endOf('day').unix(),
+    };
+    await requestFilterCustomer(paramsBegin);
   }, [params]);
 
   useEffect(() => {
@@ -56,7 +56,11 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   }, []);
 
   const [{loading, error: errorFilter}, filterDate] = useAsyncFn(async () => {
-    await requestFilterCustomer(params);
+    const paramsBegin: CustomerRecordProps = {
+      dateStart: moment(params.dateStart, 'X').startOf('day').unix(),
+      dateEnd: moment(params.dateEnd, 'X').endOf('day').unix(),
+    };
+    await requestFilterCustomer(paramsBegin);
   }, [params]);
 
   const renderItem: ListRenderItem<string> = useCallback(({item}) => {
@@ -81,6 +85,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
       <LineSeparator />
       <SViewSelect>
         <DateTimeBorder
+          key={1}
           label={'Ngày bắt đầu'}
           value={params.dateStart}
           keyName={'dateStart'}
@@ -90,6 +95,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
           format={'YYYY-MM-DD'}
         />
         <DateTimeBorder
+          key={2}
           label={'Ngày kết thúc'}
           value={params.dateEnd}
           keyName={'dateEnd'}
@@ -108,7 +114,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
 
       <FlatList
         keyExtractor={keyExtractor}
-        data={ListCustomerRecord}
+        data={data}
         renderItem={renderItem}
         ListEmptyComponent={renderEmpty}
         refreshControl={
