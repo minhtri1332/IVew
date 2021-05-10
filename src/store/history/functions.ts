@@ -23,8 +23,6 @@ export const requestGetHistoryList = async (params: HistoryProps) => {
     });
   }
 
-  console.log();
-
   batch(() => {
     syncHistory(data.data.listRecord);
     setHistoryQueries({
