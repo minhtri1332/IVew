@@ -15,8 +15,8 @@ export const requestGetHistoryList = async (params: HistoryProps) => {
       },
     },
   );
-  const param = params?.month + params?.boxID;
 
+  const param = params?.month + params?.boxID;
   if (!data.data.listRecord) {
     setHistoryQueries({
       all: [],

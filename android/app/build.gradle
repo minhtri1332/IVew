@@ -132,8 +132,8 @@ android {
         applicationId "vn.iview.android"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
-        versionName "1.0.5"
+        versionCode 7
+        versionName "1.0.6"
         multiDexEnabled true
         missingDimensionStrategy 'react-native-camera', 'mlkit' // <--- replace general with mlkit
     }
