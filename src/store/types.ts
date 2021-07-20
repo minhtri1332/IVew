@@ -8,8 +8,10 @@ export interface RawFile {
   type: string;
   uri: string;
   width: number | string;
+
 }
 
-export const urlProduct = 'https://go.iview.vn';
+export const urlProduct = 'https://api.cxview.ai';
 //  k8s.backend.dev.staging.cxview.ai
 // go.iview.vn
+// api.cxview.ai

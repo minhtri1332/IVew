@@ -10,13 +10,13 @@ import {urlProduct} from '@/store/types';
 
 export const requestFilterCustomer = async (params: CustomerRecordProps) => {
   const {data} = await Fetch.get<{data: any}>(
-    `${urlProduct}/api/v1/customer/get-customer-record`,
+    `${urlProduct}/api/v1/report/list-record-customer`,
     {
       params: params,
     },
   );
   batch(() => {
-    syncCustomerRecord(data.data.listCustomerRecord);
+    syncCustomerRecord(data.data.params  );
     setCustomerRecordQueries({
       all: data.data.listCustomerRecord.map(
         (item: RawCustomerRecord) => item.id,

@@ -21,6 +21,7 @@ import {removeAccents} from '@/utils/string';
 import {TakeCameraOptions} from '@/utils/file';
 
 export interface ParamCreateCustomer {
+  id: string;
   age: number;
   name: string;
   gender: string;
@@ -44,7 +45,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
     id: customer ? customer.id : '',
     name: customer ? customer.name : '',
-    age: customer ? customer.age : '',
+    age: customer ? customer.age : 0,
     gender: customer ? customer.gender : '',
   });
 

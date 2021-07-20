@@ -20,33 +20,26 @@ export const HistoryDetail = memo(function HistoryDetail() {
 
   return (
     <ScreenWrapper>
-      <HeaderBack title={'Chi tiết'}  />
+      <HeaderBack title={'Chi tiết'} />
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: history?.path,
+            uri: history?.image,
           }}
           size={100}
         />
         <STextName>{history?.name}</STextName>
       </SViewAvatar>
 
-      <Item label={'Ngày chấm công'} divider={true}>
-        <ItemContent>{history?.date}</ItemContent>
+      <Item label={'Checkin'} divider={true}>
+        <ItemContent>{history?.checkIn}</ItemContent>
       </Item>
-      <Item label={'Giờ chấm công'} divider={true}>
-        <ItemContent>{history?.time}</ItemContent>
+      <Item label={'Checkout'} divider={true}>
+        <ItemContent>{history?.checkOut}</ItemContent>
       </Item>
-      <Item label={'Trạng thái'} divider={true}>
-        <ItemContent>{history?.status}</ItemContent>
-      </Item>
-      <Item label={'Số phút trễ'} divider={true}>
-        <ItemContent>{history?.late} phút</ItemContent>
-      </Item>
-      <Item label={'Phòng ban'} >
+      <Item label={'Phòng ban'}>
         <ItemContent>{history?.department}</ItemContent>
       </Item>
-
     </ScreenWrapper>
   );
 });

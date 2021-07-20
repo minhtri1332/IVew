@@ -7,16 +7,15 @@ import {urlProduct} from '@/store/types';
 
 export const requestGetHistoryList = async (params: HistoryProps) => {
   const {data} = await Fetch.get<{data: any}>(
-    `${urlProduct}/api/v1/attendence/list-record-month`,
+    `${urlProduct}/api/v1/attendence/list-record`,
     {
       params: {
-        boxID: params?.boxID,
-        month: params?.month,
+        dateStart: params?.dateStart,
       },
     },
   );
-  const param = params?.month + params?.boxID;
-
+  const param = params?.dateStart ;
+  console.log(data)
   batch(() => {
     syncHistory(data.data.listRecord);
     setHistoryQueries({

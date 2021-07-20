@@ -25,17 +25,16 @@ export const ItemHistory = memo(function ItemHistory({
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
       <SAvatar
         source={{
-          uri: history?.path,
+          uri: history?.image,
         }}
         size={40}
       />
       <SViewContent>
         <STextName>{history?.name}</STextName>
-        <STextTitle>{`Chấm công lúc ${history?.time} ${history?.date}`}</STextTitle>
-        <STextTime
-          isLate={
-            history?.late <= 0
-          }>{`Thời gian muộn: ${history?.late} phút`}</STextTime>
+        <STextTitle>{`Chấm công lúc ${history?.checkIn}`}</STextTitle>
+        <STextTime>{`Thời gian muộn: ${
+          history?.checkOut || 0
+        } phút`}</STextTime>
         <LineSeparator />
       </SViewContent>
       <SIcon source={IC_ARROW} size={28} tintColor={Colors.grey3} />

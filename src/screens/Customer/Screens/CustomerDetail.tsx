@@ -81,11 +81,6 @@ export const CustomerDetail = memo(function CustomerDetail() {
       <Item label={'Tuổi'} divider={true}>
         <ItemContent>{customer?.age}</ItemContent>
       </Item>
-      <Item label={'Trạng thái'} divider={true}>
-        <ItemContent>
-          {customer?.active ? 'Đang hoạt đông' : 'Không hoạt động'}
-        </ItemContent>
-      </Item>
 
       <SubmitButtonColor
         title={'Xóa'}

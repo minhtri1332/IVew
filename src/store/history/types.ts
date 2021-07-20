@@ -1,14 +1,10 @@
 export interface RawHistory {
-    boxID: string;
-    date: string;
-    department: string;
-    employeeID: string;
-    late: number;
+    image: string;
     name: string;
-    path: string;
-    status: string;
-    time: string;
-    timestamp: number;
+    checkIn: string;
+    checkOut: string;
+    employeeID: string;
+    department: string;
 }
 
 export interface RawAttendence {
