@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -38,15 +38,15 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera.</string>
+	<string>CXView cần quyền truy cập camera để có thể chụp ảnh nhân viên</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app does not require access to the microphone.</string>
+	<string>CXView cần quyền truy cập micro để quay video và thu tiếng.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app would like to save photos to your photo gallery in order to upload the inspection process images </string>
+	<string>CXView cần quyền truy cập ảnh để có thể thay avatar, hỗ trợ giải quyết các vấn đề trong app,...</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>CXView cần quyền truy cập ảnh để có thể thay avatar, hỗ trợ giải quyết các vấn đề trong app,...</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Bold.ttf</string>

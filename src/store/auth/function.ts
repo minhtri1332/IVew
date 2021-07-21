@@ -6,11 +6,12 @@ export const requestLogin = async (userName: string, pass: string) => {
     email: userName,
     password: pass,
   });
-  console.log(params)
+
   const {data} = await Fetch.post<{token: string}>(
     `${urlProduct}/api/v1/login`,
     params,
   );
+  console.log(data);
   if (!data) {
     return null;
   }

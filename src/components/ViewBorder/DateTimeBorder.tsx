@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo} from 'react';
+import React, {memo, useCallback, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {
   Dimensions,
@@ -62,6 +62,7 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
     format,
   } = props;
   const [isModalVisible, showModal, hideModal] = useBoolean();
+  const [state, setState] = useState(new Date());
 
   const onChange = useCallback(
     (value: any) => {
@@ -73,20 +74,22 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
   const onConfirm = useCallback(
     (date: Date) => {
       hideModal();
+      setState(date);
       requestAnimationFrame(() => {
         onChange?.(moment(date).unix());
       });
     },
     [mode, onChange, hideModal, format],
   );
-
-  const date = useMemo(() => {
-    if (!value) {
-      return new Date();
-    }
-    const momentTime = moment(value, format || formatByMode[mode]);
-    return momentTime.isValid() ? momentTime.toDate() : new Date();
-  }, [value, mode, format]);
+  //
+  // const date = useMemo(() => {
+  //   if (!value) {
+  //     return new Date();
+  //   }
+  //   const momentTime = moment(value, format || formatByMode[mode]);
+  //   console.log('date', momentTime);
+  //   return momentTime.isValid() ? momentTime.toDate() : new Date();
+  // }, [value, mode, format]);
 
   if (!interactionReady) {
     return null;
@@ -120,7 +123,7 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
         isVisible={isModalVisible}
         onConfirm={onConfirm}
         onCancel={hideModal}
-        date={date}
+        date={state}
         {...dateTimePickerProps}
       />
     </ContainerButton>

@@ -15,6 +15,12 @@ export const requestFilterCustomer = async (params: CustomerRecordProps) => {
       params: params,
     },
   );
+  console.log(params);
+  if (!data.data.listCustomerRecord) {
+    setCustomerRecordQueries({
+      all: [],
+    });
+  }
   batch(() => {
     syncCustomerRecord(data.data.params  );
     setCustomerRecordQueries({

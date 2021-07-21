@@ -30,8 +30,11 @@ export const CustomerDetail = memo(function CustomerDetail() {
   }, [id]);
 
   const [{loading, error: errDelete}, onDelete] = useAsyncFn(async () => {
-    await requestRemoveCustomer(id);
-    goBack();
+    const data = await requestRemoveCustomer(id);
+
+    if (data) {
+      goBack();
+    }
   }, [id]);
 
   const deleteFN = useCallback(() => {

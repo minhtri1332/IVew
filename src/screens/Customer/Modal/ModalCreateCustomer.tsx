@@ -19,6 +19,7 @@ import {
 } from '@/store/customer/functions';
 import {removeAccents} from '@/utils/string';
 import {TakeCameraOptions} from '@/utils/file';
+import ToastService from '@/services/ToastService';
 
 export interface ParamCreateCustomer {
   id: string;
@@ -85,8 +86,10 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     if (id) {
       await requestEditCustomer(id, paramCustomer);
+      ToastService.show('Sửa thành công!');
     } else {
       await requestAddCustomer(paramCustomer);
+      ToastService.show('Tạo thành công!');
     }
 
     goBack();

@@ -14,8 +14,15 @@ export const requestGetHistoryList = async (params: HistoryProps) => {
       },
     },
   );
-  const param = params?.dateStart ;
-  console.log(data)
+
+  const param = params?.dateStart;
+
+  if (!data.data.listRecord) {
+    setHistoryQueries({
+      all: [],
+    });
+  }
+
   batch(() => {
     syncHistory(data.data.listRecord);
     setHistoryQueries({
