@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {setStore} from '@/store/getStore';
 import {setHistoryStore, historyReducer} from '@/store/history';
 import {authReducer, setAuthStore} from '@/store/auth';
-import {boxAiReducer, setBoxAiStore} from '@/store/boxAI';
+import {groupReducer, setGroupStore} from '@/store/group';
 import {departmentReducer, setDepartmentStore} from '@/store/department';
 import {customerReducer, setCustomerStore} from '@/store/customer';
 import {
@@ -30,7 +30,7 @@ const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
 const appReducer = combineReducers({
   history: historyReducer,
   auth: authReducer,
-  boxAi: boxAiReducer,
+  group: groupReducer,
   department: departmentReducer,
   customer: customerReducer,
   customerRecord: customerRecordReducer,
@@ -65,7 +65,7 @@ export default store;
 setStore(store);
 setHistoryStore(store);
 setAuthStore(store);
-setBoxAiStore(store);
+setGroupStore(store);
 setDepartmentStore(store);
 setCustomerStore(store);
 setCustomerRecordStore(store);

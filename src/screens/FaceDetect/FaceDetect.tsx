@@ -30,7 +30,7 @@ import ButtonText from '@/components/button/ButtonText';
 import {SelectModalBottom} from '@/components/ViewBorder/SelectModalBottom';
 import {FilterBoxOption} from '@/components/Filter/types';
 import {getDepartment, useDepartmentByQuery} from '@/store/department';
-import {getBoxAi, useBoxAiByQuery} from '@/store/boxAI';
+import {getGroup, useGroupByQuery} from '@/store/group';
 import useAutoToastError from '@/hooks/useAutoToastError';
 import ImageResizer from 'react-native-image-resizer';
 import {CheckBoxBorder} from '@/components/ViewBorder/CheckboxBorder';
@@ -55,7 +55,6 @@ export interface ParamEmployee {
   name: string;
   position: string;
   listGroup: string[];
-  listBoxAI: string[];
   email: string;
   address: string;
   birthDate: string;
@@ -68,40 +67,35 @@ export interface ParamEmployee {
 }
 
 export const FaceDetectScreen = memo(function FaceDetectScreen() {
-  const {
-    faces,
-    imageUri,
-    height,
-    width,
-  } = useNavigationParams<FaceDetectScreenProps>();
+  const {faces, imageUri, height, width} =
+    useNavigationParams<FaceDetectScreenProps>();
   const [imageShow, setImageShow] = useState(imageUri);
   const [myFace, setMyFace] = useState('');
   const [isFilePickerVisible, showFilePicker, hideFilePicker] = useBoolean();
   const departments = useDepartmentByQuery('all');
-  const boxAIs = useBoxAiByQuery('all');
+  const groups = useGroupByQuery('all');
   const [isLoading, loadingTrue, loadingFalse] = useBoolean();
   const [listFaceDetect, setListFaceDetect] = useState<Set<string>>(() => {
     return new Set([]);
   });
 
   const [paramEmployee, setParamEmployee] = useState<ParamEmployee>(() => ({
-    name: '',
-    position: '',
-    department: '',
-    listGroup: [],
-    listBoxAI: [''],
-    email: '',
-    address: '',
-    birthDate: '',
-    identificationCard: '',
-    phoneNumber: '',
-    employeeID: '',
-    taxID: '',
-    dayComeIn: '',
+    name: 'Trần Minh Hoàng',
+    department: 'BOD',
+    position: 'dev',
+    listGroup: [''],
+    birthDate: '01/09/1997',
+    email: 'tranhoang@gmail.com',
+    address: 'Hà Nội',
+    identificationCard: '124234234213124',
+    phoneNumber: '0123456789',
+    employeeID: '2435436456',
+    taxID: '213214234',
+    dayComeIn: '01/09/1997',
     image: '',
   }));
 
-  const [listBoxAI, setListBoxAI] = useState<Set<string>>(() => {
+  const [listGroup, setListGroup] = useState<Set<string>>(() => {
     return new Set([]);
   });
 
@@ -109,8 +103,8 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     setParamEmployee((state) => ({...state, [name]: value}));
   };
 
-  const setParamBoxAi = useCallback((name: string, value: any) => {
-    setListBoxAI((set) => {
+  const setParamGroup = useCallback((name: string, value: any) => {
+    setListGroup((set) => {
       const newSet = new Set(set);
       newSet.has(value) ? newSet.delete(value) : newSet.add(value);
       return newSet;
@@ -118,8 +112,8 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   }, []);
 
   useEffect(() => {
-    setParamCustom('listBoxAI', [...listBoxAI]);
-  }, [listBoxAI]);
+    setParamCustom('listGroup', [...listGroup]);
+  }, [listGroup]);
 
   useEffect(() => {
     setListFaceDetect(() => {
@@ -179,6 +173,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     let result = true;
+    console.log(paramEmployee);
     Object.values(paramEmployee).map((item) => {
       if (item == '' || item == []) {
         ToastService.show('Bạn cần điền đầy đủ thông tin');
@@ -221,23 +216,23 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
       const department = getDepartment(item);
       listFilterModel.push({
         label: department?.name || '',
-        value: item,
+        value: department?.name,
       });
     });
     return listFilterModel;
   }, [departments]);
 
-  const getListBoxAI = useMemo(() => {
+  const getListGroup = useMemo(() => {
     let listFilterModel: FilterBoxOption[] = [];
-    boxAIs.map((item) => {
-      const boxAI = getBoxAi(item);
+    groups.map((item) => {
+      const Group = getGroup(item);
       listFilterModel.push({
-        label: boxAI?.name || '',
-        value: item,
+        label: Group?.name || '',
+        value: Group?.name,
       });
     });
     return listFilterModel;
-  }, [boxAIs]);
+  }, [groups]);
 
   const navigateToCamera = useCallback(() => {
     hideFilePicker();
@@ -281,7 +276,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   return (
     <View style={styles.container}>
       <HeaderBack title={'Thêm nhân viên'} right={rightHeader} />
-      <ScrollView>
+      <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 24}}>
         <SViewImage onPress={takePicture}>
           <SImage
             source={imageShow ? {uri: imageShow} : IC_DETECT_FACE}
@@ -352,15 +347,72 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           onPressRight={openModalCreateDepartment}
           required={true}
         />
+
         <SCheckBoxBorder
           placeholder={'Lựa chọn'}
           label={'Cơ sở'}
-          options={getListBoxAI}
-          selectedValue={paramEmployee.listBoxAI}
-          inputName={'listBoxAI'}
-          onSelectOption={setParamBoxAi}
+          options={getListGroup}
+          selectedValue={paramEmployee.listGroup}
+          inputName={'listGroup'}
+          onSelectOption={setParamGroup}
           multiple={true}
           required={true}
+        />
+        <SInputBorder
+          value={paramEmployee.phoneNumber}
+          keyName={'phoneNumber'}
+          onTextChange={setParamCustom}
+          placeHolder={'Số điện thoại'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.email}
+          keyName={'email'}
+          onTextChange={setParamCustom}
+          placeHolder={'Email'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.address}
+          keyName={'address'}
+          onTextChange={setParamCustom}
+          placeHolder={'Địa chỉ'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.birthDate}
+          keyName={'birthDate'}
+          onTextChange={setParamCustom}
+          placeHolder={'Sinh nhật'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.identificationCard}
+          keyName={'identificationCard'}
+          onTextChange={setParamCustom}
+          placeHolder={'CMND/Căn cước'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.employeeID}
+          keyName={'employeeID'}
+          onTextChange={setParamCustom}
+          placeHolder={'EmployeeID'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.taxID}
+          keyName={'taxID'}
+          onTextChange={setParamCustom}
+          placeHolder={'Thuế'}
+          required={false}
+        />
+        <SInputBorder
+          value={paramEmployee.dayComeIn}
+          keyName={'dayComeIn'}
+          onTextChange={setParamCustom}
+          placeHolder={'Ngày tạo'}
+          required={false}
         />
       </ScrollView>
 

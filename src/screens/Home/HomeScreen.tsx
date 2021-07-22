@@ -17,7 +17,7 @@ import {
   openModalCreateCustomer,
 } from '@/utils/navigation';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
-import {requestGetBoxAi} from '@/store/boxAI/functions';
+import {requestGetGroups} from '@/store/group/functions';
 import {InteractionManager, RefreshControl} from 'react-native';
 import {requestTokenDevice} from '@/store/auth/function';
 import {firebase} from '@react-native-firebase/messaging';
@@ -29,7 +29,7 @@ export const HomeScreen = memo(function HomeScreen() {
   const [visible, show, hide] = useBoolean(false);
   const {call, loading} = useAsyncEffect(async () => {
     await requestGetDepartment();
-    await requestGetBoxAi();
+    await requestGetGroups();
     const tokenDevice = await firebase.messaging().getToken();
     await requestTokenDevice(tokenDevice);
   }, []);
