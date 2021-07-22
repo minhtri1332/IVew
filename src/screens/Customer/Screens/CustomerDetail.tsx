@@ -25,10 +25,15 @@ export const CustomerDetail = memo(function CustomerDetail() {
   const {id} = useNavigationParams<CustomerDetailProps>();
   const customer = useCustomer(id);
 
-  const {call, error, loading: loadingData} = useAsyncEffect(async () => {
+  const {
+    call,
+    error,
+    loading: loadingData,
+  } = useAsyncEffect(async () => {
     await requestGetCustomerDetail(id);
   }, [id]);
 
+  console.log(customer);
   const [{loading, error: errDelete}, onDelete] = useAsyncFn(async () => {
     const data = await requestRemoveCustomer(id);
 
@@ -83,6 +88,15 @@ export const CustomerDetail = memo(function CustomerDetail() {
       </Item>
       <Item label={'Tuổi'} divider={true}>
         <ItemContent>{customer?.age}</ItemContent>
+      </Item>
+      <Item label={'Số điện thoại'} divider={true}>
+        <ItemContent>{customer?.telephone}</ItemContent>
+      </Item>
+      <Item label={'Số lần ghé thăm'} divider={true}>
+        <ItemContent>{customer?.visitNumber}</ItemContent>
+      </Item>
+      <Item label={'Số đến gần nhất'} divider={true}>
+        <ItemContent>{customer?.lastVisit}</ItemContent>
       </Item>
 
       <SubmitButtonColor

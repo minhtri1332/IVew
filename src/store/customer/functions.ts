@@ -16,6 +16,7 @@ export const requestGetCustomer = async () => {
       },
     },
   );
+
   if (data.data.listCustomer) {
     batch(() => {
       syncCustomer(data.data.listCustomer);
@@ -58,6 +59,7 @@ export const requestRemoveCustomer = async (idRemove: string) => {
     `${urlProduct}/api/v1/customer/customer/${idRemove}`,
   );
 
+  console.log(data,idRemove)
   if (data) {
     const list = getStore()
       .getState()
@@ -74,7 +76,7 @@ export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
     `${urlProduct}/api/v1/customer/customer`,
     params,
   );
-
+  console.log(data, params)
   const newQuery = [
     data.data.newCustomer.id,
     ...(store.getState().customer.query['all'] || []),

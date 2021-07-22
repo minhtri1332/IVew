@@ -26,6 +26,7 @@ export interface ParamCreateCustomer {
   age: number;
   name: string;
   gender: string;
+  telephone: string;
 }
 
 const paramGender = ['Nam', 'Nữ'];
@@ -47,6 +48,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     id: customer ? customer.id : '',
     name: customer ? customer.name : '',
     age: customer ? customer.age : 0,
+    telephone: customer ? customer.telephone : '',
     gender: customer ? customer.gender : '',
   });
 
@@ -106,6 +108,10 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     );
   }, [loading, paramCustomer]);
 
+  const telephone = useMemo(() => {
+    return (paramCustomer?.telephone || '').replace(/\D+/g, '');
+  }, [loading, paramCustomer]);
+
   return (
     <SViewKeyBroadAware enableOnAndroid={true}>
       <SContainer>
@@ -130,6 +136,15 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           placeHolder={'Tuổi'}
           required={true}
           keyboardType={'numeric'}
+        />
+        <SInputBorder
+          value={telephone}
+          keyName={'telephone'}
+          onTextChange={setParamCustom}
+          placeHolder={'Số điện thoại'}
+          required={true}
+          keyboardType={'numeric'}
+          maxLength={10}
         />
         <CheckBoxBorder
           placeholder={'Giới tính'}

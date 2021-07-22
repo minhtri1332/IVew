@@ -4,6 +4,7 @@ export interface RawCustomer {
   age: number;
   gender: string;
   image: string;
-  visitNumber: string;
+  telephone: string;
   lastVisit: string;
+  visitNumber: string;
 }

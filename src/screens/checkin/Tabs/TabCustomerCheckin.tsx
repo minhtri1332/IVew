@@ -48,7 +48,11 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
     [params],
   );
 
-  const {call, error, loading: loadingData} = useAsyncEffect(async () => {
+  const {
+    call,
+    error,
+    loading: loadingData,
+  } = useAsyncEffect(async () => {
     const paramsBegin: CustomerRecordProps = {
       dateStart: moment(params.dateStart, 'X').startOf('day').unix(),
       dateEnd: moment(params.dateEnd, 'X').endOf('day').unix(),
