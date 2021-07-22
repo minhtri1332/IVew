@@ -54,8 +54,16 @@ export interface ParamEmployee {
   department: string;
   name: string;
   position: string;
+  listGroup: string[];
   listBoxAI: string[];
-  avatar?: string;
+  email: string;
+  address: string;
+  birthDate: string;
+  identificationCard: string;
+  phoneNumber: string;
+  employeeID: string;
+  taxID: string;
+  dayComeIn: string;
   image: string;
 }
 
@@ -79,8 +87,17 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   const [paramEmployee, setParamEmployee] = useState<ParamEmployee>(() => ({
     name: '',
     position: '',
-    listBoxAI: [''],
     department: '',
+    listGroup: [],
+    listBoxAI: [''],
+    email: '',
+    address: '',
+    birthDate: '',
+    identificationCard: '',
+    phoneNumber: '',
+    employeeID: '',
+    taxID: '',
+    dayComeIn: '',
     image: '',
   }));
 
@@ -112,11 +129,6 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     if (imageUri) {
       ImageResizer.createResizedImage(imageUri, 400, 400, 'JPEG', 10, 0)
         .then((response) => {
-          // response.uri is the URI of the new image that can now be displayed, uploaded...
-          // response.path is the path of the new image
-          // response.name is the name of the new image with the extension
-          // response.size is the size of the new image
-          // console.log('response', response);
           setImageShow(response.uri);
           RNFetchBlob.fs.readFile(response.uri, 'base64').then((data) => {
             setParamCustom('image', data);
