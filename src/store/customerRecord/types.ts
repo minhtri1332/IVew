@@ -1,15 +1,12 @@
 export interface RawCustomerRecord {
-  customerID: string;
-  boxID: string;
-  userID: string;
-  timestamp: number;
-  groupID: string;
-  date: string;
-  groupName: string;
-  customerName: string;
-  age: number;
-  emotion: string;
   id: string;
-  gender: string;
-  image: string;
+  name: string;
+  sex: string;
+  status: string;
+  visit: string;
+  age: string;
+  avatar: string;
+  customerID: string;
+  date: string;
+  group: string;
 }

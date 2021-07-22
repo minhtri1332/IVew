@@ -1,15 +1,11 @@
-import React, {memo, useCallback, useMemo, useState} from 'react';
+import React, {memo} from 'react';
 import {styled} from '@/global';
-import {ScreenWrapper} from '@/themes/BaseStyles';
+import {SAvatar, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
-import {SIcon} from '@/themes/BaseStyles';
-import {IC_ARROW, IC_EDIT, IC_LOGO} from '@/assets';
-import {SAvatar} from '@/themes/BaseStyles';
 import {Item, ItemContent} from '@/components/ViewItem';
-import moment from 'moment';
-import {useHistory} from '@/store/history';
 import {useCustomerRecord} from '@/store/customerRecord';
+import moment from 'moment';
 
 export interface CustomerRecordDetailProps {
   id: string;
@@ -25,24 +21,26 @@ export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: history?.image,
+            uri: history?.avatar,
           }}
           size={100}
         />
-        <STextName>{history?.customerName}</STextName>
+        <STextName>{history?.name || 'Không xác định'}</STextName>
       </SViewAvatar>
 
       <Item label={'Độ tuổi'} divider={true}>
         <ItemContent>{history?.age}</ItemContent>
       </Item>
       <Item label={'Giới tính'} divider={true}>
-        <ItemContent>{history?.gender}</ItemContent>
+        <ItemContent>{history?.sex}</ItemContent>
       </Item>
       <Item label={'Độ hài lòng'} divider={true}>
-        <ItemContent>{history?.emotion}</ItemContent>
+        <ItemContent>{history?.status}</ItemContent>
       </Item>
       <Item label={'Ghé thăm lúc'} divider={true}>
-        <ItemContent>{history?.date}</ItemContent>
+        <ItemContent>
+          {moment(history?.date, 'X').format('DD/MM/YYYY')}
+        </ItemContent>
       </Item>
     </ScreenWrapper>
   );

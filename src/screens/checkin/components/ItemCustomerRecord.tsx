@@ -5,6 +5,7 @@ import {Colors} from '@/themes/Colors';
 import {LineSeparator} from '@/components/LineSeparator';
 import {navigateToCustomerRecordDetail} from '@/utils/navigation';
 import {useCustomerRecord} from '@/store/customerRecord';
+import moment from 'moment';
 
 interface ItemCustomerRecordProps {
   id: string;
@@ -25,13 +26,15 @@ export const ItemCustomerRecord = memo(function ItemCustomerRecord({
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
       <SAvatar
         source={{
-          uri: customer?.image,
+          uri: customer?.avatar,
         }}
         size={40}
       />
       <SViewContent>
-        <STextName>{customer?.customerName}</STextName>
-        <STextTitle>{`Ghé thăm: ${customer?.date}   •   Tuổi: ${customer?.age}`}</STextTitle>
+        <STextName>{customer?.name || 'Không xác định'}</STextName>
+        <STextTitle>{`Ghé thăm: ${moment(customer?.date, 'X').format(
+          'DD/MM/YYYY',
+        )}   •   Tuổi: ${customer?.age}`}</STextTitle>
         <LineSeparator />
       </SViewContent>
     </SViewContainer>

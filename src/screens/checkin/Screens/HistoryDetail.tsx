@@ -1,13 +1,9 @@
-import React, {memo, useCallback, useMemo, useState} from 'react';
+import React, {memo} from 'react';
 import {styled} from '@/global';
-import {ScreenWrapper} from '@/themes/BaseStyles';
+import {SAvatar, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
-import {SIcon} from '@/themes/BaseStyles';
-import {IC_ARROW, IC_EDIT, IC_LOGO} from '@/assets';
-import {SAvatar} from '@/themes/BaseStyles';
 import {Item, ItemContent} from '@/components/ViewItem';
-import moment from 'moment';
 import {useHistory} from '@/store/history';
 
 export interface HistoryDetailProps {

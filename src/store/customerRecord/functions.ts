@@ -15,18 +15,16 @@ export const requestFilterCustomer = async (params: CustomerRecordProps) => {
       params: params,
     },
   );
-  console.log(params);
-  if (!data.data.listCustomerRecord) {
+
+  if (!data.data.listData) {
     setCustomerRecordQueries({
       all: [],
     });
   }
   batch(() => {
-    syncCustomerRecord(data.data.params  );
+    syncCustomerRecord(data.data.listData);
     setCustomerRecordQueries({
-      all: data.data.listCustomerRecord.map(
-        (item: RawCustomerRecord) => item.id,
-      ),
+      all: data.data.listData.map((item: RawCustomerRecord) => item.id),
     });
   });
 };

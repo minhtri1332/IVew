@@ -28,6 +28,7 @@ export interface CustomerRecordProps {
   limit: number;
   page: number;
 }
+
 export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const data = useCustomerRecordByQuery('all');
   const [params, setParams] = useState<CustomerRecordProps>({
