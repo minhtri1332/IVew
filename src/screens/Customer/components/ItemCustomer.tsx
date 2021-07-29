@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {styled} from '@/global';
 import {SAvatar, SIcon} from '@/themes/BaseStyles';
 import {IC_ARROW, IC_ARROW_DOWN, IC_LOGO} from '@/assets';
@@ -21,6 +21,10 @@ export const ItemCustomer = memo(function ItemCustomer({
     navigateToCustomerDetailScreen({id: customerId});
   }, [customerId]);
 
+  const gender = useMemo(() => {
+    return (customer?.gender || '') === 'Nam' ? 'Nam' : 'Nữ';
+  }, [customer?.gender]);
+
   if (!customer) return null;
 
   return (
@@ -37,7 +41,7 @@ export const ItemCustomer = memo(function ItemCustomer({
       <SViewContent>
         <STextName>{customer?.name}</STextName>
         <STextTitle>
-          Giới tính: {customer.gender} - Tuổi: {customer.age}
+          Giới tính: {gender} - Tuổi: {customer.age}
         </STextTitle>
 
         <LineSeparator />

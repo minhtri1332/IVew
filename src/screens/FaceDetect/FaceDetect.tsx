@@ -80,18 +80,18 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
   });
 
   const [paramEmployee, setParamEmployee] = useState<ParamEmployee>(() => ({
-    name: 'Trần Minh Hoàng',
-    department: 'BOD',
-    position: 'dev',
+    name: '',
+    department: '',
+    position: '',
     listGroup: [''],
-    birthDate: '01/09/1997',
-    email: 'tranhoang@gmail.com',
-    address: 'Hà Nội',
-    identificationCard: '124234234213124',
-    phoneNumber: '0123456789',
-    employeeID: '2435436456',
-    taxID: '213214234',
-    dayComeIn: '01/09/1997',
+    birthDate: '',
+    email: '',
+    address: '',
+    identificationCard: '',
+    phoneNumber: '',
+    employeeID: '',
+    taxID: '',
+    dayComeIn: '',
     image: '',
   }));
 
@@ -173,17 +173,22 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
     let result = true;
-    console.log(paramEmployee);
     Object.values(paramEmployee).map((item) => {
-      if (item == '' || item == []) {
-        ToastService.show('Bạn cần điền đầy đủ thông tin');
+      if (
+        paramEmployee.name === '' ||
+        paramEmployee.position === '' ||
+        paramEmployee.department === '' ||
+        paramEmployee.image === '' ||
+        paramEmployee.listGroup.length == 0
+      ) {
+        ToastService.show('Bạn cần điền đầy đủ hình ảnh các trường có dấu sao');
         result = false;
       }
     });
     if (result) {
       const data = await requestAddEmployee(paramEmployee);
       if (data) {
-        ToastService.show('Success!');
+        ToastService.show('Tạo thành công!');
         goBack();
       }
     }
@@ -271,6 +276,10 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
     hideFilePicker();
   }, []);
 
+  const telephone = useMemo(() => {
+    return (paramEmployee?.phoneNumber || '').replace(/\D+/g, '');
+  }, [paramEmployee]);
+
   useAutoToastError(error);
 
   return (
@@ -325,7 +334,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           value={paramEmployee.name}
           keyName={'name'}
           onTextChange={setParamCustom}
-          placeHolder={'Họ tên'}
+          placeHolder={'Họ và tên'}
           required={true}
         />
 
@@ -334,7 +343,7 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           keyName={'position'}
           onTextChange={setParamCustom}
           placeHolder={'Vị trí'}
-          required={false}
+          required={true}
         />
 
         <SSelectModalBottom
@@ -359,10 +368,11 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           required={true}
         />
         <SInputBorder
-          value={paramEmployee.phoneNumber}
+          value={telephone}
           keyName={'phoneNumber'}
           onTextChange={setParamCustom}
           placeHolder={'Số điện thoại'}
+          keyboardType={'numeric'}
           required={false}
         />
         <SInputBorder
@@ -383,35 +393,35 @@ export const FaceDetectScreen = memo(function FaceDetectScreen() {
           value={paramEmployee.birthDate}
           keyName={'birthDate'}
           onTextChange={setParamCustom}
-          placeHolder={'Sinh nhật'}
+          placeHolder={'Ngày sinh'}
           required={false}
         />
         <SInputBorder
           value={paramEmployee.identificationCard}
           keyName={'identificationCard'}
           onTextChange={setParamCustom}
-          placeHolder={'CMND/Căn cước'}
+          placeHolder={'Cmt/cccd'}
           required={false}
         />
         <SInputBorder
           value={paramEmployee.employeeID}
           keyName={'employeeID'}
           onTextChange={setParamCustom}
-          placeHolder={'EmployeeID'}
+          placeHolder={'Mã số nhân viên'}
           required={false}
         />
         <SInputBorder
           value={paramEmployee.taxID}
           keyName={'taxID'}
           onTextChange={setParamCustom}
-          placeHolder={'Thuế'}
+          placeHolder={'Mã số thuế'}
           required={false}
         />
         <SInputBorder
           value={paramEmployee.dayComeIn}
           keyName={'dayComeIn'}
           onTextChange={setParamCustom}
-          placeHolder={'Ngày tạo'}
+          placeHolder={'Ngày vào công ty'}
           required={false}
         />
       </ScrollView>

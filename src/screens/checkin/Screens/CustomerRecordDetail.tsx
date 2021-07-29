@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {styled} from '@/global';
 import {SAvatar, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
@@ -14,6 +14,20 @@ export interface CustomerRecordDetailProps {
 export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
   const {id} = useNavigationParams<CustomerRecordDetailProps>();
   const history = useCustomerRecord(id);
+
+  const typeCustomer = useMemo(() => {
+    let type: string = '';
+    if (Number(history?.visit || '0') == 1) {
+      type = 'Khách lạ (đến lần đầu)';
+    }
+    if (Number(history?.visit || '0') > 1) {
+      type = 'Khách quen';
+    }
+    if (Number(history?.visit || '0') > 15) {
+      type = 'Khách Vip';
+    }
+    return type;
+  }, [history?.visit]);
 
   return (
     <ScreenWrapper>
@@ -34,8 +48,14 @@ export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
       <Item label={'Giới tính'} divider={true}>
         <ItemContent>{history?.sex}</ItemContent>
       </Item>
-      <Item label={'Độ hài lòng'} divider={true}>
+      <Item label={'Trạng thái khách hàng'} divider={true}>
         <ItemContent>{history?.status}</ItemContent>
+      </Item>
+      <Item label={'Phân loại khách hàng'} divider={true}>
+        <ItemContent>{typeCustomer}</ItemContent>
+      </Item>
+      <Item label={'Số lần ghé thăm'} divider={true}>
+        <ItemContent>{history?.visit}</ItemContent>
       </Item>
       <Item label={'Ghé thăm lúc'} divider={true}>
         <ItemContent>

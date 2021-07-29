@@ -31,7 +31,7 @@ export const requestCreateDepartment = async (name: string) => {
       name: name,
     },
   );
-  console.log(data.data);
+
   const newQuery = [
     data.data.id,
     ...(store.getState().department.query['all'] || []),

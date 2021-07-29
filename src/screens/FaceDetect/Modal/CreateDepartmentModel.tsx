@@ -7,6 +7,7 @@ import {useAsyncFn} from '@/hooks/useAsyncFn';
 import SubmitButtonColor from '@/components/button/ButtonSubmit';
 import {requestCreateDepartment} from '@/store/department/functions';
 import {goBack} from '@/utils/navigation';
+import ToastService from '@/services/ToastService';
 
 export interface ParamCreateCustomer {
   age: number;
@@ -19,7 +20,10 @@ export const CreateDepartmentModel = memo(function CreateDepartmentModel() {
   const [name, setName] = useState('');
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
-    await requestCreateDepartment(name);
+    const data = await requestCreateDepartment(name);
+    if (data?.id != undefined) {
+      ToastService.show('Thêm phòng ban thành công!');
+    }
     goBack();
   }, [name]);
 

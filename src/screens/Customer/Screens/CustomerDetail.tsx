@@ -33,7 +33,6 @@ export const CustomerDetail = memo(function CustomerDetail() {
     await requestGetCustomerDetail(id);
   }, [id]);
 
-  console.log(customer);
   const [{loading, error: errDelete}, onDelete] = useAsyncFn(async () => {
     const data = await requestRemoveCustomer(id);
 
@@ -70,6 +69,10 @@ export const CustomerDetail = memo(function CustomerDetail() {
     );
   }, [id]);
 
+  const gender = useMemo(() => {
+    return (customer?.gender || '') === 'Nam' ? 'Nam' : 'Nữ';
+  }, [customer?.gender]);
+
   return (
     <ScreenWrapper>
       <HeaderBack title={'Chi tiết khách hàng'} right={rightHeader} />
@@ -84,7 +87,7 @@ export const CustomerDetail = memo(function CustomerDetail() {
       </SViewAvatar>
 
       <Item label={'Giới tính'} divider={true}>
-        <ItemContent>{customer?.gender}</ItemContent>
+        <ItemContent>{gender}</ItemContent>
       </Item>
       <Item label={'Tuổi'} divider={true}>
         <ItemContent>{customer?.age}</ItemContent>
@@ -95,7 +98,7 @@ export const CustomerDetail = memo(function CustomerDetail() {
       <Item label={'Số lần ghé thăm'} divider={true}>
         <ItemContent>{customer?.visitNumber}</ItemContent>
       </Item>
-      <Item label={'Số đến gần nhất'} divider={true}>
+      <Item label={'Lần ghé thăm gần nhất'} divider={true}>
         <ItemContent>{customer?.lastVisit}</ItemContent>
       </Item>
 

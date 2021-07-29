@@ -36,7 +36,7 @@ export const requestGetCustomerDetail = async (id: string) => {
   );
 
   batch(() => {
-    syncCustomer(data.data.customer);
+    syncCustomer([data.data.customer]);
   });
 };
 
@@ -59,7 +59,6 @@ export const requestRemoveCustomer = async (idRemove: string) => {
     `${urlProduct}/api/v1/customer/customer/${idRemove}`,
   );
 
-  console.log(data,idRemove)
   if (data) {
     const list = getStore()
       .getState()

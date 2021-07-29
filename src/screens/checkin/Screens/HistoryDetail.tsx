@@ -27,6 +27,10 @@ export const HistoryDetail = memo(function HistoryDetail() {
         <STextName>{history?.name}</STextName>
       </SViewAvatar>
 
+      <Item label={'Mã nhân viên'} divider={true}>
+        <ItemContent>{history?.employeeID}</ItemContent>
+      </Item>
+
       <Item label={'Checkin'} divider={true}>
         <ItemContent>{history?.checkIn}</ItemContent>
       </Item>
