@@ -10,8 +10,7 @@ const Wrapper = styled(TouchableOpacity)<{
   flex-direction: row;
   align-items: center;
   height: 44px;
-  background-color: ${(p) =>
-    p.disabled ? Colors.grey5 : p.colorButton + '15'};
+  background-color: ${(p) => p.colorButton + '15'};
   justify-content: center;
   border-radius: 8px;
   margin: ${(p) => (p.withMargin ? '16px 16px 16px' : 0)};
@@ -62,10 +61,11 @@ export const SubmitButtonColor = memo(function SubmitButtonColor({
       withMargin={withMargin}>
       {loading ? (
         <SLoadingIndicator color={color || Colors.blue1} size={24} />
-      ) : null}
-      <Title style={textStyle} colorButton={color || '#007AFF'}>
-        {title}
-      </Title>
+      ) : (
+        <Title style={textStyle} colorButton={color || '#007AFF'}>
+          {title}
+        </Title>
+      )}
     </Wrapper>
   );
 });

@@ -25,7 +25,7 @@ export interface HistoryProps {
 }
 export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
   const [params, setParams] = useState<HistoryProps>({
-    dateStart: moment(new Date(), 'X').unix(),
+    dateStart: moment(new Date(), 'X').startOf('day').unix(),
   });
   const ListHistory = useHistoryByQuery(String(params?.dateStart));
 
@@ -43,7 +43,11 @@ export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
     [params],
   );
 
-  const {call, error, loading: loadingData} = useAsyncEffect(async () => {
+  const {
+    call,
+    error,
+    loading: loadingData,
+  } = useAsyncEffect(async () => {
     if (params.dateStart != '') {
       await requestGetHistoryList(params);
     }

@@ -6,12 +6,12 @@ import {ParamCreateCustomer} from '@/screens/Customer/Modal/ModalCreateCustomer'
 import {urlProduct} from '@/store/types';
 import store from '@/store';
 
-export const requestGetCustomer = async () => {
+export const requestGetCustomer = async (page: number) => {
   const {data} = await Fetch.get<{data: any}>(
     `${urlProduct}/api/v1/customer/list-customer`,
     {
       params: {
-        page: 1,
+        page: page,
         limit: 100,
       },
     },
@@ -25,6 +25,7 @@ export const requestGetCustomer = async () => {
       });
     });
   }
+  return data?.data?.listCustomer || [];
 };
 
 export const requestGetCustomerDetail = async (id: string) => {
@@ -38,6 +39,7 @@ export const requestGetCustomerDetail = async (id: string) => {
   batch(() => {
     syncCustomer([data.data.customer]);
   });
+  return data?.data?.customer;
 };
 
 export const requestEditCustomer = async (
@@ -75,7 +77,7 @@ export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
     `${urlProduct}/api/v1/customer/customer`,
     params,
   );
-  console.log(data, params)
+  console.log(data, params);
   const newQuery = [
     data.data.newCustomer.id,
     ...(store.getState().customer.query['all'] || []),

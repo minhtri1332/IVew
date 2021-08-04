@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useState} from 'react';
 import {styled} from '@/global';
 import {SAvatar, ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
@@ -6,28 +6,33 @@ import {useNavigationParams} from '@/hooks/useNavigationParams';
 import {Item, ItemContent} from '@/components/ViewItem';
 import {useCustomerRecord} from '@/store/customerRecord';
 import moment from 'moment';
+import {useAsyncFn} from '@/hooks/useAsyncFn';
+import {
+  requestGetCustomerDetail,
+  requestRemoveCustomer,
+} from '@/store/customer/functions';
+import {goBack} from '@/utils/navigation';
+import {useAsyncEffect} from '@/hooks/useAsyncEffect';
+import {RawCustomer} from '@/store/customer/types';
 
 export interface CustomerRecordDetailProps {
   id: string;
 }
 
 export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
+  const [customer, setCustomer] = useState({} as RawCustomer);
   const {id} = useNavigationParams<CustomerRecordDetailProps>();
   const history = useCustomerRecord(id);
-
-  const typeCustomer = useMemo(() => {
-    let type: string = '';
-    if (Number(history?.visit || '0') == 1) {
-      type = 'Khách lạ (đến lần đầu)';
+  const {
+    call,
+    error,
+    loading: loadingData,
+  } = useAsyncEffect(async () => {
+    if (history?.customerID) {
+      const data = await requestGetCustomerDetail(history.customerID);
+      setCustomer(data);
     }
-    if (Number(history?.visit || '0') > 1) {
-      type = 'Khách quen';
-    }
-    if (Number(history?.visit || '0') > 15) {
-      type = 'Khách Vip';
-    }
-    return type;
-  }, [history?.visit]);
+  }, [history]);
 
   return (
     <ScreenWrapper>
@@ -48,11 +53,11 @@ export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
       <Item label={'Giới tính'} divider={true}>
         <ItemContent>{history?.sex}</ItemContent>
       </Item>
+      <Item label={'Số điện thoại'} divider={true}>
+        <ItemContent>{customer?.telephone}</ItemContent>
+      </Item>
       <Item label={'Trạng thái khách hàng'} divider={true}>
         <ItemContent>{history?.status}</ItemContent>
-      </Item>
-      <Item label={'Phân loại khách hàng'} divider={true}>
-        <ItemContent>{typeCustomer}</ItemContent>
       </Item>
       <Item label={'Số lần ghé thăm'} divider={true}>
         <ItemContent>{history?.visit}</ItemContent>

@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
 import {FlatList, ListRenderItem, RefreshControl} from 'react-native';
@@ -15,11 +15,28 @@ const keyExtractor = (item: any, index: number) => {
 };
 
 export const CustomerScreen = memo(function CustomerScreen() {
+  const [page, setPage] = useState(1);
   const data = useCustomerByQuery('all');
 
-  const {call, error, loading: loadingData} = useAsyncEffect(async () => {
-    await requestGetCustomer();
-  }, []);
+  const {
+    call,
+    error,
+    loading: loadingData,
+  } = useAsyncEffect(async () => {
+    const data = await requestGetCustomer(page);
+    if (data && data.length > 99) {
+      setPage(page + 1);
+    }
+  }, [page]);
+
+  const updateList = useCallback(async () => {
+    await call();
+  }, [page]);
+
+  const refreshList = useCallback(async () => {
+    await setPage(1);
+    await call();
+  }, [page]);
 
   const renderItem: ListRenderItem<string> = useCallback(({item}) => {
     return <ItemCustomer customerId={item} />;
@@ -39,8 +56,10 @@ export const CustomerScreen = memo(function CustomerScreen() {
         keyExtractor={keyExtractor}
         data={data}
         renderItem={renderItem}
+        onEndReachedThreshold={0.4}
+        onEndReached={updateList}
         refreshControl={
-          <RefreshControl refreshing={loadingData} onRefresh={call} />
+          <RefreshControl refreshing={loadingData} onRefresh={refreshList} />
         }
       />
 

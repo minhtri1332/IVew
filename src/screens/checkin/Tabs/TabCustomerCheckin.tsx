@@ -5,6 +5,7 @@ import {
   FlatList,
   ListRenderItem,
   RefreshControl,
+  StyleSheet,
   Text,
   View,
 } from 'react-native';
@@ -32,8 +33,8 @@ export interface CustomerRecordProps {
 export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const data = useCustomerRecordByQuery('all');
   const [params, setParams] = useState<CustomerRecordProps>({
-    dateStart: moment(new Date(), 'X').unix(),
-    dateEnd: moment(new Date(), 'X').unix(),
+    dateStart: moment(new Date(), 'X').startOf('day').unix(),
+    dateEnd: moment(new Date(), 'X').startOf('day').unix(),
     limit: 100,
     page: 1,
   });
@@ -47,19 +48,8 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
     },
     [params],
   );
-
-  const {
-    call,
-    error,
-    loading: loadingData,
-  } = useAsyncEffect(async () => {
-    const paramsBegin: CustomerRecordProps = {
-      dateStart: moment(params.dateStart, 'X').startOf('day').unix(),
-      dateEnd: moment(params.dateEnd, 'X').endOf('day').unix(),
-      limit: 100,
-      page: 1,
-    };
-    await requestFilterCustomer(paramsBegin);
+  const [{loading: loadingData, error}, call] = useAsyncFn(async () => {
+    await requestFilterCustomer(params);
   }, [params]);
 
   useEffect(() => {
@@ -67,18 +57,20 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   }, []);
 
   const [{loading, error: errorFilter}, filterDate] = useAsyncFn(async () => {
-    const paramsBegin: CustomerRecordProps = {
-      dateStart: moment(params.dateStart, 'X').startOf('day').unix(),
-      dateEnd: moment(params.dateEnd, 'X').endOf('day').unix(),
-      limit: 100,
-      page: 1,
-    };
-    await requestFilterCustomer(paramsBegin);
+    const data = await requestFilterCustomer(params);
+
+    if (data && data.length > 99) {
+      setParamCustom(String(Number(params.page) + 1), 'page');
+    }
   }, [params]);
 
   const renderItem: ListRenderItem<string> = useCallback(({item}) => {
     return <ItemCustomerRecord id={item} />;
   }, []);
+
+  const updateList = useCallback(async () => {
+    await filterDate();
+  }, [params, setParamCustom]);
 
   const renderEmpty = useMemo(() => {
     return (
@@ -104,7 +96,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
           keyName={'dateStart'}
           mode={'date'}
           onChangeValue={setParamCustom}
-          containerStyle={{flex: 1, marginRight: 8}}
+          containerStyle={styles.dateLeft}
           format={'YYYY-MM-DD'}
         />
         <DateTimeBorder
@@ -114,15 +106,16 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
           keyName={'dateEnd'}
           mode={'date'}
           onChangeValue={setParamCustom}
-          containerStyle={{flex: 1, marginLeft: 8}}
+          containerStyle={styles.dateRight}
           format={'YYYY-MM-DD'}
         />
       </SViewSelect>
 
       <SubmitButtonColor
-        style={{marginTop: 8, marginBottom: 8}}
+        style={styles.button}
         title={'Tìm kiếm'}
         onPress={filterDate}
+        loading={loading}
       />
 
       <FlatList
@@ -130,12 +123,26 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
         data={data}
         renderItem={renderItem}
         ListEmptyComponent={renderEmpty}
-        refreshControl={
-          <RefreshControl refreshing={loadingData} onRefresh={call} />
-        }
+        onEndReachedThreshold={0.4}
+        onEndReached={updateList}
       />
     </ScreenWrapper>
   );
+});
+
+const styles = StyleSheet.create({
+  dateLeft: {
+    flex: 1,
+    marginLeft: 8,
+  },
+  dateRight: {
+    flex: 1,
+    marginLeft: 8,
+  },
+  button: {
+    marginTop: 8,
+    marginBottom: 8,
+  },
 });
 
 const SViewSelect = styled.View`
