@@ -21,6 +21,17 @@ export const ItemHome = memo(function ItemHome({
     </SViewContainerHome>
   );
 });
+
+export const ItemEmpty = memo(function ItemEmpty() {
+  return <SViewContainerEmpty></SViewContainerEmpty>;
+});
+const SViewContainerEmpty = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 16px;
+`;
 const SViewContainerHome = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;

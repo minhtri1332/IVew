@@ -2,9 +2,10 @@ import React, {memo, useCallback} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {HomeHeader} from '@/components/HomeHeader';
-import {ItemHome} from '@/screens/Home/components/ItemHome';
+import {ItemEmpty, ItemHome} from '@/screens/Home/components/ItemHome';
 import {
   IC_CHECKIN_EMPLOYEE,
+  IC_CHECKIN_FACE,
   IC_DETECT_FACE,
   IC_HOME_CHECKIN,
   IC_HOME_SCAN,
@@ -12,6 +13,7 @@ import {
 import {
   navigateComingSoonScreen,
   navigateToCustomerScreen,
+  navigateToFaceCheckinScreen,
   navigateToHistoryScreen,
   openFaceDetectScreen,
   openModalCreateCustomer,
@@ -70,31 +72,25 @@ export const HomeScreen = memo(function HomeScreen() {
             icon={IC_CHECKIN_EMPLOYEE}
             label={'Khách hàng'}
             onPress={navigateToCustomerScreen}
-            //navigateToHeadMapScreen
           />
 
-          {/*<ItemHome*/}
-          {/*  icon={IC_HOME_HEAD_MAP}*/}
-          {/*  label={'Sơ đồ'}*/}
-          {/*  onPress={navigateComingSoonScreen}*/}
-          {/*  //navigateToHeadMapScreen*/}
-          {/*/>*/}
+          <ItemHome
+            icon={IC_CHECKIN_FACE}
+            label={'Chấm công'}
+            onPress={navigateToFaceCheckinScreen}
+          />
+        </SViewFunction>
+
+        <SViewFunction>
           <ItemHome
             icon={IC_HOME_SCAN}
             label={'Quét văn bản'}
             onPress={navigateComingSoonScreen}
             //navigateToMScanScreen
           />
+
+          <ItemEmpty />
         </SViewFunction>
-
-        {/*<SViewFunction>*/}
-        {/*  <ItemHome*/}
-        {/*    icon={IC_HOME_SERVICE}*/}
-        {/*    label={'Dịch vụ'}*/}
-        {/*    onPress={navigateToMServiceScreen}*/}
-
-        {/*  />*/}
-        {/*</SViewFunction>*/}
       </Container>
 
       <SelectTypesCreateModal

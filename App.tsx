@@ -9,6 +9,7 @@ import messaging, {firebase} from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
 import {requestMessageCheckin} from './src/store/notification/functions';
 import Toast from 'react-native-simple-toast';
+import FaceCheckinScreen from './src/screens/FaceCheckin/FaceCheckinScreen';
 YellowBox.ignoreWarnings(['']);
 
 export const App = memo(() => {
@@ -89,7 +90,8 @@ export const App = memo(() => {
           backgroundColor={'transparent'}
           barStyle="light-content"
         />
-        <Routes />
+        {/*<Routes />*/}
+        <FaceCheckinScreen/>
       </PersistGate>
     </Provider>
   );

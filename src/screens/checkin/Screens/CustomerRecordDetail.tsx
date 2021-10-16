@@ -6,7 +6,7 @@ import {useNavigationParams} from '@/hooks/useNavigationParams';
 import {Item, ItemContent} from '@/components/ViewItem';
 import {useCustomerRecord} from '@/store/customerRecord';
 import moment from 'moment';
-import {useAsyncFn} from '@/hooks/useAsyncFn';
+
 import {
   requestGetCustomerDetail,
   requestRemoveCustomer,
