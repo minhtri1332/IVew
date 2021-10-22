@@ -40,7 +40,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>CXView cần quyền truy cập camera để có thể chụp ảnh nhân viên</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+  <string>CXView cần quyền truy cập vị trí để lấy tọa độ checkin</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>CXView cần quyền truy cập micro để quay video và thu tiếng.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

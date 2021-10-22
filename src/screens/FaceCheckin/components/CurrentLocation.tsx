@@ -1,5 +1,9 @@
 import React, {memo, useCallback, useRef} from 'react';
-import MapView, {EventUserLocation, MapViewProps} from 'react-native-maps';
+import MapView, {
+  EventUserLocation,
+  MapViewProps,
+  PROVIDER_DEFAULT,
+} from 'react-native-maps';
 import PermissionFunction from '@/components/Permission';
 import {Permission, PERMISSIONS} from 'react-native-permissions';
 import {styled} from '@/global';
@@ -47,13 +51,13 @@ export const CurrentLocation = memo(function LocationValidation() {
     scrollEnabled: false,
     cacheEnabled: true,
     loadingEnabled: true,
-    zoomEnabled: false,
-    zoomControlEnabled: false,
-    zoomTapEnabled: false,
+    zoomEnabled: true,
+    zoomControlEnabled: true,
+    zoomTapEnabled: true,
     pitchEnabled: false,
     rotateEnabled: false,
     toolbarEnabled: false,
-    provider: 'google',
+    provider: PROVIDER_DEFAULT,
     onUserLocationChange,
   };
 
@@ -66,7 +70,7 @@ export const CurrentLocation = memo(function LocationValidation() {
         }) as Permission
       }>
       <SMapView
-        as={interactionReady ? MapView : <ActivityIndicator/>}
+        as={interactionReady ? MapView : <ActivityIndicator />}
         {...mapViewProps}
       />
     </PermissionFunction>
