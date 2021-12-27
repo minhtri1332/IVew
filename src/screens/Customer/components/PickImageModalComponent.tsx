@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 // @ts-ignore
@@ -11,29 +11,29 @@ import {FileType} from '@/types';
 
 interface ImageParams {
   onImageCallback: (keyName: string, value: any) => void;
+  imageDefault?: string;
 }
 
 export const PickImageModalComponent = memo(function PickImageModalComponent({
   onImageCallback,
+  imageDefault,
 }: ImageParams) {
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(imageDefault);
   const [isFilePickerVisible, showFilePicker, hideFilePicker] = useBoolean();
-  // const pickAvatar = useCallback(async () => {
-  //   const file = await File.pickImage({multiple: false} || {});
-  //
-  //   RNFetchBlob.fs.readFile(file[0].uri, 'base64').then((data) => {
-  //     onImageCallback('image', `data:image/jpeg;base64,${data}`);
-  //     setAvatar(file[0].uri);
-  //   });
-  // }, [onImageCallback]);
+  useEffect(() => {
+    setAvatar(imageDefault);
+  }, [imageDefault]);
 
-  const fileCallback = useCallback((files: FileType[]) => {
-    RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
-      onImageCallback('image', `data:image/jpeg;base64,${data}`);
-      setAvatar(files[0].uri);
-    });
-    hideFilePicker();
-  }, []);
+  const fileCallback = useCallback(
+    (files: FileType[]) => {
+      RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
+        onImageCallback('image', `data:image/jpeg;base64,${data}`);
+        setAvatar(files[0].uri);
+      });
+      hideFilePicker();
+    },
+    [onImageCallback],
+  );
 
   return (
     <SViewContainer>

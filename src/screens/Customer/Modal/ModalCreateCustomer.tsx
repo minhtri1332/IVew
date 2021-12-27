@@ -27,9 +27,11 @@ export interface ParamCreateCustomer {
   name: string;
   gender: string;
   telephone: string;
+  image: string;
+  customerType: string;
 }
 
-const paramGender = ['Nam', 'Nữ'];
+const paramGender = ['female', 'male'];
 
 export interface ModalCreateCustomerProps {
   id?: string;
@@ -44,12 +46,15 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const {id} = useNavigationParams<ModalCreateCustomerProps>();
 
   const customer = useCustomer(id);
+
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
     id: customer ? customer.id : '',
     name: customer ? customer.name : '',
     age: customer ? customer.age : 0,
     telephone: customer ? customer.telephone : '',
     gender: customer ? customer.gender : '',
+    image: customer ? customer.image : '',
+    customerType: '',
   });
 
   const setParamCustom = useCallback(
@@ -86,7 +91,9 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   }, [paramGender]);
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
+    console.log(paramCustomer);
     if (id) {
+      console.log('suwa');
       await requestEditCustomer(id, paramCustomer);
       ToastService.show('Sửa thành công!');
     } else {
@@ -120,7 +127,10 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           right={rightHeader}
         />
 
-        {!id && <PickImageModalComponent onImageCallback={setParamCustom} />}
+        <PickImageModalComponent
+          imageDefault={paramCustomer.image}
+          onImageCallback={setParamCustom}
+        />
 
         <SInputBorder
           value={paramCustomer.name}

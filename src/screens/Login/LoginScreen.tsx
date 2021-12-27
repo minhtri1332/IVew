@@ -22,8 +22,8 @@ const SInputBorder = styled(InputBorder).attrs({
 
 export const LoginScreen = memo(function LoginScreen() {
   const buildVersion = DeviceInfo.getVersion();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('scid_demo@cxview.ai');
+  const [password, setPassword] = useState('meditech1234');
 
   const onTextChange = useCallback((keyname: string, value: string) => {
     if (keyname == 'username') {

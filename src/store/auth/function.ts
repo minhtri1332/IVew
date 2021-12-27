@@ -8,10 +8,10 @@ export const requestLogin = async (userName: string, pass: string) => {
   });
 
   const {data} = await Fetch.post<{token: string}>(
-    `${urlProduct}/api/v1/login`,
+    `${urlProduct}/api/v1/user-management/login`,
     params,
   );
-  console.log(data);
+
   if (!data) {
     return null;
   }

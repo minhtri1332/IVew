@@ -7,39 +7,34 @@ import {urlProduct} from '@/store/types';
 import store from '@/store';
 
 export const requestGetCustomer = async (page: number) => {
-  const {data} = await Fetch.get<{data: any}>(
-    `${urlProduct}/api/v1/customer/list-customer`,
-    {
-      params: {
-        page: page,
-        limit: 100,
-      },
-    },
+  const {data} = await Fetch.get<{listResponse: any}>(
+    `${urlProduct}/api/v1/customer-management/list-customer`,
+    {},
   );
 
-  if (data.data.listCustomer) {
+  if (data.listResponse) {
     batch(() => {
-      syncCustomer(data.data.listCustomer);
+      syncCustomer(data.listResponse);
       setCustomerQueries({
-        all: data.data.listCustomer.map((item: any) => item.id),
+        all: data.listResponse.map((item: any) => item.id),
       });
     });
   }
-  return data?.data?.listCustomer || [];
+  return data?.listResponse || [];
 };
 
 export const requestGetCustomerDetail = async (id: string) => {
-  const {data} = await Fetch.get<{data: any}>(
-    `${urlProduct}/api/v1/customer/customer/${id}`,
+  const {data} = await Fetch.get<{response: any}>(
+    `${urlProduct}/api/v1/customer-management/get-detail-customer/${id}`,
     {
       params: {},
     },
   );
 
   batch(() => {
-    syncCustomer([data.data.customer]);
+    syncCustomer([data.response]);
   });
-  return data?.data?.customer;
+  return data?.response;
 };
 
 export const requestEditCustomer = async (
@@ -47,7 +42,7 @@ export const requestEditCustomer = async (
   params?: ParamCreateCustomer,
 ) => {
   const {data} = await Fetch.put(
-    `${urlProduct}/api/v1/customer/customer/${id}`,
+    `${urlProduct}/api/v1/customer-management/update-customer/${id}`,
     params,
   );
 
@@ -58,7 +53,7 @@ export const requestEditCustomer = async (
 };
 export const requestRemoveCustomer = async (idRemove: string) => {
   const {data} = await Fetch.delete<{data: any}>(
-    `${urlProduct}/api/v1/customer/customer/${idRemove}`,
+    `${urlProduct}/api/v1/customer-management/delete-customer/${idRemove}`,
   );
 
   if (data) {
@@ -74,7 +69,7 @@ export const requestRemoveCustomer = async (idRemove: string) => {
 
 export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
   const {data} = await Fetch.post(
-    `${urlProduct}/api/v1/customer/customer`,
+    `${urlProduct}/api/v1/customer-management/add-customer`,
     params,
   );
   console.log(data, params);
