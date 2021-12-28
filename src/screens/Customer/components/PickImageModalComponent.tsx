@@ -26,10 +26,11 @@ export const PickImageModalComponent = memo(function PickImageModalComponent({
 
   const fileCallback = useCallback(
     (files: FileType[]) => {
-      RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
-        onImageCallback('image', `data:image/jpeg;base64,${data}`);
-        setAvatar(files[0].uri);
-      });
+      // RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
+      //
+      // });
+      onImageCallback('image', files[0]);
+      setAvatar(files[0].uri);
       hideFilePicker();
     },
     [onImageCallback],

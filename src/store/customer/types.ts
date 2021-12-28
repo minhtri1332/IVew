@@ -1,7 +1,7 @@
 export interface RawCustomer {
   id: string;
   name: string;
-  age: number;
+  age: string;
   gender: string;
   image: string;
   telephone: string;

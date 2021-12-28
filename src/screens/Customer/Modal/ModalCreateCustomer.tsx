@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo, useState} from 'react';
+import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {HeaderBack} from '@/components/HeaderBack';
 import PickImageModalComponent from '@/screens/Customer/components/PickImageModalComponent';
 import {styled} from '@/global';
@@ -22,12 +22,12 @@ import {TakeCameraOptions} from '@/utils/file';
 import ToastService from '@/services/ToastService';
 
 export interface ParamCreateCustomer {
-  id: string;
-  age: number;
+  id?: string;
+  age: string;
   name: string;
   gender: string;
   telephone: string;
-  image: string;
+  image: any;
   customerType: string;
 }
 
@@ -48,17 +48,17 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
   const customer = useCustomer(id);
 
   const [paramCustomer, setParamCustomer] = useState<ParamCreateCustomer>({
-    id: customer ? customer.id : '',
     name: customer ? customer.name : '',
-    age: customer ? customer.age : 0,
+    age: customer ? customer.age : '',
     telephone: customer ? customer.telephone : '',
     gender: customer ? customer.gender : '',
     image: customer ? customer.image : '',
-    customerType: '',
+    customerType: 'anotherType',
   });
 
   const setParamCustom = useCallback(
     (keyName: string, value: any) => {
+      console.log(keyName, value);
       setParamCustomer({
         ...paramCustomer,
         [keyName]: value,
@@ -66,6 +66,12 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     },
     [paramCustomer],
   );
+
+  useEffect(() => {
+    if (id) {
+      setParamCustom('id', id);
+    }
+  }, [id]);
 
   const setParamCustomNumber = useCallback(
     (keyName: string, value: any) => {
@@ -128,7 +134,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
         />
 
         <PickImageModalComponent
-          imageDefault={paramCustomer.image}
+          imageDefault={paramCustomer?.image?.uri || paramCustomer.image}
           onImageCallback={setParamCustom}
         />
 

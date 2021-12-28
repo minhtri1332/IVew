@@ -68,18 +68,31 @@ export const requestRemoveCustomer = async (idRemove: string) => {
 };
 
 export const requestAddCustomer = async (params?: ParamCreateCustomer) => {
+  const formData = new FormData();
+  formData.append('image', params?.image);
+  formData.append('age', params?.age);
+  formData.append('name', params?.name);
+  formData.append('telephone', params?.telephone);
+  formData.append('customerType', params?.customerType);
+  formData.append('gender', params?.gender);
+
   const {data} = await Fetch.post(
     `${urlProduct}/api/v1/customer-management/add-customer`,
-    params,
+    formData,
   );
-  console.log(data, params);
+
   const newQuery = [
-    data.data.newCustomer.id,
+    data.listResponse.id,
     ...(store.getState().customer.query['all'] || []),
   ];
 
+  const newCustomer = {
+    ...data.listResponse,
+    image: params?.image.uri,
+  };
+
   batch(() => {
-    syncCustomer([data.data.newCustomer]);
+    syncCustomer([newCustomer]);
     setCustomerQueries({
       all: newQuery,
     });

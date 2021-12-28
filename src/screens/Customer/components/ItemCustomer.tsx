@@ -16,7 +16,7 @@ export const ItemCustomer = memo(function ItemCustomer({
   customerId,
 }: ItemCustomerProps) {
   const customer = useCustomer(customerId);
-
+  console.log(customer);
   const onPress = useCallback(() => {
     navigateToCustomerDetailScreen({id: customerId});
   }, [customerId]);
@@ -33,7 +33,7 @@ export const ItemCustomer = memo(function ItemCustomer({
         style={{borderWidth: 1, borderColor: Colors.grey6, borderRadius: 40}}>
         <SAvatar
           source={{
-            uri: customer?.image,
+            uri: customer?.image?.path || customer?.image,
           }}
           size={40}
         />
