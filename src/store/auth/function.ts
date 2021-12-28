@@ -1,14 +1,14 @@
 import {Fetch, updateFetchToken} from '@/utils/fetch';
-import {urlProduct} from '@/store/types';
+import LocaleServiceUrl, {urlProduct} from '@/store/types';
 
 export const requestLogin = async (userName: string, pass: string) => {
   const params = JSON.stringify({
     email: userName,
     password: pass,
   });
-
+  console.log(`${LocaleServiceUrl.getUrl()}/api/v1/user-management/login`);
   const {data} = await Fetch.post<{token: string}>(
-    `${urlProduct}/api/v1/user-management/login`,
+    `${LocaleServiceUrl.getUrl()}/api/v1/user-management/login`,
     params,
   );
 

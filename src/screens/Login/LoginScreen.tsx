@@ -13,6 +13,7 @@ import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestLogin} from '@/store/auth/function';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
 import DeviceInfo from 'react-native-device-info';
+import LocaleServiceUrl from '@/store/types';
 
 const SInputBorder = styled(InputBorder).attrs({
   containerStyle: {
@@ -104,12 +105,22 @@ export const LoginScreen = memo(function LoginScreen() {
         </Bottom>
       </SViewBox>
 
-      <STextVersion>Phiên bản {buildVersion}</STextVersion>
+      <SButton
+        onPress={() => {
+          LocaleServiceUrl.change();
+        }}>
+        <STextVersion>Reset</STextVersion>
+        <STextVersion>Phiên bản {buildVersion}</STextVersion>
+      </SButton>
     </Container>
   );
 });
 
 const STextVersion = styled.Text``;
+const SButton = styled.TouchableOpacity`
+  padding-left: 8px;
+  padding-bottom: 4px;
+`;
 const SImageBackground = styled.Image`
   flex: 1;
   width: 100%;
