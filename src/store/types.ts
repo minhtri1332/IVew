@@ -16,7 +16,7 @@ export const urlProductMain = 'https://api.cxview.ai';
 // https://api.cxview.ai
 
 class ServiceClass {
-  private urlProduct: string = 'https://api.cxview.ai';
+  private urlProduct: string = 'https://api.cxview.ai:8081';
 
   getUrl = () => {
     return this.urlProduct;

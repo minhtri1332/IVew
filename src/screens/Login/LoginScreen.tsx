@@ -1,7 +1,13 @@
 import React, {memo, useCallback, useEffect, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
-import {ActivityIndicator, KeyboardAvoidingView, Platform} from 'react-native';
+import {
+  ActivityIndicator,
+  InteractionManager,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {InputBorder} from '@/components/ViewBorder/InputBorder';
 import {BG_LOGIN, IC_LOGO_APP} from '@/assets';
 import {
@@ -13,7 +19,8 @@ import {useAsyncFn} from '@/hooks/useAsyncFn';
 import {requestLogin} from '@/store/auth/function';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
 import DeviceInfo from 'react-native-device-info';
-import LocaleServiceUrl from '@/store/types';
+import LocaleServiceUrl, {urlProduct} from '@/store/types';
+import ToastService from '@/services/ToastService';
 
 const SInputBorder = styled(InputBorder).attrs({
   containerStyle: {
@@ -23,6 +30,8 @@ const SInputBorder = styled(InputBorder).attrs({
 
 export const LoginScreen = memo(function LoginScreen() {
   const buildVersion = DeviceInfo.getVersion();
+  const [url, setUrl] = useState(LocaleServiceUrl.getUrl());
+
   const [username, setUsername] = useState('scid_demo@cxview.ai');
   const [password, setPassword] = useState('meditech1234');
 
@@ -52,13 +61,15 @@ export const LoginScreen = memo(function LoginScreen() {
   }, []);
 
   const [{loading}, startLogin] = useAsyncFn(async () => {
-    const response = await requestLogin(username, password);
-
-    if (response) {
-      await LocalStorageHelper.set('username', username);
-      await LocalStorageHelper.set('password', password);
-      replaceWithMainScreen();
-    }
+    Keyboard.dismiss();
+    InteractionManager.runAfterInteractions(async () => {
+      const response = await requestLogin(username, password);
+      if (response) {
+        await LocalStorageHelper.set('username', username);
+        await LocalStorageHelper.set('password', password);
+        replaceWithMainScreen();
+      }
+    });
   }, [username, password]);
 
   return (
@@ -108,8 +119,12 @@ export const LoginScreen = memo(function LoginScreen() {
       <SButton
         onPress={() => {
           LocaleServiceUrl.change();
-        }}>
-        <STextVersion>Reset</STextVersion>
+          setUrl(LocaleServiceUrl.getUrl());
+        }}
+      >
+        <STextVersion>
+          Reset{url == urlProduct ? ': Test' : ' :Product'}
+        </STextVersion>
         <STextVersion>Phiên bản {buildVersion}</STextVersion>
       </SButton>
     </Container>

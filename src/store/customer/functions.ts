@@ -12,15 +12,16 @@ export const requestGetCustomer = async () => {
     {},
   );
 
-  if (data.listResponse) {
-    batch(() => {
-      syncCustomer(data.listResponse);
-      setCustomerQueries({
-        all: data.listResponse.map((item: any) => item.id),
-      });
+  const result = (data && data?.listResponse) || [];
+
+  batch(() => {
+    syncCustomer(result);
+    setCustomerQueries({
+      all: result.map((item: any) => item.id),
     });
-  }
-  return data?.listResponse || [];
+  });
+
+  return result;
 };
 
 export const requestGetCustomerDetail = async (id: string) => {

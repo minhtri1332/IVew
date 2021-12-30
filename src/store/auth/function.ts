@@ -6,7 +6,7 @@ export const requestLogin = async (userName: string, pass: string) => {
     email: userName,
     password: pass,
   });
-  console.log(`${LocaleServiceUrl.getUrl()}/api/v1/user-management/login`);
+
   const {data} = await Fetch.post<{token: string}>(
     `${LocaleServiceUrl.getUrl()}/api/v1/user-management/login`,
     params,

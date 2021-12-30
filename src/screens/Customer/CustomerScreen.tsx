@@ -57,7 +57,8 @@ export const CustomerScreen = memo(function CustomerScreen() {
     <ScreenWrapper>
       <HeaderBack title={'Tất cả khách hàng'} />
 
-      {interactionReady && loaded()?      <FlatList
+      {interactionReady && loaded()?
+        <FlatList
         keyExtractor={keyExtractor}
         data={data}
         renderItem={renderItem}

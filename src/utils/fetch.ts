@@ -25,7 +25,6 @@ Fetch.interceptors.response.use(
       if (error.response.data.message === 'Mã lỗi #10000') {
         return error.response.data;
       }
-      console.log(error.response.data);
       ToastService.showError(error.response.data.message, true, true, '');
       return error.response.data;
     }
