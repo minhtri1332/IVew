@@ -43,7 +43,7 @@ export const replaceWithMainScreen = createReplace(
   'HomeScreen'
 );
 
-export const navigateToLoginScreen = createPush(
+export const navigateToLoginScreen = createReplace(
   'LoginScreen'
 );
 

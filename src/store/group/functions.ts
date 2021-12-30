@@ -15,7 +15,6 @@ export const requestGetGroups = async () => {
     },
   );
 
-  console.log('data', data)
   batch(() => {
     syncGroup(data.data.listGroup);
     setGroupQueries({all: data.data.listGroup.map((item: any) => item.id)});

@@ -6,7 +6,7 @@ import {ParamCreateCustomer} from '@/screens/Customer/Modal/ModalCreateCustomer'
 import {urlProduct} from '@/store/types';
 import store from '@/store';
 
-export const requestGetCustomer = async (page: number) => {
+export const requestGetCustomer = async () => {
   const {data} = await Fetch.get<{listResponse: any}>(
     `${urlProduct}/api/v1/customer-management/list-customer`,
     {},
@@ -46,10 +46,14 @@ export const requestEditCustomer = async (
     params,
   );
 
-  batch(() => {
-    syncCustomer([data.data.customer]);
-  });
-  return data.data.customer;
+  if (data.message) {
+    await requestGetCustomerDetail(id);
+  }
+
+  // batch(() => {
+  //   syncCustomer([data.data.customer]);
+  // });
+  // return data.data.customer;
 };
 export const requestRemoveCustomer = async (idRemove: string) => {
   const {data} = await Fetch.delete<{data: any}>(

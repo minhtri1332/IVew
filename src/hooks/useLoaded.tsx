@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import {useUpdateEffect, useLatest} from '@base/core/hooks';
+import {useLatest, useUpdateEffect} from '@/hooks/index';
 
 export const useLoaded = (loading: boolean) => {
   const [loaded, setLoaded] = useState(false);

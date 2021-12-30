@@ -132,8 +132,8 @@ android {
         applicationId "vn.iview.android"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.0.7"
+        versionCode 9
+        versionName "1.0.8"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         missingDimensionStrategy 'react-native-camera', 'mlkit' // <--- replace general with mlkit

@@ -7,6 +7,5 @@ export const requestAddEmployee = async (params?: ParamEmployee) => {
     `${urlProduct}/api/v1/employee`,
     params,
   );
-  console.log('data', data)
   return data;
 };

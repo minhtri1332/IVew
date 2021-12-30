@@ -8,6 +8,8 @@ import PickFileActionsSheet from '@/components/PickFileActionsSheet';
 import {takeCameraOptions} from '@/screens/Customer/Modal/ModalCreateCustomer';
 import useBoolean from '@/hooks/useBoolean';
 import {FileType} from '@/types';
+import ImageResizer from 'react-native-image-resizer';
+import file from '@/utils/file';
 
 interface ImageParams {
   onImageCallback: (keyName: string, value: any) => void;
@@ -26,10 +28,20 @@ export const PickImageModalComponent = memo(function PickImageModalComponent({
 
   const fileCallback = useCallback(
     (files: FileType[]) => {
-      // RNFetchBlob.fs.readFile(files[0].uri, 'base64').then((data) => {
-      //
-      // });
-      onImageCallback('image', files[0]);
+      ImageResizer.createResizedImage(files[0].uri, 1000, 1000, 'JPEG', 10, 0)
+        .then((response) => {
+          const image = {
+            ...files[0],
+            path: response.uri,
+            uri: response.uri,
+          };
+          onImageCallback('image', image);
+        })
+        .catch((err) => {
+          // Oops, something went wrong. Check that the filename is correct and
+          // inspect err to get more details.
+        });
+
       setAvatar(files[0].uri);
       hideFilePicker();
     },

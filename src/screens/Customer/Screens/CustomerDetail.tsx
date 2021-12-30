@@ -70,7 +70,7 @@ export const CustomerDetail = memo(function CustomerDetail() {
   }, [id]);
 
   const gender = useMemo(() => {
-    return (customer?.gender || '') === 'Nam' ? 'Nam' : 'Nữ';
+    return (customer?.gender || '') === 'male' ? 'Nam' : 'Nữ';
   }, [customer?.gender]);
 
   return (

@@ -16,13 +16,13 @@ export const ItemCustomer = memo(function ItemCustomer({
   customerId,
 }: ItemCustomerProps) {
   const customer = useCustomer(customerId);
-  console.log(customer);
+
   const onPress = useCallback(() => {
     navigateToCustomerDetailScreen({id: customerId});
   }, [customerId]);
 
   const gender = useMemo(() => {
-    return (customer?.gender || '') === 'Nam' ? 'Nam' : 'Nữ';
+    return (customer?.gender || '') === 'male' ? 'Nam' : 'Nữ';
   }, [customer?.gender]);
 
   if (!customer) return null;

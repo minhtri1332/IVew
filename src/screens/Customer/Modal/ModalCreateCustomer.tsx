@@ -31,7 +31,7 @@ export interface ParamCreateCustomer {
   customerType: string;
 }
 
-const paramGender = ['female', 'male'];
+const paramGender = [{label: 'Nữ', value:'female'}, {label:'Nam', value:'male'}];
 
 export interface ModalCreateCustomerProps {
   id?: string;
@@ -58,7 +58,6 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
 
   const setParamCustom = useCallback(
     (keyName: string, value: any) => {
-      console.log(keyName, value);
       setParamCustomer({
         ...paramCustomer,
         [keyName]: value,
@@ -89,17 +88,15 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     let listFilterModel: FilterBoxOption[] = [];
     paramGender.map((item, index) => {
       listFilterModel.push({
-        label: item,
-        value: removeAccents(item),
+        label: item.label,
+        value: item.value,
       });
     });
     return listFilterModel;
   }, [paramGender]);
 
   const [{loading, error}, requestData] = useAsyncFn(async () => {
-    console.log(paramCustomer);
     if (id) {
-      console.log('suwa');
       await requestEditCustomer(id, paramCustomer);
       ToastService.show('Sửa thành công!');
     } else {
@@ -150,7 +147,6 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           keyName={'age'}
           onTextChange={setParamCustomNumber}
           placeHolder={'Tuổi'}
-          required={true}
           keyboardType={'numeric'}
         />
         <SInputBorder
@@ -158,7 +154,6 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           keyName={'telephone'}
           onTextChange={setParamCustom}
           placeHolder={'Số điện thoại'}
-          required={true}
           keyboardType={'numeric'}
           maxLength={10}
         />
@@ -171,6 +166,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           inputName={'gender'}
           onSelectOption={setParamCustom}
           flexDirection={true}
+          required={true}
         />
       </SContainer>
     </SViewKeyBroadAware>
