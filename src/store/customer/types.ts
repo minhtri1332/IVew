@@ -3,8 +3,10 @@ export interface RawCustomer {
   name: string;
   age: string;
   gender: string;
+  currentImage: string;
   image: string;
   telephone: string;
-  lastVisit: string;
+  status: string;
   visitNumber: string;
+  customerType: string;
 }
