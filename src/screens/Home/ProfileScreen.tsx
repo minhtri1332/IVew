@@ -1,9 +1,9 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {styled} from '@/global';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {HeaderBack} from '@/components/HeaderBack';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
-import {requestProfile} from '@/store/auth/function';
+import {requestLogout, requestProfile} from '@/store/auth/function';
 import {LineSeparator, ViewLineSpace} from '@/components/LineSeparator';
 import {ClickableItem, Item, ItemContent} from '@/components/ViewItem';
 import {ScreenWrapper} from '@/themes/BaseStyles';
@@ -13,6 +13,7 @@ import {Colors} from '@/themes/Colors';
 import DeviceInfo from 'react-native-device-info';
 import FastImage from 'react-native-fast-image';
 import {useDispatch} from 'react-redux';
+import ToastService from '@/services/ToastService';
 
 export const ProfileScreen = memo(function ProfileScreen() {
   const dispatch = useDispatch();
@@ -23,6 +24,12 @@ export const ProfileScreen = memo(function ProfileScreen() {
     setUser(user);
   }, []);
 
+  const logoutApp = useCallback(async () => {
+    await requestLogout().then();
+    logout(dispatch).then();
+    ToastService.show('Đăng xuất thành công');
+  }, []);
+
   return (
     <SView>
       <View style={styles.avatarContainer}>
@@ -31,8 +38,7 @@ export const ProfileScreen = memo(function ProfileScreen() {
           <FastImage
             style={styles.avatar}
             source={{
-              uri:
-                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+              uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
             }}
           />
         </SViewAvatar>
@@ -56,7 +62,7 @@ export const ProfileScreen = memo(function ProfileScreen() {
       </Item>
 
       <ClickableItem
-        onPress={() => logout(dispatch)}
+        onPress={logoutApp}
         labelStyle={{color: Colors.red1}}
         iconStyle={{tintColor: Colors.red1}}
         icon={IC_LOGOUT}

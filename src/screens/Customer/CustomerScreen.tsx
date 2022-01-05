@@ -1,7 +1,12 @@
 import React, {memo, useCallback, useState} from 'react';
 import {ScreenWrapper} from '@/themes/BaseStyles';
 import {HeaderBack} from '@/components/HeaderBack';
-import {FlatList, InteractionManager, ListRenderItem, RefreshControl} from 'react-native';
+import {
+  FlatList,
+  InteractionManager,
+  ListRenderItem,
+  RefreshControl,
+} from 'react-native';
 import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {useCustomerByQuery} from '@/store/customer';
 import {requestGetCustomer} from '@/store/customer/functions';
@@ -51,23 +56,26 @@ export const CustomerScreen = memo(function CustomerScreen() {
 
   useAutoToastError(error);
 
-  const loaded = useLoaded(loadingData)
+  const loaded = useLoaded(loadingData);
 
   return (
     <ScreenWrapper>
       <HeaderBack title={'Tất cả khách hàng'} />
 
-      {interactionReady && loaded()?
+      {interactionReady && loaded() ? (
         <FlatList
-        keyExtractor={keyExtractor}
-        data={data}
-        renderItem={renderItem}
-        onEndReachedThreshold={0.4}
-        onEndReached={updateList}
-        refreshControl={
-          <RefreshControl refreshing={loadingData} onRefresh={refreshList} />
-        }
-      />: <Loading/>}
+          keyExtractor={keyExtractor}
+          data={data}
+          renderItem={renderItem}
+          onEndReachedThreshold={0.4}
+          onEndReached={updateList}
+          refreshControl={
+            <RefreshControl refreshing={loadingData} onRefresh={refreshList} />
+          }
+        />
+      ) : (
+        <Loading />
+      )}
 
       <FloatingButton onPress={openCreate} />
     </ScreenWrapper>

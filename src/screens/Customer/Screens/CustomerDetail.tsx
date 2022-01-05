@@ -79,7 +79,8 @@ export const CustomerDetail = memo(function CustomerDetail() {
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: customer?.image,
+            uri:
+              customer?.image == '' ? customer?.currentImage : customer?.image,
           }}
           size={100}
         />
@@ -98,8 +99,11 @@ export const CustomerDetail = memo(function CustomerDetail() {
       <Item label={'Số lần ghé thăm'} divider={true}>
         <ItemContent>{customer?.visitNumber}</ItemContent>
       </Item>
-      <Item label={'Lần ghé thăm gần nhất'} divider={true}>
-        <ItemContent>{customer?.lastVisit}</ItemContent>
+      <Item label={'Trạng thái'} divider={true}>
+        <ItemContent>{customer?.status}</ItemContent>
+      </Item>
+      <Item label={'Kiểu khách hàng'} divider={true}>
+        <ItemContent>{customer?.customerType}</ItemContent>
       </Item>
 
       <SubmitButtonColor

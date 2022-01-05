@@ -29,6 +29,18 @@ export const requestTokenDevice = async (token: string) => {
 };
 
 export const requestProfile = async () => {
-  const {data} = await Fetch.get(`${urlProduct}/api/v1/user/user-detail`, {});
-  return data.data.data;
+  const {data} = await Fetch.get(
+    `${urlProduct}/api/v1/user-management/get-profile`,
+    {},
+  );
+  return data.data;
+};
+
+export const requestLogout = async () => {
+  const {data} = await Fetch.post(
+    `${urlProduct}/api/v1/user-management/logout`,
+    {},
+  );
+  console.log(data);
+  return data.data;
 };

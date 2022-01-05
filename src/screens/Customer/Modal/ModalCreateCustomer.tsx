@@ -31,7 +31,10 @@ export interface ParamCreateCustomer {
   customerType: string;
 }
 
-const paramGender = [{label: 'Nữ', value:'female'}, {label:'Nam', value:'male'}];
+const paramGender = [
+  {label: 'Nữ', value: 'female'},
+  {label: 'Nam', value: 'male'},
+];
 
 export interface ModalCreateCustomerProps {
   id?: string;
@@ -156,6 +159,12 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           placeHolder={'Số điện thoại'}
           keyboardType={'numeric'}
           maxLength={10}
+        />
+        <SInputBorder
+          value={paramCustomer.customerType}
+          keyName={'customerType'}
+          onTextChange={setParamCustom}
+          placeHolder={'Kiểu khách hàng'}
         />
         <CheckBoxBorder
           placeholder={'Giới tính'}
