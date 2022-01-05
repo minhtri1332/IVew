@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "660388191702",
-    "firebase_url": "https://mobile-iview.firebaseio.com",
-    "project_id": "mobile-iview",
-    "storage_bucket": "mobile-iview.appspot.com"
+    "project_number": "622757137908",
+    "project_id": "cxview-6c811",
+    "storage_bucket": "cxview-6c811.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:660388191702:android:1a286eb599b87335811877",
+        "mobilesdk_app_id": "1:622757137908:android:84daa79bb3f4e5c4903da1",
         "android_client_info": {
           "package_name": "vn.iview.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "660388191702-4sumsaeani9s7v27d36ihrc0prhf5vom.apps.googleusercontent.com",
+          "client_id": "622757137908-a9ft13av1cpe5agr860o3posklni6ahb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyABVkvaGY4m9w-L86aUQXomwDjlWTixOZE"
+          "current_key": "AIzaSyBOepVtOvv9n4vznKAcpuUwYong-Z6jSAQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "660388191702-4sumsaeani9s7v27d36ihrc0prhf5vom.apps.googleusercontent.com",
+              "client_id": "622757137908-a9ft13av1cpe5agr860o3posklni6ahb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
