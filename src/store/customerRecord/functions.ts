@@ -10,27 +10,27 @@ import {urlProduct} from '@/store/types';
 import store from '@/store';
 
 export const requestFilterCustomer = async (params: CustomerRecordProps) => {
-  const {data} = await Fetch.get<{data: any}>(
-    `${urlProduct}/api/v1/report/list-record-customer`,
+  const {data} = await Fetch.get<{listResponse: any}>(
+    `${urlProduct}/api/v1/report-face-attendance/count-by-date`,
     {
       params: params,
     },
   );
-
-  if (!data.data.listData) {
+  console.log('listResponse', data, params);
+  if (!data.listResponse) {
     setCustomerRecordQueries({
       all: [],
     });
   }
 
-  let newData = data.data.listData.map(
+  let newData = data.listResponse.map(
     (customerRecord: RawCustomerRecord) => customerRecord.id,
   );
 
   let newQuery = store.getState().customerRecord.query['all'] || [];
 
   batch(() => {
-    syncCustomerRecord(data.data.listData);
+    syncCustomerRecord(data.listResponse);
     // setCustomerRecordQueries({
     //   all: data.data.listData.map((item: RawCustomerRecord) => item.id),
     // });
@@ -42,5 +42,5 @@ export const requestFilterCustomer = async (params: CustomerRecordProps) => {
           : newData,
     });
   });
-  return data.data.listData;
+  return data.listResponse;
 };

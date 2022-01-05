@@ -1,15 +1,7 @@
 import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {ScreenWrapper} from '@/themes/BaseStyles';
-import {
-  FlatList,
-  ListRenderItem,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {useAsyncEffect} from '@/hooks/useAsyncEffect';
+import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '@/themes/Colors';
 import {DateTimeBorder} from '@/components/ViewBorder/DateTimeBorder';
 import moment from 'moment';
@@ -26,8 +18,7 @@ const keyExtractor = (item: any, index: number) => {
 export interface CustomerRecordProps {
   dateStart: number;
   dateEnd: number;
-  limit: number;
-  page: number;
+  groupID: string;
 }
 
 export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
@@ -35,8 +26,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const [params, setParams] = useState<CustomerRecordProps>({
     dateStart: moment(new Date(), 'X').startOf('day').unix(),
     dateEnd: moment(new Date(), 'X').startOf('day').unix(),
-    limit: 100,
-    page: 1,
+    groupID: '',
   });
 
   const setParamCustom = useCallback(
@@ -59,9 +49,9 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
   const [{loading, error: errorFilter}, filterDate] = useAsyncFn(async () => {
     const data = await requestFilterCustomer(params);
 
-    if (data && data.length > 99) {
-      setParamCustom(String(Number(params.page) + 1), 'page');
-    }
+    // if (data && data.length > 99) {
+    //   setParamCustom(String(Number(params.page) + 1), 'page');
+    // }
   }, [params]);
 
   const renderItem: ListRenderItem<string> = useCallback(({item}) => {
@@ -77,7 +67,8 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
       <View
         style={{
           alignItems: 'center',
-        }}>
+        }}
+      >
         <Text style={{marginTop: 100, fontSize: 18, color: Colors.grey3}}>
           Không có dữ liệu!
         </Text>

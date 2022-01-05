@@ -26,15 +26,16 @@ export const ItemCustomerRecord = memo(function ItemCustomerRecord({
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
       <SAvatar
         source={{
-          uri: customer?.avatar,
+          uri: customer?.image,
         }}
         size={40}
       />
       <SViewContent>
-        <STextName>{customer?.name || 'Không xác định'}</STextName>
-        <STextTitle>{`Ghé thăm: ${moment(customer?.date, 'X').format(
-          'DD/MM/YYYY',
-        )}   •   Tuổi: ${customer?.age}`}</STextTitle>
+        <STextName>{customer?.customerName || 'Không xác định'}</STextName>
+        <STextTitle>{customer?.date}</STextTitle>
+        {/*<STextTitle>{`Ghé thăm: ${moment(customer?.date, 'X').format(*/}
+        {/*  'DD/MM/YYYY',*/}
+        {/*)}   •   Tuổi: ${customer?.age}`}</STextTitle>*/}
         <LineSeparator />
       </SViewContent>
     </SViewContainer>

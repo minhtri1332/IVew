@@ -61,15 +61,17 @@ export const LoginScreen = memo(function LoginScreen() {
   }, []);
 
   const [{loading}, startLogin] = useAsyncFn(async () => {
-    Keyboard.dismiss();
-    InteractionManager.runAfterInteractions(async () => {
-      const response = await requestLogin(username, password);
-      if (response) {
-        await LocalStorageHelper.set('username', username);
-        await LocalStorageHelper.set('password', password);
-        replaceWithMainScreen();
-      }
+    InteractionManager.runAfterInteractions(() => {
+      Keyboard.dismiss();
     });
+
+    const response = await requestLogin(username, password);
+
+    if (response) {
+      await LocalStorageHelper.set('username', username);
+      await LocalStorageHelper.set('password', password);
+      replaceWithMainScreen();
+    }
   }, [username, password]);
 
   return (

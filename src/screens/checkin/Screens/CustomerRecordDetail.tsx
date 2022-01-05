@@ -40,33 +40,33 @@ export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: history?.avatar,
+            uri: history?.image,
           }}
           size={100}
         />
-        <STextName>{history?.name || 'Không xác định'}</STextName>
+        <STextName>{history?.customerName || 'Không xác định'}</STextName>
       </SViewAvatar>
 
       <Item label={'Độ tuổi'} divider={true}>
         <ItemContent>{history?.age}</ItemContent>
       </Item>
-      <Item label={'Giới tính'} divider={true}>
-        <ItemContent>{history?.sex}</ItemContent>
-      </Item>
-      <Item label={'Số điện thoại'} divider={true}>
-        <ItemContent>{customer?.telephone}</ItemContent>
-      </Item>
-      <Item label={'Trạng thái khách hàng'} divider={true}>
-        <ItemContent>{history?.status}</ItemContent>
+      {/*<Item label={'Giới tính'} divider={true}>*/}
+      {/*  <ItemContent>{history?.sex}</ItemContent>*/}
+      {/*</Item>*/}
+      {/*<Item label={'Số điện thoại'} divider={true}>*/}
+      {/*  <ItemContent>{customer?.telephone}</ItemContent>*/}
+      {/*</Item>*/}
+      <Item label={'Nhóm'} divider={true}>
+        <ItemContent>{history?.groupName}</ItemContent>
       </Item>
       <Item label={'Số lần ghé thăm'} divider={true}>
-        <ItemContent>{history?.visit}</ItemContent>
+        <ItemContent>{history?.visitNumber}</ItemContent>
       </Item>
-      <Item label={'Ghé thăm lúc'} divider={true}>
-        <ItemContent>
-          {moment(history?.date, 'X').format('DD/MM/YYYY')}
-        </ItemContent>
-      </Item>
+      {/*<Item label={'Ghé thăm lúc'} divider={true}>*/}
+      {/*  <ItemContent>*/}
+      {/*    {moment(history?.date, 'X').format('DD/MM/YYYY')}*/}
+      {/*  </ItemContent>*/}
+      {/*</Item>*/}
     </ScreenWrapper>
   );
 });
