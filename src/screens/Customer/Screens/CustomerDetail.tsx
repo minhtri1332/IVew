@@ -99,10 +99,7 @@ export const CustomerDetail = memo(function CustomerDetail() {
       <Item label={'Số lần ghé thăm'} divider={true}>
         <ItemContent>{customer?.visitNumber}</ItemContent>
       </Item>
-      <Item label={'Trạng thái'} divider={true}>
-        <ItemContent>{customer?.status}</ItemContent>
-      </Item>
-      <Item label={'Kiểu khách hàng'} divider={true}>
+      <Item label={'Phân loại khách hàng'} divider={true}>
         <ItemContent>{customer?.customerType}</ItemContent>
       </Item>
 

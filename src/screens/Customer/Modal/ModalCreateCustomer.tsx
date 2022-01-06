@@ -56,7 +56,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
     telephone: customer ? customer.telephone : '',
     gender: customer ? customer.gender : '',
     image: customer ? customer.image : '',
-    customerType: 'anotherType',
+    customerType: customer ? customer.customerType : '',
   });
 
   const setParamCustom = useCallback(
@@ -164,7 +164,7 @@ export const ModalCreateCustomer = memo(function ModalCreateCustomer() {
           value={paramCustomer.customerType}
           keyName={'customerType'}
           onTextChange={setParamCustom}
-          placeHolder={'Kiểu khách hàng'}
+          placeHolder={'Phân loại khách hàng'}
         />
         <CheckBoxBorder
           placeholder={'Giới tính'}

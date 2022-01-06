@@ -76,7 +76,7 @@ export const DateTimeBorder = memo(function DateTimeBorder(props: Props) {
       hideModal();
       setState(date);
       requestAnimationFrame(() => {
-        onChange?.(moment(date).unix());
+        onChange?.(date.getTime());
       });
     },
     [mode, onChange, hideModal, format],

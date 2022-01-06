@@ -1,15 +1,26 @@
-import React, {memo, useCallback, useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {styled} from '@/global';
 import {Colors} from '@/themes/Colors';
 import {
   ActivityIndicator,
+  Image,
   InteractionManager,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import {InputBorder} from '@/components/ViewBorder/InputBorder';
-import {BG_LOGIN, IC_LOGO_APP} from '@/assets';
+import {
+  BG_LOGIN,
+  IC_CLOSE,
+  IC_COMING_SOON,
+  IC_EYE_CLOSE,
+  IC_EYE_OPEN,
+  IC_LOGO,
+  IC_LOGO_APP,
+} from '@/assets';
 import {
   navigateToForgotPasswordScreen,
   replaceWithMainScreen,
@@ -29,6 +40,7 @@ const SInputBorder = styled(InputBorder).attrs({
 })``;
 
 export const LoginScreen = memo(function LoginScreen() {
+  const [showPassword, setShowPassword] = useState(false);
   const buildVersion = DeviceInfo.getVersion();
   const [url, setUrl] = useState(LocaleServiceUrl.getUrl());
 
@@ -42,6 +54,19 @@ export const LoginScreen = memo(function LoginScreen() {
       setPassword(value);
     }
   }, []);
+  const rightComponent = useMemo(() => {
+    return (
+      <TouchableOpacity
+        style={{
+          alignSelf: 'center',
+          padding: 16,
+        }}
+        onPress={() => setShowPassword(!showPassword)}
+      >
+        <Image source={!showPassword ? IC_EYE_CLOSE : IC_EYE_OPEN} />
+      </TouchableOpacity>
+    );
+  }, [showPassword]);
 
   const fillUser = useCallback(async () => {
     const email = await LocalStorageHelper.get('username');
@@ -98,7 +123,8 @@ export const LoginScreen = memo(function LoginScreen() {
               keyName={'password'}
               onTextChange={onTextChange}
               placeHolder={'Nhập mật khẩu của bạn'}
-              secureTextEntry={true}
+              secureTextEntry={!showPassword}
+              rightComponent={rightComponent}
             />
             <ViewSpaceFlexEnd>
               <BtnRow onPress={navigateToForgotPasswordScreen}>

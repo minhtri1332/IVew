@@ -35,9 +35,10 @@ export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
 
   const setParamCustom = useCallback(
     (value: string, keyname: any) => {
+      const time = moment(value).startOf('day').unix();
       setParams({
         ...params,
-        [keyname]: value,
+        [keyname]: time,
       });
     },
     [params],
@@ -62,7 +63,8 @@ export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
       <View
         style={{
           alignItems: 'center',
-        }}>
+        }}
+      >
         <Text style={{marginTop: 100, fontSize: 18, color: Colors.grey3}}>
           Không có dữ liệu!
         </Text>

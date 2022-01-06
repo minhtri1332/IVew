@@ -37,6 +37,8 @@ export const IC_PLUS = require('./icons/plus.png');
 export const IC_CAMERA_PICK = require('./icons/ic_camera_pick.png');
 export const IC_GALLERY = require('./icons/ic_gallery.png');
 export const IC_FLIP = require('./icons/flip-cam.png');
+export const IC_EYE_CLOSE = require('./icons/ic_eye_close.png');
+export const IC_EYE_OPEN = require('./icons/ic_eye_open.png');
 
 export const IC_LOGO_APP = require('./icons/ic_logo_app.png');
 export const BG_LOGIN = require('./images/bg_login.png');

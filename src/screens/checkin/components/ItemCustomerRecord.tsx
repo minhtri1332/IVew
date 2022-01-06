@@ -26,7 +26,7 @@ export const ItemCustomerRecord = memo(function ItemCustomerRecord({
     <SViewContainer activeOpacity={0.6} onPress={onPress}>
       <SAvatar
         source={{
-          uri: customer?.image,
+          uri: customer?.image == '' ? customer?.currentImage : customer?.image,
         }}
         size={40}
       />

@@ -8,6 +8,7 @@ import {RawCustomerRecord} from '@/store/customerRecord/types';
 import {CustomerRecordProps} from '@/screens/checkin/Tabs/TabCustomerCheckin';
 import {urlProduct} from '@/store/types';
 import store from '@/store';
+import moment from 'moment';
 
 export const requestFilterCustomer = async (params: CustomerRecordProps) => {
   const {data} = await Fetch.get<{listResponse: any}>(
@@ -16,18 +17,21 @@ export const requestFilterCustomer = async (params: CustomerRecordProps) => {
       params: params,
     },
   );
-  console.log('listResponse', data, params);
-  if (!data.listResponse) {
-    setCustomerRecordQueries({
-      all: [],
-    });
-  }
 
+  // const a = moment(params.dateStart, 'X').format('DD/MM/YYYY HH:mm');
+  // const b = moment(params.dateEnd, 'X').format('DD/MM/YYYY HH:mm');
+
+  // if (!data.listResponse) {
+  //   setCustomerRecordQueries({
+  //     all: [],
+  //   });
+  // }
+  //
   let newData = data.listResponse.map(
     (customerRecord: RawCustomerRecord) => customerRecord.id,
   );
-
-  let newQuery = store.getState().customerRecord.query['all'] || [];
+  //
+  // let newQuery = store.getState().customerRecord.query['all'] || [];
 
   batch(() => {
     syncCustomerRecord(data.listResponse);
@@ -36,10 +40,7 @@ export const requestFilterCustomer = async (params: CustomerRecordProps) => {
     // });
 
     setCustomerRecordQueries({
-      all:
-        params.page && params.page > 1
-          ? [...new Set([...newQuery, ...newData])]
-          : newData,
+      all: newData,
     });
   });
   return data.listResponse;

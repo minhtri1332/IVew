@@ -31,9 +31,22 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
 
   const setParamCustom = useCallback(
     (value: any, keyname: string) => {
+      const a = moment(value, 'X').startOf('day').unix();
+
       setParams({
         ...params,
         [keyname]: value,
+      });
+    },
+    [params],
+  );
+  const setParamDate = useCallback(
+    (value: any, keyname: string) => {
+      const time = moment(value).startOf('day').unix();
+
+      setParams({
+        ...params,
+        [keyname]: time,
       });
     },
     [params],
@@ -86,7 +99,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
           value={params.dateStart}
           keyName={'dateStart'}
           mode={'date'}
-          onChangeValue={setParamCustom}
+          onChangeValue={setParamDate}
           containerStyle={styles.dateLeft}
           format={'YYYY-MM-DD'}
         />
@@ -96,7 +109,7 @@ export const TabCustomerCheckin = memo(function TabCustomerCheckin() {
           value={params.dateEnd}
           keyName={'dateEnd'}
           mode={'date'}
-          onChangeValue={setParamCustom}
+          onChangeValue={setParamDate}
           containerStyle={styles.dateRight}
           format={'YYYY-MM-DD'}
         />

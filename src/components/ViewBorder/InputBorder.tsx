@@ -131,7 +131,8 @@ export const InputBorder = memo(function InputBorder(props: Props) {
                 outputRange: [18, 11],
               }),
               right: 0,
-            }}>
+            }}
+          >
             <Animated.Text
               numberOfLines={1}
               style={[
@@ -143,7 +144,8 @@ export const InputBorder = memo(function InputBorder(props: Props) {
                   }),
                   color: Colors.grey3,
                 },
-              ]}>
+              ]}
+            >
               {placeHolder + setRequired}
             </Animated.Text>
           </Animated.View>
@@ -152,7 +154,8 @@ export const InputBorder = memo(function InputBorder(props: Props) {
           {disabled ? (
             <Gray1Text
               numberOfLines={Platform.OS == 'ios' ? 10 : 1}
-              style={styles.textInputLabel}>
+              style={styles.textInputLabel}
+            >
               {value}
             </Gray1Text>
           ) : (

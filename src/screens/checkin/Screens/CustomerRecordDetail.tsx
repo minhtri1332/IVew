@@ -20,19 +20,17 @@ export interface CustomerRecordDetailProps {
 }
 
 export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
-  const [customer, setCustomer] = useState({} as RawCustomer);
   const {id} = useNavigationParams<CustomerRecordDetailProps>();
   const history = useCustomerRecord(id);
-  const {
-    call,
-    error,
-    loading: loadingData,
-  } = useAsyncEffect(async () => {
-    if (history?.customerID) {
-      const data = await requestGetCustomerDetail(history.customerID);
-      setCustomer(data);
-    }
-  }, [history]);
+  // const {
+  //   call,
+  //   error,
+  //   loading: loadingData,
+  // } = useAsyncEffect(async () => {
+  //   if (history?.id) {
+  //     await requestGetCustomerDetail(history.id);
+  //   }
+  // }, [history]);
 
   return (
     <ScreenWrapper>
@@ -40,7 +38,7 @@ export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
       <SViewAvatar>
         <SAvatar
           source={{
-            uri: history?.image,
+            uri: history?.image == '' ? history?.currentImage : history?.image,
           }}
           size={100}
         />
@@ -50,23 +48,16 @@ export const CustomerRecordDetail = memo(function CustomerRecordDetail() {
       <Item label={'Độ tuổi'} divider={true}>
         <ItemContent>{history?.age}</ItemContent>
       </Item>
-      {/*<Item label={'Giới tính'} divider={true}>*/}
-      {/*  <ItemContent>{history?.sex}</ItemContent>*/}
-      {/*</Item>*/}
-      {/*<Item label={'Số điện thoại'} divider={true}>*/}
-      {/*  <ItemContent>{customer?.telephone}</ItemContent>*/}
-      {/*</Item>*/}
+
+      <Item label={'Phân loại khách hàng'} divider={true}>
+        <ItemContent>{history?.customerType}</ItemContent>
+      </Item>
       <Item label={'Nhóm'} divider={true}>
         <ItemContent>{history?.groupName}</ItemContent>
       </Item>
       <Item label={'Số lần ghé thăm'} divider={true}>
         <ItemContent>{history?.visitNumber}</ItemContent>
       </Item>
-      {/*<Item label={'Ghé thăm lúc'} divider={true}>*/}
-      {/*  <ItemContent>*/}
-      {/*    {moment(history?.date, 'X').format('DD/MM/YYYY')}*/}
-      {/*  </ItemContent>*/}
-      {/*</Item>*/}
     </ScreenWrapper>
   );
 });

@@ -5,6 +5,7 @@ import {HeaderBack} from '@/components/HeaderBack';
 import {useNavigationParams} from '@/hooks/useNavigationParams';
 import {Item, ItemContent} from '@/components/ViewItem';
 import {useHistory} from '@/store/history';
+import moment from 'moment';
 
 export interface HistoryDetailProps {
   id: string;
@@ -32,10 +33,18 @@ export const HistoryDetail = memo(function HistoryDetail() {
       </Item>
 
       <Item label={'Checkin'} divider={true}>
-        <ItemContent>{history?.checkIn}</ItemContent>
+        <ItemContent>
+          {history?.checkIn != ''
+            ? moment(history?.checkIn, 'X').format('DD/MM/YYYY HH:mm')
+            : ''}
+        </ItemContent>
       </Item>
       <Item label={'Checkout'} divider={true}>
-        <ItemContent>{history?.checkOut}</ItemContent>
+        <ItemContent>
+          {history?.checkOut != ''
+            ? moment(history?.checkOut, 'X').format('DD/MM/YYYY HH:mm')
+            : ''}
+        </ItemContent>
       </Item>
       <Item label={'Phòng ban'}>
         <ItemContent>{history?.department}</ItemContent>
