@@ -31,7 +31,7 @@ export const requestGetCustomerDetail = async (id: string) => {
       params: {},
     },
   );
-
+  console.log('á', data);
   batch(() => {
     syncCustomer([data.response]);
   });

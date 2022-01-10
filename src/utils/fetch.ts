@@ -5,7 +5,8 @@ import ToastService from '@/services/ToastService';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
 
 let headers = {
-  Authorization: '',
+  Authorization:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9kdWN0IjoiZnIscGMsaG0sYXQsZmQsbHAiLCJlbWFpbCI6Im1kdF9hdHRlbmRlbmNlQGN4dmlldy5haSIsInVzZXJfaWQiOiI4OTU5YWZlMS1mNzljLTRiODYtYjhhYS1mY2ZhZTc5ZTA2NzIiLCJyb2xlIjoiYm9zcyIsImV4cCI6MTY0MTU0NjExNn0.7GDxviSCc-zQKNyXUW69urV6wW34eJJGwQhyyHy34FI',
   'Content-Type': 'application/json',
 };
 
@@ -13,6 +14,7 @@ export const Fetch = axios.create({baseURL: '', headers}); // baseURL: Core.base
 
 Fetch.interceptors.response.use(
   (response) => {
+    console.log(response);
     return response;
   },
   (error) => {

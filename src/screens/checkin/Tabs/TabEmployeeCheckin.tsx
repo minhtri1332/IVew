@@ -22,10 +22,12 @@ const keyExtractor = (item: any, index: number) => {
 };
 export interface HistoryProps {
   dateStart: string | number;
+  groupID: string;
 }
 export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
   const [params, setParams] = useState<HistoryProps>({
     dateStart: moment(new Date(), 'X').startOf('day').unix(),
+    groupID: '',
   });
   const ListHistory = useHistoryByQuery(String(params?.dateStart));
 
@@ -54,7 +56,7 @@ export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
     }
   }, [params.dateStart]);
 
-  const renderItem: ListRenderItem<string> = useCallback(({item}) => {
+  const renderItem: ListRenderItem<string> = useCallback(({item, index}) => {
     return <ItemHistory historyId={item} />;
   }, []);
 

@@ -7,13 +7,8 @@ import {urlProduct} from '@/store/types';
 
 export const requestGetHistoryList = async (params: HistoryProps) => {
   const {data} = await Fetch.get<{listResponse: any}>(
-    `${urlProduct}/api/v1/report-face-attendance/get-employee-attendance`,
-    {
-      params: {
-        dateStart: params?.dateStart,
-        groupID: '',
-      },
-    },
+    `${urlProduct}/api/v1/report-face-attendance/get-employee-attendance?dateStart=${params.dateStart}`,
+    {},
   );
 
   const param = params?.dateStart;
@@ -27,7 +22,7 @@ export const requestGetHistoryList = async (params: HistoryProps) => {
   batch(() => {
     syncHistory(data.listResponse);
     setHistoryQueries({
-      [param]: data.listResponse.map((item: RawHistory) => item.employeeID),
+      [param]: data.listResponse.map((item: RawHistory) => item.image),
     });
   });
   return data;

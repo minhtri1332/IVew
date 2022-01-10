@@ -16,7 +16,7 @@ export const requestLogin = async (userName: string, pass: string) => {
     return null;
   }
 
-  updateFetchToken(data.token);
+   updateFetchToken(data.token);
   return data;
 };
 
