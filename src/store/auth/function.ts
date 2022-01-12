@@ -6,23 +6,24 @@ export const requestLogin = async (userName: string, pass: string) => {
     email: userName,
     password: pass,
   });
-
   const {data} = await Fetch.post<{token: string}>(
     `${LocaleServiceUrl.getUrl()}/api/v1/user-management/login`,
     params,
   );
 
+  console.log('dât', data);
+
   if (!data) {
     return null;
   }
 
-   updateFetchToken(data.token);
+  updateFetchToken(data.token);
   return data;
 };
 
 export const requestTokenDevice = async (token: string) => {
   const response = await Fetch.put<{token: string}>(
-    `${urlProduct}/api/v1/user/set-mobile-token`,
+    `${urlProduct}/user-management/update-mobilFie-token`,
     {mobileToken: token},
   );
   return response;
