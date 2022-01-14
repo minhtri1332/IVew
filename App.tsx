@@ -1,6 +1,6 @@
 // @ts-ignore
 import React, {memo, useCallback, useEffect, useMemo} from 'react';
-import {StatusBar, YellowBox} from 'react-native';
+import {Alert, StatusBar, YellowBox} from 'react-native';
 //@ts-ignore
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
@@ -41,19 +41,21 @@ export const App = memo(() => {
   const notification = useCallback(async () => {
     await requestUserPermission();
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      console.log('noti ok');
       createNotification(
         remoteMessage.data?.title || '',
         remoteMessage.data?.value || '',
       ).then();
-      await requestMessageCheckin(remoteMessage.data?.boxID || '');
+      //await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
 
     messaging().onNotificationOpenedApp(async (remoteMessage) => {
+      console.log('noti ok');
       createNotification(
         remoteMessage.data?.title || '',
         remoteMessage.data?.value || '',
       ).then();
-      await requestMessageCheckin(remoteMessage.data?.boxID || '');
+      //  await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
 
     messaging()
@@ -66,16 +68,15 @@ export const App = memo(() => {
           );
         }
       });
-
     return unsubscribe;
   }, []);
 
   async function requestUserPermission() {
     const authStatus = await messaging().requestPermission();
+
     const enabled =
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
     if (enabled) {
       console.log('Authorization status:', authStatus);
     }

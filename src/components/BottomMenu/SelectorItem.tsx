@@ -1,7 +1,12 @@
 import React, {memo, useCallback} from 'react';
-import {Image, ImageSourcePropType, StyleSheet, TouchableOpacity} from 'react-native';
-import {Colors} from "@/themes/Colors";
-import styled from "styled-components/native";
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import {Colors} from '@/themes/Colors';
+import styled from 'styled-components/native';
 
 const CheckIcon = styled.Image``;
 
@@ -45,8 +50,7 @@ export const SelectorItem = memo(function SelectorItem({
           ) : (
             <Image source={option.icon} style={styles.icon} />
           ))}
-        <STranslatedText
-          numberOfLines={1}>
+        <STranslatedText numberOfLines={1}>
           {option?.label || ''}
         </STranslatedText>
         {selected && (
