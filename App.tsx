@@ -41,19 +41,17 @@ export const App = memo(() => {
   const notification = useCallback(async () => {
     await requestUserPermission();
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log('noti ok');
       createNotification(
-        remoteMessage.data?.title || '',
-        remoteMessage.data?.value || '',
+        remoteMessage.notification?.title || '',
+        remoteMessage.notification?.body || '',
       ).then();
       //await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
 
     messaging().onNotificationOpenedApp(async (remoteMessage) => {
-      console.log('noti ok');
       createNotification(
-        remoteMessage.data?.title || '',
-        remoteMessage.data?.value || '',
+        remoteMessage.notification?.title || '',
+        remoteMessage.notification?.body || '',
       ).then();
       //  await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
