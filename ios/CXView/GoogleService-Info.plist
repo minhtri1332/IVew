@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>622757137908-ulj01jimndt8sg3qsmo15eu45aj1thpo.apps.googleusercontent.com</string>
+	<string>911975563936-f83qpuk0e42t3ecdfa3i02e53codnktd.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.622757137908-ulj01jimndt8sg3qsmo15eu45aj1thpo</string>
+	<string>com.googleusercontent.apps.911975563936-f83qpuk0e42t3ecdfa3i02e53codnktd</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>911975563936-n4l24vcvsi4fhkbq07oks4savloncp05.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAwadNF9vZztGdiOeLi5Yuh1SWt9G4DhBs</string>
+	<string>AIzaSyDoUMVcYvD-o_excil7EPgD_8oWl9MPvEY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>622757137908</string>
+	<string>911975563936</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.cxview.app</string>
+	<string>ai.cxview.app2021</string>
 	<key>PROJECT_ID</key>
-	<string>cxview-6c811</string>
+	<string>cxview-de6c3</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cxview-6c811.appspot.com</string>
+	<string>cxview-de6c3.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:622757137908:ios:31237a61fd6d8ec0903da1</string>
+	<string>1:911975563936:ios:97cf2eabfbe3ac060c3fc5</string>
 </dict>
 </plist>
