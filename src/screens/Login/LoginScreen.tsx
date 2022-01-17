@@ -43,7 +43,6 @@ export const LoginScreen = memo(function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const buildVersion = DeviceInfo.getVersion();
   const [url, setUrl] = useState(LocaleServiceUrl.getUrl());
-
   const [username, setUsername] = useState('scid_demo@cxview.ai');
   const [password, setPassword] = useState('meditech1234');
 
@@ -54,6 +53,7 @@ export const LoginScreen = memo(function LoginScreen() {
       setPassword(value);
     }
   }, []);
+
   const rightComponent = useMemo(() => {
     return (
       <TouchableOpacity
@@ -61,8 +61,7 @@ export const LoginScreen = memo(function LoginScreen() {
           alignSelf: 'center',
           padding: 16,
         }}
-        onPress={() => setShowPassword(!showPassword)}
-      >
+        onPress={() => setShowPassword(!showPassword)}>
         <Image source={!showPassword ? IC_EYE_CLOSE : IC_EYE_OPEN} />
       </TouchableOpacity>
     );
@@ -78,6 +77,7 @@ export const LoginScreen = memo(function LoginScreen() {
 
     if (pass) {
       onTextChange('password', String(pass));
+      startLogin().then();
     }
   }, []);
 
@@ -144,17 +144,16 @@ export const LoginScreen = memo(function LoginScreen() {
         </Bottom>
       </SViewBox>
 
-      <SButton
-        onPress={() => {
-          LocaleServiceUrl.change();
-          setUrl(LocaleServiceUrl.getUrl());
-        }}
-      >
-        <STextVersion>
-          Reset{url == urlProduct ? ': Test' : ' :Product'}
-        </STextVersion>
-        <STextVersion>Phiên bản {buildVersion}</STextVersion>
-      </SButton>
+      {/*<SButton*/}
+      {/*  onPress={() => {*/}
+      {/*    LocaleServiceUrl.change();*/}
+      {/*    setUrl(LocaleServiceUrl.getUrl());*/}
+      {/*  }}>*/}
+      {/*<STextVersion>*/}
+      {/*  Reset{url == urlProduct ? ': Test' : ' :Product'}*/}
+      {/*</STextVersion>*/}
+      <STextVersion>Phiên bản {buildVersion}</STextVersion>
+      {/*</SButton>*/}
     </Container>
   );
 });

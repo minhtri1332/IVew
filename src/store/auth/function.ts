@@ -7,7 +7,7 @@ export const requestLogin = async (userName: string, pass: string) => {
     password: pass,
   });
   const {data} = await Fetch.post<{token: string}>(
-    `${LocaleServiceUrl.getUrl()}/api/v1/user-management/login`,
+    `${urlProduct}/api/v1/user-management/login`,
     params,
   );
 
