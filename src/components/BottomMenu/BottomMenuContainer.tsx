@@ -3,7 +3,7 @@ import {styled} from '@/global';
 import {Animated, StyleSheet, ViewStyle} from 'react-native';
 import {screenLongDimension, screenShortDimension} from '@/utils/scale';
 import {getStatusBarHeight, getBottomSpace} from 'react-native-iphone-x-helper';
-import {Colors} from "@/themes/Colors";
+import {Colors} from '@/themes/Colors';
 
 interface OwnProps {
   containerStyle?: ViewStyle;
@@ -25,7 +25,7 @@ const Container = styled.View`
 
 export const BottomMenuContainer = memo(
   ({children, containerStyle, fullScreen}: PropsWithChildren<Props>) => {
-      return (
+    return (
       <Container
         style={[
           styles.portrait,

@@ -1,10 +1,20 @@
 import {FilterBoxOption, FilterModalBottomProps} from './types';
 import React, {memo, useCallback, useMemo, useState} from 'react';
 import {FilterBoxContentBig} from './FilterBoxContentBig';
-import {Dimensions, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {BottomMenuContainer, BottomMenuHeader, BottomMenuModal,} from '../BottomMenu';
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {
+  BottomMenuContainer,
+  BottomMenuHeader,
+  BottomMenuModal,
+} from '../BottomMenu';
 import {FilterModalItem} from './FilterModalItem';
-import {Colors} from "@/themes/Colors";
+import {Colors} from '@/themes/Colors';
 
 type Props = FilterModalBottomProps;
 
@@ -76,7 +86,7 @@ export const FilterModalBottom = memo(
             hideDivider={hideDivider}
             dropDownStyle={dropDownStyle}
             textContainerStyle={{
-                flex: 1
+              flex: 1,
             }}
           />
         </TouchableOpacity>

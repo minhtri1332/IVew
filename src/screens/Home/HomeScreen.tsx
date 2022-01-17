@@ -20,7 +20,7 @@ import {useAsyncEffect} from '@/hooks/useAsyncEffect';
 import {requestGetGroups} from '@/store/group/functions';
 import {InteractionManager, RefreshControl} from 'react-native';
 import {requestTokenDevice} from '@/store/auth/function';
-import {firebase} from '@react-native-firebase/messaging';
+import messaging, {firebase} from '@react-native-firebase/messaging';
 import {requestGetDepartment} from '@/store/department/functions';
 import SelectTypesCreateModal from '@/screens/FaceDetect/Modal/SelectTypesCreateModal';
 import useBoolean from '@/hooks/useBoolean';
@@ -28,10 +28,11 @@ import useBoolean from '@/hooks/useBoolean';
 export const HomeScreen = memo(function HomeScreen() {
   const [visible, show, hide] = useBoolean(false);
   const {call, loading} = useAsyncEffect(async () => {
+    await messaging().registerDeviceForRemoteMessages();
+    const tokenDevice = await messaging().getToken();
+    await requestTokenDevice(tokenDevice);
     await requestGetDepartment();
     await requestGetGroups();
-    const tokenDevice = await firebase.messaging().getToken();
-    await requestTokenDevice(tokenDevice);
   }, []);
 
   const openCreateEmployee = useCallback((value: string) => {

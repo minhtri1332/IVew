@@ -65,8 +65,7 @@ export const TabEmployeeCheckin = memo(function TabEmployeeCheckin() {
       <View
         style={{
           alignItems: 'center',
-        }}
-      >
+        }}>
         <Text style={{marginTop: 100, fontSize: 18, color: Colors.grey3}}>
           Không có dữ liệu!
         </Text>

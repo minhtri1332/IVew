@@ -1,4 +1,9 @@
-import {ImageSourcePropType, ImageStyle, TextStyle, ViewStyle} from 'react-native';
+import {
+  ImageSourcePropType,
+  ImageStyle,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 export interface FilterBoxOption {
   value: string | number | undefined | boolean;
@@ -26,6 +31,6 @@ export interface FilterModalBottomProps {
   textStyle?: TextStyle;
   dropDownStyle?: ImageStyle;
   hideDivider?: boolean;
-  isButtonClearValue?:boolean;
-  onPressRight?: ()=>void;
+  isButtonClearValue?: boolean;
+  onPressRight?: () => void;
 }

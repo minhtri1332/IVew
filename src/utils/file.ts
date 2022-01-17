@@ -1,36 +1,66 @@
-import DocumentPicker, {DocumentPickerResponse} from 'react-native-document-picker';
+import DocumentPicker, {
+  DocumentPickerResponse,
+} from 'react-native-document-picker';
 import {Alert, Linking, PermissionsAndroid, Platform} from 'react-native';
 import {Buffer} from 'buffer';
 import mime from 'mime';
 import axios from 'axios';
 import CameraRoll from '@react-native-community/cameraroll';
 import RNFetchBlob from 'rn-fetch-blob';
-import ImagePicker, {Image as ImagePickerImage, Options as ImagePickerOptions} from 'react-native-image-crop-picker';
+import ImagePicker, {
+  Image as ImagePickerImage,
+  Options as ImagePickerOptions,
+} from 'react-native-image-crop-picker';
 import Share, {Options} from 'react-native-share';
 
-export type FileType = Partial<Omit<ImagePickerImage, 'size'>> & DocumentPickerResponse;
+export type FileType = Partial<Omit<ImagePickerImage, 'size'>> &
+  DocumentPickerResponse;
 
 type DownloadOptions = {
-  url: string,
-  filename?: string,
-  openFile?: boolean,
-  isImage?: boolean
+  url: string;
+  filename?: string;
+  openFile?: boolean;
+  isImage?: boolean;
 };
 
 export type TakeCameraOptions = ImagePickerOptions;
 export type PickImageOptions = ImagePickerOptions;
 export type PickFileOptions = {
-  multiple?: boolean
-}
+  multiple?: boolean;
+};
 export type ProgressCallback = (progress: number, total: number) => any;
 
 const officeFileExtensions = [
   // Word
-  'doc', 'dot', 'wbk', 'docx', 'docm', 'dotx', 'dotm', 'docb',
+  'doc',
+  'dot',
+  'wbk',
+  'docx',
+  'docm',
+  'dotx',
+  'dotm',
+  'docb',
   // Excel
-  'xls', 'xlt', 'xlm', 'xlsx', 'xlsm', 'xltx', 'xltm',
+  'xls',
+  'xlt',
+  'xlm',
+  'xlsx',
+  'xlsm',
+  'xltx',
+  'xltm',
   // Power point
-  'ppt', 'pot', 'pps', 'pptx', 'pptm', 'potx', 'potm', 'ppam', 'ppsx', 'ppsm', 'sldx', 'sldm'
+  'ppt',
+  'pot',
+  'pps',
+  'pptx',
+  'pptm',
+  'potx',
+  'potm',
+  'ppam',
+  'ppsx',
+  'ppsm',
+  'sldx',
+  'sldm',
 ];
 
 class File {
@@ -45,33 +75,37 @@ class File {
     }
 
     // @ts-ignore
-    return [await DocumentPicker.pick({
-      type: [DocumentPicker.types.allFiles],
-    })];
+    return [
+      await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      }),
+    ];
   };
 
   askWritePermission = () => {
     if (Platform.OS !== 'android') return;
-    return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+    return PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+    );
   };
 
   askReadPermission = () => {
     if (Platform.OS !== 'android') return;
-    return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
+    return PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+    );
   };
 
   private _extractFileNameFromPath = (path: string) => {
     const splitFromPath = /\w+.\w+$/.exec(path);
     return splitFromPath && splitFromPath[0]
       ? splitFromPath[0]
-      : (Math.random().toString(36)) + '.png';
+      : Math.random().toString(36) + '.png';
   };
 
   takeCamera = async (options: TakeCameraOptions): Promise<FileType[]> => {
     if (Platform.OS === 'android') {
-      await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-      );
+      await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
     }
 
     const result = await ImagePicker.openCamera(options);
@@ -79,7 +113,7 @@ class File {
     const output: FileType[] = [];
 
     if (Array.isArray(result)) {
-      result.forEach(image => {
+      result.forEach((image) => {
         const i: FileType = {
           ...image,
           name: image.filename || this._extractFileNameFromPath(image.path),
@@ -107,9 +141,11 @@ class File {
     return output;
   };
 
-  pickImage = async (options: PickImageOptions & {
-    changeFileNameExtensionFromHEICToJpg?: boolean
-  }): Promise<FileType[]> => {
+  pickImage = async (
+    options: PickImageOptions & {
+      changeFileNameExtensionFromHEICToJpg?: boolean;
+    },
+  ): Promise<FileType[]> => {
     this.askReadPermission();
 
     const pick = await ImagePicker.openPicker(options);
@@ -123,7 +159,7 @@ class File {
     };
 
     if (Array.isArray(pick)) {
-      pick.forEach(image => {
+      pick.forEach((image) => {
         if (!image) return;
         let i: FileType = {
           ...image,
@@ -169,7 +205,7 @@ class File {
     const mimeType = mime.getType(options.filename || options.url) || '';
 
     if (Platform.OS === 'ios') {
-      if ((mimeType.startsWith('image') || mimeType.startsWith('video'))) {
+      if (mimeType.startsWith('image') || mimeType.startsWith('video')) {
         return await CameraRoll.saveToCameraRoll(options.url);
       }
 
@@ -187,11 +223,12 @@ class File {
         mediaScannable: true,
       },
       overwrite: true,
-    })
-      .fetch('GET', options.url);
+    }).fetch('GET', options.url);
 
-    if (options.openFile && Platform.OS === 'android') android.actionViewIntent(download.path(), mimeType);
-    if (Platform.OS === 'android') await fs.scanFile([{path: download.path(), mime: mimeType}]);
+    if (options.openFile && Platform.OS === 'android')
+      android.actionViewIntent(download.path(), mimeType);
+    if (Platform.OS === 'android')
+      await fs.scanFile([{path: download.path(), mime: mimeType}]);
 
     return download;
   };
@@ -209,7 +246,7 @@ class File {
       const response = await axios.get(url, {
         responseType: 'arraybuffer',
       });
-      const base64 = (new Buffer(response.data, 'binary')).toString('base64');
+      const base64 = new Buffer(response.data, 'binary').toString('base64');
       const mimeType = mime.getType(url);
       return `data:${mimeType};base64,${base64}`;
     };
@@ -219,13 +256,15 @@ class File {
     }
 
     if (options.urls) {
-      options.urls = await Promise.all(options.urls.map(url => getBase64(url)));
+      options.urls = await Promise.all(
+        options.urls.map((url) => getBase64(url)),
+      );
     }
 
     return await Share.open(options);
   };
 
-  getMime = ({uri}: { uri: string }) => {
+  getMime = ({uri}: {uri: string}) => {
     return mime.getType(uri);
   };
 
@@ -233,7 +272,13 @@ class File {
     return mime.getExtension(mimeType);
   };
 
-  extractFileNameFromUri = ({uri, removeQueryString = false}: { uri: string, removeQueryString?: boolean }) => {
+  extractFileNameFromUri = ({
+    uri,
+    removeQueryString = false,
+  }: {
+    uri: string;
+    removeQueryString?: boolean;
+  }) => {
     // Remove all content before last /
     let output = uri.substr(uri.lastIndexOf('/') + 1);
 
@@ -242,11 +287,17 @@ class File {
     return output;
   };
 
-  extractExtensionFromFilename = ({filename}: { filename: string }) => {
+  extractExtensionFromFilename = ({filename}: {filename: string}) => {
     return filename.replace(/^.*\./, '');
   };
 
-  guessUriInfo = ({uri, removeQueryString = false}: { uri: string, removeQueryString?: boolean }) => {
+  guessUriInfo = ({
+    uri,
+    removeQueryString = false,
+  }: {
+    uri: string;
+    removeQueryString?: boolean;
+  }) => {
     const filename = this.extractFileNameFromUri({uri, removeQueryString});
     const extension = this.extractExtensionFromFilename({filename});
     const mimeType = this.getMime({uri: filename}) || '*/*';
@@ -254,14 +305,18 @@ class File {
     return {
       filename,
       extension,
-      mimeType
-    }
+      mimeType,
+    };
   };
 
-  viewFile = async ({uri, progressCallback, openStoreIfNotSupported = true}: {
-    uri: string,
-    progressCallback?: ProgressCallback,
-    openStoreIfNotSupported?: boolean
+  viewFile = async ({
+    uri,
+    progressCallback,
+    openStoreIfNotSupported = true,
+  }: {
+    uri: string;
+    progressCallback?: ProgressCallback;
+    openStoreIfNotSupported?: boolean;
   }) => {
     const {config, android} = RNFetchBlob;
 
@@ -280,9 +335,8 @@ class File {
       const prepared = config({
         fileCache: true,
         overwrite: true,
-        appendExt: extension
-      })
-        .fetch('GET', uri);
+        appendExt: extension,
+      }).fetch('GET', uri);
 
       if (progressCallback) {
         prepared.progress(progressCallback);
@@ -291,7 +345,8 @@ class File {
       const download = await prepared;
       localUri = download.path();
       if (typeof download.respInfo.headers === 'object') {
-        const {['content-type']: contentType1, ['Content-Type']: contentType2} = download.respInfo.headers as Record<string, any>;
+        const {['content-type']: contentType1, ['Content-Type']: contentType2} =
+          download.respInfo.headers as Record<string, any>;
         if (contentType1 || contentType2) {
           mimeType = (contentType1 || contentType2) as string;
         }
@@ -305,22 +360,21 @@ class File {
       await android.actionViewIntent(localUri, mimeType || '*/*');
     } catch (e) {
       if (e.message === 'NO_ACTIVITY' && openStoreIfNotSupported) {
-        return Alert.alert(
-          "File không được hỗ trợ",
-          "Tải app để mở file.",
-          [
-            {text: 'Cancel', style: 'cancel'},
-            {
-              text: 'Mở store', onPress: () => {
-                return Linking.openURL(`https://play.google.com/store/search?q=${extension}%20viewer`);
-              }
-            }
-          ]
-        );
+        return Alert.alert('File không được hỗ trợ', 'Tải app để mở file.', [
+          {text: 'Cancel', style: 'cancel'},
+          {
+            text: 'Mở store',
+            onPress: () => {
+              return Linking.openURL(
+                `https://play.google.com/store/search?q=${extension}%20viewer`,
+              );
+            },
+          },
+        ]);
       }
       throw new Error('FILE_NOT_SUPPORTED');
     }
-  }
+  };
 }
 
-export default new File;
+export default new File();

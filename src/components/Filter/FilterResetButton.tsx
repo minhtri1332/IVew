@@ -1,6 +1,6 @@
 import {styled} from '@/global';
 import React, {memo, useCallback} from 'react';
-import {Colors} from "@/themes/Colors";
+import {Colors} from '@/themes/Colors';
 
 const Button = styled.TouchableOpacity`
   height: 44px;
@@ -27,7 +27,7 @@ export const FilterResetButton = memo((props: Props) => {
   const {onPress} = props;
 
   const onPressCB = useCallback(() => {
-    onPress && onPress()
+    onPress && onPress();
   }, [onPress]);
 
   return (

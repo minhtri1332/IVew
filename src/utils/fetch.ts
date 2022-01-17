@@ -3,6 +3,7 @@ import {Alert} from 'react-native';
 import {navigateToLoginScreen} from '@/utils/navigation';
 import ToastService from '@/services/ToastService';
 import LocalStorageHelper from '@/services/LocalServiceHelper';
+import messaging, {firebase} from '@react-native-firebase/messaging';
 
 let headers = {
   Authorization:
@@ -14,7 +15,6 @@ export const Fetch = axios.create({baseURL: '', headers}); // baseURL: Core.base
 
 Fetch.interceptors.response.use(
   (response) => {
-    console.log(response);
     return response;
   },
   (error) => {
@@ -50,6 +50,7 @@ export const logout = async (dispatch: any) => {
   Fetch.defaults.headers['Authorization'] = '';
   await LocalStorageHelper.set('password', '');
   dispatch({type: 'RESET_STORE_DATA'});
+  await messaging().deleteToken();
   navigateToLoginScreen();
   ToastService.show('Đăng xuất thành công');
 };

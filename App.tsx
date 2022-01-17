@@ -1,14 +1,15 @@
 // @ts-ignore
 import React, {memo, useCallback, useEffect, useMemo} from 'react';
-import {Alert, StatusBar, YellowBox} from 'react-native';
+import {StatusBar, YellowBox} from 'react-native';
 //@ts-ignore
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import Routes from './src/Routes';
-import messaging, {firebase} from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
-import {requestMessageCheckin} from './src/store/notification/functions';
 import Toast from 'react-native-simple-toast';
+import _ from 'lodash';
+
 YellowBox.ignoreWarnings(['']);
 
 export const App = memo(() => {
@@ -32,27 +33,42 @@ export const App = memo(() => {
           channelId,
         },
       });
-
-      Toast.showWithGravity(`${title} ${value}`, Toast.LONG, Toast.TOP);
     },
+    [],
+  );
+
+  const showToast = useMemo(
+    () =>
+      _.debounce((title, body) => {
+        Toast.showWithGravity(`${title} ${body}`, Toast.SHORT, Toast.TOP);
+      }, 1000),
     [],
   );
 
   const notification = useCallback(async () => {
     await requestUserPermission();
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      createNotification(
+      await createNotification(
         remoteMessage.notification?.title || '',
         remoteMessage.notification?.body || '',
       ).then();
+      showToast(
+        remoteMessage.notification?.title || '',
+        remoteMessage.notification?.body,
+      );
+
       //await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
 
     messaging().onNotificationOpenedApp(async (remoteMessage) => {
-      createNotification(
+      await createNotification(
         remoteMessage.notification?.title || '',
         remoteMessage.notification?.body || '',
       ).then();
+      showToast(
+        remoteMessage.notification?.title || '',
+        remoteMessage.notification?.body,
+      );
       //  await requestMessageCheckin(remoteMessage.data?.boxID || '');
     });
 

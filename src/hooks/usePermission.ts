@@ -8,11 +8,10 @@ export const usePermission = (
 ): undefined | 'unavailable' | 'denied' | 'blocked' | 'granted' => {
   const appState = useAppState();
 
-  const {value} = useAsync(() => check(permission), [
-    permission,
-    appState,
-    ...(deps || []),
-  ]);
+  const {value} = useAsync(
+    () => check(permission),
+    [permission, appState, ...(deps || [])],
+  );
 
   return value;
 };

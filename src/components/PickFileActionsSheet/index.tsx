@@ -1,3 +1,3 @@
-import PickFileActionsSheet from "./PickFileActionsSheet";
+import PickFileActionsSheet from './PickFileActionsSheet';
 
 export default PickFileActionsSheet;

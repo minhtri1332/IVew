@@ -1,9 +1,14 @@
 import React, {memo, useCallback} from 'react';
-import {Image, ImageSourcePropType, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {IC_CHECK_ROUND} from '@/assets';
 import {styled} from '@/global';
 import {FilterBoxOption} from './types';
-import {Colors} from "@/themes/Colors";
+import {Colors} from '@/themes/Colors';
 
 interface OwnProps {
   option: FilterBoxOption;
@@ -21,7 +26,7 @@ const STranslatedText = styled.Text`
 `;
 
 const Icon = styled.Image`
-  tint-color: ${Colors.gray1}
+  tint-color: ${Colors.gray1};
 `;
 export const FilterModalItem = memo(
   ({option, onSelect, renderIcon, selected}: Props) => {
@@ -38,9 +43,7 @@ export const FilterModalItem = memo(
             ) : (
               <Image source={option.icon} style={styles.icon} />
             ))}
-          <STranslatedText numberOfLines={1}>
-            {option.label}
-          </STranslatedText>
+          <STranslatedText numberOfLines={1}>{option.label}</STranslatedText>
           {selected && (
             <Icon
               resizeMode="contain"

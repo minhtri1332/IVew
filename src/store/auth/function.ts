@@ -11,8 +11,6 @@ export const requestLogin = async (userName: string, pass: string) => {
     params,
   );
 
-  console.log('dât', data);
-
   if (!data) {
     return null;
   }
@@ -23,7 +21,7 @@ export const requestLogin = async (userName: string, pass: string) => {
 
 export const requestTokenDevice = async (token: string) => {
   const response = await Fetch.put<{token: string}>(
-    `${urlProduct}/user-management/update-mobilFie-token`,
+    `${urlProduct}/user-management/update-mobile-token`,
     {mobileToken: token},
   );
   return response;

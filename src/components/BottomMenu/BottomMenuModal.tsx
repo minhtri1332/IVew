@@ -13,7 +13,7 @@ export const BottomMenuModal = memo(
   ({onClose, children, ...rest}: PropsWithChildren<Props>) => {
     useEffect(() => {
       let stack = rest.isVisible
-          ? StatusBar.pushStackEntry({
+        ? StatusBar.pushStackEntry({
             translucent: true,
             showHideTransition: 'fade',
             networkActivityIndicatorVisible: true,
@@ -22,12 +22,11 @@ export const BottomMenuModal = memo(
             hidden: false,
             barStyle: 'light-content',
           })
-          : null;
+        : null;
       return () => {
         stack && StatusBar.popStackEntry(stack);
       };
     }, [rest.isVisible]);
-
 
     return (
       <Modal

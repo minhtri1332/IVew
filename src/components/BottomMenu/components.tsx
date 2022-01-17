@@ -1,6 +1,6 @@
 import {TouchableWithoutFeedback} from 'react-native';
-import {Colors} from "@/themes/Colors";
-import styled from "styled-components/native";
+import {Colors} from '@/themes/Colors';
+import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   margin: 16px 16px 0;
