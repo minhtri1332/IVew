@@ -7,6 +7,7 @@ import {
   IC_CHECKIN_EMPLOYEE,
   IC_DETECT_FACE,
   IC_HOME_CHECKIN,
+  IC_HOME_REPORT,
   IC_HOME_SCAN,
 } from '@/assets';
 import {
@@ -81,8 +82,8 @@ export const HomeScreen = memo(function HomeScreen() {
           {/*  //navigateToHeadMapScreen*/}
           {/*/>*/}
           <ItemHome
-            icon={IC_HOME_SCAN}
-            label={'Quét văn bản'}
+            icon={IC_HOME_REPORT}
+            label={'Báo cáo thống kê'}
             onPress={navigateComingSoonScreen}
             //navigateToMScanScreen
           />
