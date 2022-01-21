@@ -28,6 +28,7 @@ export const IC_HOME_SCAN = require('./icons/ic_scanning.png');
 export const IC_HOME_HEAD_MAP = require('./icons/ic_headmap.png');
 export const IC_HOME_CHECKIN = require('./icons/ic_checkin.png');
 export const IC_HOME_SERVICE = require('./icons/ic_service.png');
+export const IC_HOME_REPORT = require('./icons/ic_home_report.png');
 export const IC_CLOCK = require('./icons/ic_clock.png');
 export const IC_CALENDAR = require('./icons/calendar.png');
 export const IC_CAMERA = require('./icons/ic_camera.png');

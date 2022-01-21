@@ -1,7 +1,6 @@
 import React, {memo} from 'react';
 import {styled} from '@/global';
 import {HeaderBack} from '@/components/HeaderBack';
-import {Image} from 'react-native';
 import {IC_COMING_SOON} from '@/assets';
 
 export const ComingSoon = memo(function ComingSoon() {
