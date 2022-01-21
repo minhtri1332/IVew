@@ -61,7 +61,8 @@ export const LoginScreen = memo(function LoginScreen() {
           alignSelf: 'center',
           padding: 16,
         }}
-        onPress={() => setShowPassword(!showPassword)}>
+        onPress={() => setShowPassword(!showPassword)}
+      >
         <Image source={!showPassword ? IC_EYE_CLOSE : IC_EYE_OPEN} />
       </TouchableOpacity>
     );
