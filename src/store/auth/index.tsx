@@ -1,14 +1,8 @@
-import {createDynamicReducer} from '@/utils/createDynamicReducer';
-import {RawAuth} from "@/store/auth/types";
+import {RawAuth} from '@/store/auth/types';
+import {createDynamicReducer} from '@/ultils/createDynamicReducer';
 
-const {
-    setStore,
-    reducer,
-    sync,
-    useByKey,
-    setQueries,
-    useKeysByQuery,
-} = createDynamicReducer<RawAuth>('auth', 'id');
+const {setStore, reducer, sync, useByKey, setQueries, useKeysByQuery} =
+  createDynamicReducer<RawAuth>('auth', 'id');
 
 export const setAuthStore = setStore;
 export const authReducer = reducer;

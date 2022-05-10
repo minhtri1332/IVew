@@ -1,40 +1,24 @@
 import {applyMiddleware, createStore, combineReducers} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
 import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
-
 import {setStore} from '@/store/getStore';
-import {setHistoryStore, historyReducer} from '@/store/history';
 import {authReducer, setAuthStore} from '@/store/auth';
-import {groupReducer, setGroupStore} from '@/store/group';
-import {departmentReducer, setDepartmentStore} from '@/store/department';
-import {customerReducer, setCustomerStore} from '@/store/customer';
-import {
-  customerRecordReducer,
-  setCustomerRecordStore,
-} from '@/store/customerRecord';
-import {
-  customerGroupReducer,
-  setCustomerGroupStore,
-} from '@/store/customerGroups';
+import {createSettingSetStore} from '@/ultils/createSetting';
+import {practiceReducer, setPracticeStore} from '@/store/home';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 const middlewares: any[] = [];
 
 // if (__DEV__) {
-//   const createDebugger = require('redux-flipper').default;
+//   const createDebugger = require("redux-flipper").default;
 //   middlewares.push(createDebugger());
 // }
 
 const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
 
 const appReducer = combineReducers({
-  history: historyReducer,
   auth: authReducer,
-  group: groupReducer,
-  department: departmentReducer,
-  customer: customerReducer,
-  customerRecord: customerRecordReducer,
-  customerGroup: customerGroupReducer,
+  practice: practiceReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -63,10 +47,5 @@ export default store;
 
 // set store
 setStore(store);
-setHistoryStore(store);
 setAuthStore(store);
-setGroupStore(store);
-setDepartmentStore(store);
-setCustomerStore(store);
-setCustomerRecordStore(store);
-setCustomerGroupStore(store);
+setPracticeStore(store);

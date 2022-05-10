@@ -1,22 +1,8 @@
-export interface RawFile {
-  height: number | string;
-  mime: string;
-  modificationDate: string;
-  name: string;
-  path: string;
-  size: string;
-  type: string;
-  uri: string;
-  width: number | string;
-}
-export const urlProduct = 'https://api.cxview.ai:8081';
-export const urlProductMain = 'https://api.cxview.ai';
-
-// https://api.cxview.ai:8081
-// https://api.cxview.ai
+export const urlProduct = "https://api";
+export const urlProductMain = "https://api";
 
 class ServiceClass {
-  private urlProduct: string = 'https://api.cxview.ai';
+  private urlProduct: string = "https://api.gw.trilucmaster.com/api/v1";
 
   getUrl = () => {
     return this.urlProduct;

@@ -13,12 +13,7 @@ export class ToastServiceClass {
     atRoot: boolean = true,
   ) => {
     if (typeof message !== 'string') return;
-    return Toast.show(
-      this._getRealMessage(message),
-      Toast.SHORT,
-      keyboardAvoid,
-      atRoot,
-    );
+    return Toast.show(this._getRealMessage(message), Toast.SHORT);
   };
 
   showLong = (
@@ -27,12 +22,7 @@ export class ToastServiceClass {
     atRoot: boolean = true,
   ) => {
     if (typeof message !== 'string') return;
-    return Toast.show(
-      this._getRealMessage(message),
-      Toast.LONG,
-      keyboardAvoid,
-      atRoot,
-    );
+    return Toast.show(this._getRealMessage(message), Toast.LONG);
   };
 
   showError = (
@@ -43,12 +33,7 @@ export class ToastServiceClass {
   ) => {
     if (typeof message !== 'string') return;
     const finalMessage = message !== UNKNOWN_ERROR ? message : defaultMessage;
-    return Toast.show(
-      this._getRealMessage(finalMessage),
-      Toast.SHORT,
-      keyboardAvoid,
-      atRoot,
-    );
+    return Toast.show(this._getRealMessage(finalMessage), Toast.SHORT);
   };
 }
 
